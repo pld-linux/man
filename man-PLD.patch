@@ -18,12 +18,3 @@
  
  if test "$RANDOM" = "$RANDOM"; then
    # Plain old Bourne shell.
-@@ -901,7 +901,7 @@
- 
- # What sections do we anticipate?
- 
--tmpsections="1 8 2 3 4 5 6 7 9 tcl n l p o"
-+tmpsections="1 8 2 3 4 5 6 7 9 3p tcl n l p o"
- 
- if [ x$default = x ]; then
-   echo ""
