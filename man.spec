@@ -21,6 +21,7 @@ Patch5:		man-makewhatis.patch
 Patch6:		man-loop.patch
 Patch7:		man-safer.patch
 Requires:	groff
+Requires:	less
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
