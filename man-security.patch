@@ -1,6 +1,6 @@
---- man-1.5g/src/man.c.security	Mon Feb 28 22:49:50 2000
-+++ man-1.5g/src/man.c	Mon Feb 28 23:04:46 2000
-@@ -1095,6 +1095,20 @@
+--- man-1.5h1/src/man.c.security	Mon Feb 28 22:55:58 2000
++++ man-1.5h1/src/man.c	Fri Jun 30 11:45:15 2000
+@@ -1102,6 +1102,20 @@
       extern int optind;
  #endif
  
@@ -21,3 +21,16 @@
  #ifndef __FreeBSD__ 
       /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
       setlocale(LC_MESSAGES, "");
+--- man-1.5h1/src/makewhatis.sh.security	Fri Jun 30 11:46:10 2000
++++ man-1.5h1/src/makewhatis.sh	Fri Jun 30 11:51:44 2000
+@@ -47,8 +47,8 @@
+ # in case makewhatis is run as root, by creating a subdirectory of /tmp.
+ # If that fails we use $HOME.
+ # The code below uses  test -O  which doesnt work on all systems.
+-TMPFILE=$HOME/whatis$$
+-TMPFILEDIR=/tmp/whatis$$
++TMPFILE=/var/cache/man/whatis$$
++TMPFILEDIR=/var/cache/man/whatis$$
+ if [ ! -d $TMPFILEDIR ]; then
+ 	mkdir $TMPFILEDIR
+ 	chmod 0700 $TMPFILEDIR

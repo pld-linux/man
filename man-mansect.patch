@@ -1,0 +1,11 @@
+--- man-1.5h1/src/man.c.MANSECT	Thu Oct 19 14:05:12 2000
++++ man-1.5h1/src/man.c	Thu Oct 19 14:07:30 2000
+@@ -996,7 +996,7 @@
+ 
+ 	  tmp_section_list[i++] = my_strdup (p);
+ 
+-	  if (end == NULL || i+1 == sizeof(tmp_section_list))
++	  if (end == NULL || i+1 == sizeof(tmp_section_list)/sizeof(tmp_section_list[0]))
+ 	       break;
+      }
+ 

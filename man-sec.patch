@@ -1,0 +1,42 @@
+--- man-1.5h1/src/makewhatis.sh.sec	Mon Oct  9 16:20:26 2000
++++ man-1.5h1/src/makewhatis.sh	Mon Oct  9 16:24:47 2000
+@@ -47,8 +47,9 @@
+ # in case makewhatis is run as root, by creating a subdirectory of /tmp.
+ # If that fails we use $HOME.
+ # The code below uses  test -O  which doesnt work on all systems.
+-TMPFILE=/var/cache/man/whatis$$
+-TMPFILEDIR=/var/cache/man/whatis$$
++rm -rf /var/tmp/tmpwhatis*
++TMPFILE=`mktemp /var/tmp/tmpwhatisXXXXXX`
++TMPFILEDIR=`mktemp -d /var/tmp/tmpwhatisXXXXXX`
+ if [ ! -d $TMPFILEDIR ]; then
+ 	mkdir $TMPFILEDIR
+ 	chmod 0700 $TMPFILEDIR
+@@ -74,6 +75,7 @@
+ case $name in
+     --version|-V)
+         echo "$program from %version%"
++	rm -rf /var/tmp/tmpwhatis*
+ 	exit 0;;
+     -c) topath=catpath
+ 	defmanpath=
+@@ -97,12 +99,14 @@
+         echo "       [manpath]: man directories (default: $DEFMANPATH)"
+ 	echo "       [catpath]: cat directories (default: the first existing"
+ 	echo "           directory in $DEFCATPATH)"
++	rm -rf /var/tmp/tmpwhatis*
+         exit;;
+      *) if [ -d $name ]
+         then
+             eval $topath="\$$topath":$name
+         else
+             echo "No such directory $name"
++	    rm -rf /var/tmp/tmpwhatis*
+             exit
+         fi;;
+ esac
+@@ -350,3 +354,4 @@
+ if [ $TMPFILE = $TMPFILEDIR/w ]; then
+ 	rmdir $TMPFILEDIR
+ fi
++rm -rf /var/tmp/tmpwhatis*

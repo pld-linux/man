@@ -1,0 +1,58 @@
+--- man-1.5h1/src/makewhatis.sh.usr	Mon Oct  9 16:02:20 2000
++++ man-1.5h1/src/makewhatis.sh	Mon Oct  9 16:04:17 2000
+@@ -125,7 +125,7 @@
+       eval path="\$$pages"path
+       for mandir in $path
+       do
+-         cp /dev/null $mandir/whatis
++         cp /dev/null /var/cache/man/whatis
+       done
+    done
+ fi
+@@ -139,7 +139,7 @@
+      if [ x$verbose != x ]; then
+         echo "about to enter $mandir" > /dev/tty
+      fi
+-     if [ -s ${mandir}/whatis -a $pages = man -a x$update = x ]; then
++     if [ -s /var/cache/man/whatis -a $pages = man -a x$update = x ]; then
+         if [ x$verbose != x ]; then
+            echo skipping $mandir - we did it already > /dev/tty
+         fi
+@@ -334,13 +334,13 @@
+          mandir1=$mandir
+        fi
+ 
+-       if [ -f ${mandir1}/whatis ]
++       if [ -f /var/cache/man/whatis ]
+        then
+-         cat ${mandir1}/whatis >> $TMPFILE
++         cat /var/cache/man/whatis >> $TMPFILE
+        fi
+-       sed '/^$/d' < $TMPFILE | sort | uniq > ${mandir1}/whatis
++       sed '/^$/d' < $TMPFILE | sort | uniq > /var/cache/man/whatis
+ 
+-       chmod 644 ${mandir1}/whatis
++       chmod 644 /var/cache/man/whatis
+        rm $TMPFILE
+      fi
+    done
+--- man-1.5h1/src/apropos.sh.usr	Mon Oct  9 16:06:30 2000
++++ man-1.5h1/src/apropos.sh	Mon Oct  9 16:07:15 2000
+@@ -68,7 +68,7 @@
+ found=0
+ while [ $found = 0 -a -n "$1" ]
+ do
+-    for d in $manpath /usr/lib
++    for d in /var/cache/man /usr/lib
+     do
+         if [ -f $d/whatis ]
+         then
+@@ -102,7 +102,7 @@
+     done
+     nothing=
+     found=0
+-    for d in $manpath /usr/lib
++    for d in /var/cache/man /usr/lib
+     do
+         if [ -f $d/whatis ]
+         then

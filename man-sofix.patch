@@ -1,0 +1,19 @@
+--- man-1.5h1/src/man.c.sofix	Tue Aug 15 14:18:45 2000
++++ man-1.5h1/src/man.c	Tue Aug 15 14:21:06 2000
+@@ -294,6 +294,7 @@
+      static char ultname[BUFSIZE];
+ 
+      name = my_strdup(name0);
++     name = (char *)realloc(name, strlen(name)+32);
+ 
+ again:
+      expander = get_expander (name);
+@@ -324,7 +325,7 @@
+ 	   * .so files - we could glob for all possible extensions,
+ 	   * for now: only try .gz
+ 	   */
+-	  else if (fp == NULL && get_expander(".gz")) {
++	  if (fp == NULL && get_expander(".gz")) {
+ 	       strcat(name, ".gz");
+ 	       fp = fopen (name, "r");
+ 	  }

@@ -1,0 +1,12 @@
+*** man-1.5h1/gencat/genlib.c	Tue Dec  2 22:23:30 1997
+--- man-1.5h1-ja/gencat/genlib.c	Tue Apr 18 19:02:08 2000
+***************
+*** 47,52 ****
+--- 47,53 ----
+  01/14/91   4 nazgul	Off by one on number specified entries
+  */
+  
++ #undef _GNU_SOURCE
+  #include <stdio.h>
+  #ifdef SYSV
+  #include <sys/types.h>

@@ -1,0 +1,20 @@
+--- man-1.5h1/src/manfile.c.lookon	Wed Apr  7 14:52:05 1999
++++ man-1.5h1/src/manfile.c	Thu Oct 12 16:10:15 2000
+@@ -7,6 +7,7 @@
+ #include <stdio.h>
+ #include <ctype.h>
+ #include <string.h>
++#include <unistd.h>
+ 
+ #include "glob.h"
+ #include "manfile.h"
+@@ -167,6 +168,9 @@
+ 	       names = glob_for_file (dir, sec, name, type);
+ 	       if (names) {
+ 		    for (np = names; *np; np++) {
++			 if(access(*np, R_OK))
++				 /* Keep looking if we encounter a file we can't access */
++				 continue;
+ 			 p = (struct manpage *) malloc(sizeof(*p));
+ 			 if (!p)
+ 			      break; 	/* %% perhaps print msg, free names */

@@ -1,0 +1,20 @@
+--- man-1.5h1/configure.11621	Fri Aug  4 12:18:03 2000
++++ man-1.5h1/configure	Fri Aug  4 12:18:11 2000
+@@ -326,7 +326,7 @@
+   then
+     pager="$Fmore"
+   else
+-    pager="$Fless -is"
++    pager="$Fless -isr"
+   fi
+   cmp="$Fcmp -s"
+   cat="$Fcat"
+@@ -379,7 +379,7 @@
+   then
+     pager="$Fmore"
+   else
+-    pager="$Fless -is"
++    pager="$Fless -isr"
+   fi
+   cmp="$Fcmp -s"
+   cat="$Fcat"
