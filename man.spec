@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	29
+Release:	30
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -157,8 +157,8 @@ done
 %{__make} install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
 )
 
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis.cron
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis.cron
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
@@ -191,8 +191,8 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %files -f man.lang
 %defattr(644,root,root,755)
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis.cron
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis.cron
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis
 
 %attr(2755,root,man) %{_bindir}/man
 
