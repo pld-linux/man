@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	25
+Release:	26
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de es fi fr hu id it ja ko nl pl pt pt_BR ru sl sv; do
+for i in "" bg cs da de es fi fr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN.GB2312 zh_TW.Big5; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
