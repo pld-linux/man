@@ -12,37 +12,36 @@ Summary(tr):	K˝lavuz sayfas˝ okuyucusu
 Summary(ru):	Ó¡¬œ“ ’‘…Ã…‘ ƒÃ— ƒœÀ’Õ≈Œ‘¡√……: man, apropos … whatis
 Summary(uk):	Ó¡¬¶“ ’‘…Ã¶‘ ƒÃ— ƒœÀ’Õ≈Œ‘¡√¶ß: man, apropos ‘¡ whatis
 Name:		man
-Version:	1.5m2
-Release:	2
+Version:	1.5n
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	d27867e59d3bbb971b00058f20ef8ea4
+# Source0-md5:	0a22477df70a223e5058f46a33491c8b
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
 # Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-gencat_glibc.patch
-Patch3:		%{name}-man2html.patch
-Patch4:		%{name}-fhs.patch
-Patch5:		%{name}-makewhatis.patch
-Patch6:		%{name}-safer.patch
-Patch7:		%{name}-security.patch
-Patch8:		%{name}-locales.patch
-Patch9:		%{name}-roff.patch
-Patch10:	%{name}-sofix.patch
-Patch11:	%{name}-ro-usr.patch
-Patch12:	%{name}-lookon.patch
-Patch13:	%{name}-bug11621.patch
-Patch14:	%{name}-gencat.patch
-Patch15:	%{name}-nls-priority.patch
-Patch16:	%{name}-pl_%{name}_pages.patch
-Patch17:	%{name}-pmake.patch
-Patch18:	%{name}-segv.patch
-Patch19:	%{name}-fmntbug.patch
-Patch20:	%{name}-nls-codesets.patch
+Patch2:		%{name}-man2html.patch
+Patch3:		%{name}-fhs.patch
+Patch4:		%{name}-makewhatis.patch
+Patch5:		%{name}-safer.patch
+Patch6:		%{name}-security.patch
+Patch7:		%{name}-locales.patch
+Patch8:		%{name}-roff.patch
+Patch9:		%{name}-sofix.patch
+Patch10:	%{name}-ro-usr.patch
+Patch11:	%{name}-lookon.patch
+Patch12:	%{name}-bug11621.patch
+Patch13:	%{name}-gencat.patch
+Patch14:	%{name}-nls-priority.patch
+Patch15:	%{name}-pl_%{name}_pages.patch
+Patch16:	%{name}-pmake.patch
+Patch17:	%{name}-segv.patch
+Patch18:	%{name}-fmntbug.patch
+Patch19:	%{name}-nls-codesets.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
@@ -144,7 +143,7 @@ Plik konfiguracyjny dla rÛønych czytnikÛw podrÍcznikÛw
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
 Group:		Applications/System
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description -n man2html
 This program can convert man pages stored in manroff format to html
@@ -157,7 +156,7 @@ formacie manroff na format html.
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
-Requires:	man2html = %{version}
+Requires:	man2html = %{version}-%{release}
 
 %description -n man2html-cgi
 These scripts allows read man pages throught www browser. It uses
@@ -187,11 +186,10 @@ nie byÊ bezpieczne.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
-%patch15 -p1
+%patch16 -p1
 %patch17 -p1
 %patch18 -p1
 %patch19 -p1
-%patch20 -p1
 
 %build
 ./configure \
@@ -345,7 +343,6 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
 %lang(ro) %{_datadir}/locale/ro/man
-%lang(ru) %{_datadir}/locale/ru/man
 %lang(sl) %{_datadir}/locale/sl/man
 
 %files config
