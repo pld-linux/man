@@ -2,6 +2,7 @@ Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
 Summary(es):	Lector de páginas de manual (man)
 Summary(fr):	Lecteur de pages de man
+Summary(ko):	¹®¼­ °ü·Ã µµ±¸ ¸ðÀ½ : ¸Ç, apropos ±×¸®°í whatis
 Summary(pl):	Czytnik stron man
 Summary(pt_BR):	Leitor de páginas de manuais (man)
 Summary(tr):	Kýlavuz sayfasý okuyucusu
@@ -34,6 +35,7 @@ Patch14:	%{name}-gencat.patch
 Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_%{name}_pages.patch
 Patch17:	%{name}-pmake.patch
+Patch18:	%{name}-segv.patch
 Requires:	man-config
 Requires:	groff
 Requires:	less
@@ -176,6 +178,7 @@ nie byæ bezpieczne.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
+%patch18 -p1
 
 %build
 ./configure -default +fhs +lang all -confdir %{_sysconfdir}
