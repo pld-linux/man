@@ -167,7 +167,7 @@ rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
