@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	22
+Release:	23
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
