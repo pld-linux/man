@@ -12,12 +12,12 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5n
+Version:	1.5o
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	0a22477df70a223e5058f46a33491c8b
+Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
+# Source0-md5:	966ac6eb310e2bca4646292905d8e87b
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -29,19 +29,16 @@ Patch3:		%{name}-fhs.patch
 Patch4:		%{name}-makewhatis.patch
 Patch5:		%{name}-safer.patch
 Patch6:		%{name}-security.patch
-Patch7:		%{name}-locales.patch
-Patch8:		%{name}-roff.patch
-Patch9:		%{name}-sofix.patch
-Patch10:	%{name}-ro-usr.patch
-Patch11:	%{name}-lookon.patch
-Patch12:	%{name}-bug11621.patch
-Patch13:	%{name}-gencat.patch
-Patch14:	%{name}-nls-priority.patch
-Patch15:	%{name}-pl_%{name}_pages.patch
-Patch16:	%{name}-pmake.patch
-Patch17:	%{name}-segv.patch
-Patch18:	%{name}-fmntbug.patch
-Patch19:	%{name}-nls-codesets.patch
+Patch7:		%{name}-roff.patch
+Patch8:		%{name}-sofix.patch
+Patch9:		%{name}-ro-usr.patch
+Patch10:	%{name}-lookon.patch
+Patch11:	%{name}-bug11621.patch
+Patch12:	%{name}-gencat.patch
+Patch13:	%{name}-nls-priority.patch
+Patch14:	%{name}-pmake.patch
+Patch15:	%{name}-segv.patch
+Patch16:	%{name}-fmntbug.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
@@ -186,10 +183,8 @@ nie byФ bezpieczne.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 %patch16 -p1
-%patch17 -p1
-%patch18 -p1
-%patch19 -p1
 
 %build
 ./configure \
