@@ -4,16 +4,16 @@ Summary(fr): Lecteur de pages de man.
 Summary(pl): Czytnik stron man
 Summary(tr): Kýlavuz sayfasý okuyucusu
 Name:        man
-Version:     1.5d
-Release:     5
+Version:     1.5f
+Release:     1
 Copyright:   GPL
 Group:       Utilities/System
 Source0:     ftp://sunsite.unc.edu/pub/Linux/apps/doctools/%{name}-%{version}.tar.gz
 Source1:     makewhatis.cron
-Source2:     man-1.5d-PLD.patch
 Patch0:      man-1.5a-manpath.patch
-Patch1:      man-1.5a-sgid.patch
-Patch2:      man-1.5d-properfree.patch
+Patch1:      man-1.5f-PLD.patch
+Patch2:      man-1.5f-msgs.patch
+Patch3:      man-1.5f-man2html.patch
 Requires:    groff
 Buildroot:   /tmp/%{name}-%{version}-root
 
@@ -22,6 +22,20 @@ The man page suite, including man, apropos, and whatis.  These programs are
 used to read most of the documentation available on a Linux system.  The
 whatis and apropos programs can be used to find documentation related to a
 particular subject.
+
+%package -n man2html
+Summary:     manroff to html converter
+Summary(pl): konwerter formaty manroff na html
+Group:       Utilities/System
+
+%package -n man2html-cgi
+Summary:     CGI interface to man2html
+Summary(pl): Interfejs CGI dla man2html
+Group:       Utilities/System
+Requires:    man2html
+
+%description -n man2html
+This program can convert man pages stored in manroff format to html
 
 %description -l de
 Die man-Seiten-Suite, einschließlich Handbuch, Apropos und Whatis.  Diese
@@ -41,6 +55,20 @@ czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy whatis
 i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy powi±zane z
 poszukiwanym.
 
+%description -l pl -n man2html
+Program man2html s³u¿y do konwersji plików manuala zapisanych w formacie
+manroff na format html
+
+%description -n man2html-cgi
+These scripts allows read man pages throught www browser. It uses
+man2htlm program to convert man pages to html format.
+Scripts are still in alpha stage, could be not secure.
+
+%description -l pl -n man2html-cgi
+Te skrypty pozwalaj± czytaæ strony man przy pomocy przegl±darki www.
+Skrtpty wykorzystuj± program man2html do konwesji stron man na html
+Programy s± ci±gle w stadium alfa i mog± nie byæ bezpieczne.
+
 %description -l tr
 Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux sisteminde
 bulunan birçok belgenin okunmasýnda kullanylyr. whatis ve apropos
@@ -49,26 +77,21 @@ programlarý özel bir konu ile alakalý belgeleri bulmak için kullanýlabilir.
 %prep
 %setup -q
 %patch0 -p1 -b .manpath
-%patch1 -p1 -b .sgid
-%patch2 -p1 -b .freefix
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
-./configure -default +fsstnd +lang all
-patch -p0 -s < $RPM_SOURCE_DIR/man-1.5d-PLD.patch
+CFLAGS="$RPM_OPT_FLAGS" ./configure -default +fsstnd +lang all
 make CC="gcc $RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/cron.weekly,usr/{bin,man,sbin}}
 
-# XXX avoid man2html install
-( cd src
-  make install BINROOTDIR="$RPM_BUILD_ROOT"
-  cd ../man
-  make installsubdirs BINROOTDIR="$RPM_BUILD_ROOT"
-  cd ../msgs
-  make install BINROOTDIR="$RPM_BUILD_ROOT"
-)
+make install BINROOTDIR="$RPM_BUILD_ROOT"
+cd man2html
+make install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
 
 install $RPM_SOURCE_DIR/makewhatis.cron $RPM_BUILD_ROOT/etc/cron.weekly
 
@@ -76,7 +99,7 @@ install -d $RPM_BUILD_ROOT/var/catman/{local,X11R6}
 install -d $RPM_BUILD_ROOT/var/catman/cat{1,2,3,4,5,6,7,8,9,n}
 install -d $RPM_BUILD_ROOT/var/catman/local/cat{1,2,3,4,5,6,7,8,9,n}
 install -d $RPM_BUILD_ROOT/var/catman/X11R6/cat{1,2,3,4,5,6,7,8,9,n}
-for i in cs da de es fr it nl pl pt sl
+for i in cs da de es fi fr it nl pl pt sl
 do
 #  install -d $RPM_BUILD_ROOT/var/catman/$i/cat{1,5}
   install -d $RPM_BUILD_ROOT/var/catman/$i/cat{1,2,3,4,5,6,7,8,9,n}
@@ -116,13 +139,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0755, root, root) /usr/sbin/makewhatis
 %attr(0644, root, root) %config /etc/man.config
 
-# Supported languages cs da de en es fr it nl pl pt sl
+# Supported languages cs da de en es fi fr it nl pl pt sl
 
 /usr/man/man[15]/*
 %lang(cs) /usr/man/cs/man[15]/*
 %lang(da) /usr/man/da/man[15]/*
 %lang(de) /usr/man/de/man[15]/*
 %lang(es) /usr/man/es/man[15]/*
+%lang(fi) /usr/man/fi/man[15]/*
 %lang(fr) /usr/man/fr/man[15]/*
 %lang(it) /usr/man/it/man[15]/*
 %lang(nl) /usr/man/nl/man[15]/*
@@ -145,6 +169,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) /var/catman/es/cat[123456789n]
 %lang(es) /var/catman/local/es/cat[123456789n]
 %lang(es) /var/catman/X11R6/es/cat[123456789n]
+%lang(fi) /var/catman/fi/cat[123456789n]
+%lang(fi) /var/catman/local/fi/cat[123456789n]
+%lang(fi) /var/catman/X11R6/fi/cat[123456789n]
 %lang(fr) /var/catman/fr/cat[123456789n]
 %lang(fr) /var/catman/local/fr/cat[123456789n]
 %lang(fr) /var/catman/X11R6/fr/cat[123456789n]
@@ -169,6 +196,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) /usr/share/locale/de/man
 %lang(en) /usr/share/locale/en/man
 %lang(es) /usr/share/locale/es/man
+%lang(fi) /usr/share/locale/fi/man
 %lang(fr) /usr/share/locale/fr/man
 %lang(it) /usr/share/locale/it/man
 %lang(nl) /usr/share/locale/nl/man
@@ -176,8 +204,29 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) /usr/share/locale/pt/man
 %lang(sl) /usr/share/locale/sl/man
 
+%files -n man2html
+%defattr(644, root, root, 0755)
+%doc man2html/README man2html/TODO
+%attr(755, root, root) /usr/bin/man2html
+%attr(644, root,  man) /usr/man/man1/man2html.1
+
+%files -n man2html-cgi
+%defattr(644, root, root, 0755)
+/home/httpd/cgi-aux/man
+%dir /home/httpd/cgi-bin/man
+%attr(755, root, root) /home/httpd/cgi-bin/man/*
+%attr(755, nobody, nobody) %dir /var/man2html
+/var/man2html/.glimpse_filters
+%attr(755, root, root) /usr/bin/hman
+%attr(644, root,  man) /usr/man/man1/hman.1
+
 %changelog
-* Sat Aug 26 1998 Konrad Stepien <konrad@interdata.com.pl>
+* Thu Sep 17 1998 Konrad Stêpieñ <konrad@interdata.com.pl>
+  [1.5f-1]
+- now patching conigure script not output of this
+- added man2html and cgi scripts in separated packages
+
+* Sat Aug 26 1998 Konrad Stêpieñ <konrad@interdata.com.pl>
   [1.5d-5]
 - Reconfig to include international locales and man pages,
 - Removed -D_GNU_SOURCE flag,
