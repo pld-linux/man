@@ -5,8 +5,8 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5g
-Release:	8
-Copyright:	GPL
+Release:	9
+License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -26,19 +26,16 @@ Buildroot:	/tmp/%{name}-%{version}-root
 %description
 The man package includes three tools for finding information and/or
 documentation about your Linux system: man, apropos and whatis. The man
-system formats and displays on-line manual pages about commands or functions
-on your system. Apropos searches the whatis database (containing short
-descriptions of system commands) for a string. Whatis searches its own
-database for a complete word.
-                                                                                                              
-The man package should be installed on your system because it is the primary
-way to find documentation on a Linux system.
+system formats and displays on-line manual pages about commands or
+functions on your system. Apropos searches the whatis database (containing
+short descriptions of system commands) for a string. Whatis searches its
+own database for a complete word.
 
 %description -l de
 Die man-Seiten-Suite, einschließlich Handbuch, Apropos und Whatis.  Diese
-Programme dienen zum Einsehen des Großteils der Dokumentation, die auf einem
-Linux-System verfügbar ist. Die Whatis- und Apropos-Programme dienen dazu,
-Beschreibungen zu bestimmten Themen zu finden.
+Programme dienen zum Einsehen des Großteils der Dokumentation, die auf
+einem Linux-System verfügbar ist. Die Whatis- und Apropos-Programme dienen
+dazu, Beschreibungen zu bestimmten Themen zu finden.
 
 %description -l fr
 Ensemble des pages man. Contient man, apropos et whatis. Ces programmes
@@ -48,9 +45,9 @@ relative à un sujet précis.
 
 %description -l pl
 Pakiet man zawiera man, apropos i whatis. Te programy s± u¿ywane do
-czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy whatis
-i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy powi±zane z
-poszukiwanym.
+czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy
+whatis i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy
+powi±zane z poszukiwanym.
 
 %description -l tr
 Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux sisteminde
@@ -62,6 +59,7 @@ Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
+Requires:	%{name} = %{version}
 
 %description -n man2html
 This program can convert man pages stored in manroff format to html
@@ -75,18 +73,18 @@ Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-Requires:	man2html
+Requires:	man2html = %{version}
 
 %description -n man2html-cgi
-These scripts allows read man pages throught www browser. It uses
-man2htlm program to convert man pages to html format.
-Scripts are still in alpha stage, could be not secure.
+These scripts allows read man pages throught www browser. It uses man2htlm
+program to convert man pages to html format. Scripts are still in alpha
+stage, could be not secure.
 
 %description -l pl -n man2html-cgi
-Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy 
-pomocy przegl±darki WWW. Skrtpty wykorzystuj± program man2html do 
-konwesji stron man na html. Programy s± ci±gle w stadium alfa i mog± 
-nie byæ bezpieczne.
+Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy  pomocy
+przegl±darki WWW. Skrtpty wykorzystuj± program man2html do  konwesji stron
+man na html. Programy s± ci±gle w stadium alfa i mog±  nie byæ bezpieczne.
+
 
 %prep
 %setup  -q
