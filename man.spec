@@ -10,7 +10,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5l
-Release:	2
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.g
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
-# Source3-md5: 	16c3fde2243289524cf40c1d2e7150e4
+# Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-gencat_glibc.patch
@@ -38,14 +38,16 @@ Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_%{name}_pages.patch
 Patch17:	%{name}-pmake.patch
 Patch18:	%{name}-segv.patch
+Patch19:	%{name}-fmntbug.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
-Requires:	groff
-Requires:	less
-Requires:	gzip
 Requires:	/bin/awk
+Requires:	groff
+Requires:	gzip
+Requires:	less
 Requires:	mktemp >= 1.5-8
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	man-cs
 Obsoletes:	man-da
 Obsoletes:	man-de
@@ -56,7 +58,8 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_htmldir	/home
 
 %description
 The man package includes three tools for finding information and/or
@@ -181,6 +184,7 @@ nie byФ bezpieczne.
 %patch15 -p1
 %patch17 -p1
 %patch18 -p1
+%patch19 -p1
 
 %build
 ./configure -default +fhs +lang all -confdir %{_sysconfdir}
@@ -189,7 +193,8 @@ nie byФ bezpieczne.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
+install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_htmldir}} \
+	$RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
 
 echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh_CN zh_TW; do
@@ -206,7 +211,8 @@ for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh
 	done
 done
 
-%{__make} install PREFIX="$RPM_BUILD_ROOT"
+%{__make} install \
+	PREFIX="$RPM_BUILD_ROOT"
 
 %{__make} -C man2html install-scripts \
 	PREFIX="$RPM_BUILD_ROOT"
@@ -219,18 +225,11 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
-install -d $RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
 install man/hu/man1/* $RPM_BUILD_ROOT%{_mandir}/hu/man1
 install man/ja/man1/{hman,man2html}.1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
 install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
 install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
-
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
-
-install -d $RPM_BUILD_ROOT/home/services
-cd $RPM_BUILD_ROOT/home
-mv httpd services
-cd -
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -342,13 +341,11 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files -n man2html-cgi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hman
-%{_mandir}/man1/hman.1*
-%lang(ja) %{_mandir}/ja/man1/hman.1*
-
+%attr(755,root,root) %{_htmldir}/httpd/cgi-bin/man
+%{_htmldir}/httpd/cgi-aux/man
 %dir %attr(775,root,http) /var/cache/man2html
 /var/cache/man2html/.glimpse_filters
-
-%attr(755,root,root) /home/services/httpd/cgi-bin/man
-/home/services/httpd/cgi-aux/man
+%{_mandir}/man1/hman.1*
+%lang(ja) %{_mandir}/ja/man1/hman.1*
 # seems man2html-cgi it's the only package that uses it
-%dir /home/services/httpd/cgi-aux
+%dir %{_htmldir}/httpd/cgi-aux
