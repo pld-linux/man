@@ -1,14 +1,14 @@
-diff -Nur man-1.5g/src/makewhatis.sh man-1.5g.pld/src/makewhatis.sh
---- man-1.5g/src/makewhatis.sh	Tue Apr  6 04:48:37 1999
-+++ man-1.5g.pld/src/makewhatis.sh	Sun May 30 12:35:00 1999
-@@ -29,8 +29,8 @@
+diff -Naur man-1.5h1/src/makewhatis.sh man-1.5h1-p/src/makewhatis.sh
+--- man-1.5h1/src/makewhatis.sh	Tue Jun 29 04:20:59 1999
++++ man-1.5h1-p/src/makewhatis.sh	Fri Jul 14 17:39:43 2000
+@@ -36,8 +36,8 @@
+ DEFMANPATH=/usr/man
+ DEFCATPATH=/usr/man/preformat:/usr/man
  
- PATH=/usr/bin:/bin
+-# AWK=/usr/bin/gawk
+-AWK=%gawk%
++AWK=/bin/awk
++# AWK=%gawk%
  
--DEFMANPATH=/usr/man
--DEFCATPATH=/usr/man/preformat:/usr/man
-+DEFMANPATH=/usr/share/man
-+DEFCATPATH=/var/cache/man:/usr/share/man
- 
- # AWK=/usr/bin/gawk
- AWK=%gawk%
+ # Find a place for our temporary files. If security is not a concern, use
+ #	TMPFILE=/tmp/whatis$$; TMPFILEDIR=none
