@@ -1,0 +1,85 @@
+diff -Nur man-1.5h1.orig/catopen/catopen.c man-1.5h1/catopen/catopen.c
+--- man-1.5h1.orig/catopen/catopen.c	Mon Sep 24 23:40:28 2001
++++ man-1.5h1/catopen/catopen.c	Tue Sep 25 00:23:47 2001
+@@ -87,8 +87,12 @@
+ 
+   namesz = strlen(name);
+ 
+-  lang = getenv("LANG");
++  lang = getenv("LC_ALL");
+   if (!lang)
++    lang = getenv("LC_MESSAGES");
++  if (!lang)
++    lang = getenv("LANG");
++  if (!lang || !strcmp(lang,"C") || !strcmp(lang,"POSIX"))
+     lang = "";
+   langsz = strlen(lang);
+ 
+diff -Nur man-1.5h1.orig/src/gripes.c man-1.5h1/src/gripes.c
+--- man-1.5h1.orig/src/gripes.c	Mon Jan 12 20:08:54 1998
++++ man-1.5h1/src/gripes.c	Tue Sep 25 00:23:47 2001
+@@ -41,8 +41,10 @@
+ 	       and LANG != "en" (or when debugging) */
+ 	    char *s, *lg;
+ 	    s = getenv("NLSPATH");
+-	    lg = getenv("LANG");
+-	    if ((s || lg) && (!lg || strcmp(lg, "en"))) {
++	    lg = getenv("LC_ALL");
++	    if(!lg) lg = getenv("LC_MESSAGES");
++	    if(!lg) lg = getenv("LANG");
++	    if ((s || lg) && (!lg || (strcmp(lg, "en") && strcmp(lg,"C") && strcmp(lg,"POSIX")))) {
+ 		perror(mantexts);
+ 		fprintf(stderr,
+ "Failed to open the message catalog %s on the path NLSPATH=%s\n\n",
+diff -Nur man-1.5h1.orig/src/man.c man-1.5h1/src/man.c
+--- man-1.5h1.orig/src/man.c	Mon Sep 24 23:40:28 2001
++++ man-1.5h1/src/man.c	Tue Sep 25 00:24:38 2001
+@@ -1121,11 +1121,8 @@
+      CHECK("MAN_HP_DIREXT", 128);
+      CHECK("LANGUAGE", 128);
+      CHECK("LC_MESSAGES", 128);
++     CHECK("LC_ALL", 128);
+ 
+-#ifndef __FreeBSD__ 
+-     /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
+-     setlocale(LC_MESSAGES, "");
+-#endif
+ 
+      /* Handle /usr/man/man1.Z/name.1 nonsense from HP */
+      dohp = getenv("MAN_HP_DIREXT");		/* .Z */
+diff -Nur man-1.5h1.orig/src/manpath.c man-1.5h1/src/manpath.c
+--- man-1.5h1.orig/src/manpath.c	Tue Jul 14 00:58:52 1998
++++ man-1.5h1/src/manpath.c	Tue Sep 25 00:23:47 2001
+@@ -242,6 +242,7 @@
+ 
+ static void
+ add_to_mandirlist_x (char *dir, char *lang, int perrs) {
++	add_to_list(dir, lang, perrs);
+ 	if (lang && strlen(lang) > 2) {
+ 		char lang2[3];
+ 
+@@ -249,7 +250,6 @@
+ 		lang2[2] = 0;
+ 		add_to_list(dir, lang2, perrs);
+ 	}
+-	add_to_list(dir, lang, perrs);
+ }	
+ 
+ static void
+@@ -259,11 +259,11 @@
+ 	if (alt_system) {
+ 		add_to_list(dir, alt_system_name, perrs);
+ 	} else {
+-		if((lang = getenv("LANG")) != NULL)
+-			split2(dir, lang, add_to_mandirlist_x, perrs);
+-		if((lang = getenv("LANGUAGE")) != NULL)
+-			split2(dir, lang, add_to_mandirlist_x, perrs);
+-		if((lang = getenv("LC_MESSAGES")) != NULL)
++		lang = getenv("LC_ALL");
++		if(!lang) lang=getenv("LC_MESSAGES");
++		if(!lang) lang=getenv("LANG");
++		if(!lang) lang=getenv("LANGUAGE");
++		if(lang != NULL)
+ 			split2(dir, lang, add_to_mandirlist_x, perrs);
+ 		add_to_mandirlist_x(dir, 0, perrs);
+ 	}

@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	27
+Release:	28
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -30,6 +30,7 @@ Patch13:	%{name}-mansect.patch
 Patch14:	%{name}-lookon.patch
 Patch15:	%{name}-bug11621.patch
 Patch16:	%{name}-gencat.patch
+Patch17:	%{name}-nls-priority.patch
 Requires:	groff
 Requires:	less
 Requires:	gzip
@@ -124,6 +125,7 @@ nie byæ bezpieczne.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 %build
 CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
