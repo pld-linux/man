@@ -116,7 +116,7 @@ do
   install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/$i/cat{1,2,3,4,5,6,7,8,9,n}
 done
 
-strip $RPM_BUILD_ROOT/usr/bin/man
+strip $RPM_BUILD_ROOT%{_bindir}/man
 
 #for LNG in $RPM_BUILD_ROOT%{_libdir}/locale/man/*; do
 #  install -d $RPM_BUILD_ROOT%{_datadir}/locale/`basename $LNG`
@@ -158,10 +158,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,man,755)
 %attr(750,root,root) %config /etc/cron.weekly/makewhatis.cron
 
-%attr(2711,root,man) /usr/bin/man
+%attr(2711,root,man) %{_bindir}/man
 
-%attr(755,root,root) /usr/bin/apropos
-%attr(755,root,root) /usr/bin/whatis
+%attr(755,root,root) %{_bindir}/apropos
+%attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) /usr/sbin/makewhatis
 %attr(644,root,root) %config %verify(not size mtime md5) /etc/man.config
 
@@ -237,7 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc {man2html/README,man2html/TODO}.gz
 
-%attr(755,root,root) /usr/bin/man2html
+%attr(755,root,root) %{_bindir}/man2html
 
 %files -n man2html-cgi
 %defattr(644,root,root,755)
@@ -249,7 +249,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(755,nobody,nobody) /var/man2html
 /var/man2html/.glimpse_filters
 
-%attr(755,root,root) /usr/bin/hman
+%attr(755,root,root) %{_bindir}/hman
 
 %changelog
 * Fri May  7 1999 Artur Frysiak <wiget@pld.org.pl>
