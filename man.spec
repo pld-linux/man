@@ -119,8 +119,8 @@ done
 strip $RPM_BUILD_ROOT/usr/bin/man
 
 #for LNG in $RPM_BUILD_ROOT%{_libdir}/locale/man/*; do
-#  install -d $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`
-#  cp $LNG $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`/man
+#  install -d $RPM_BUILD_ROOT%{_datadir}/locale/`basename $LNG`
+#  cp $LNG $RPM_BUILD_ROOT%{_datadir}/locale/`basename $LNG`/man
 #done
 
 gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
@@ -218,18 +218,18 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sl) %attr(775,root, man) /var/cache/man/local/sl/cat[1-9n]
 %lang(sl) %attr(775,root, man) /var/cache/man/X11R6/sl/cat[1-9n]
 
-%lang(cs) /usr/share/locale/cs/man
-%lang(da) /usr/share/locale/da/man
-%lang(de) /usr/share/locale/de/man
-%lang(en) /usr/share/locale/en/man
-%lang(es) /usr/share/locale/es/man
-%lang(fi) /usr/share/locale/fi/man
-%lang(fr) /usr/share/locale/fr/man
-%lang(it) /usr/share/locale/it/man
-%lang(nl) /usr/share/locale/nl/man
-%lang(pl) /usr/share/locale/pl/man
-%lang(pt) /usr/share/locale/pt/man
-%lang(sl) /usr/share/locale/sl/man
+%lang(cs) %{_datadir}/locale/cs/man
+%lang(da) %{_datadir}/locale/da/man
+%lang(de) %{_datadir}/locale/de/man
+%lang(en) %{_datadir}/locale/en/man
+%lang(es) %{_datadir}/locale/es/man
+%lang(fi) %{_datadir}/locale/fi/man
+%lang(fr) %{_datadir}/locale/fr/man
+%lang(it) %{_datadir}/locale/it/man
+%lang(nl) %{_datadir}/locale/nl/man
+%lang(pl) %{_datadir}/locale/pl/man
+%lang(pt) %{_datadir}/locale/pt/man
+%lang(sl) %{_datadir}/locale/sl/man
 
 %{_mandir}/man[15]/*
 
