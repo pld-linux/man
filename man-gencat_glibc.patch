@@ -1,0 +1,19 @@
+--- man-1.5k/msgs/Makefile.in.orig	Mon Jul 29 23:17:18 2002
++++ man-1.5k/msgs/Makefile.in	Mon Jul 29 23:23:48 2002
+@@ -2,7 +2,14 @@
+ all:	../src/makemsg gencat
+ 	@for i in mess.??; do ../src/makemsg -c $$i $$i.catin; \
+ 	echo "==== Making $$i.cat ====" ;\
+-	./gencat $$i.cat $$i.catin; done; \
++	if [ -f /usr/bin/locale ]; then \
++		langcode=`echo $$i | sed 's:mess\.::'`; \
++		LANG=`locale -a | grep $${langcode}_ | head -1` \
++		./gencat $$i.cat $$i.catin; \
++	else \
++		./gencat $$i.cat $$i.catin; \
++	fi; \
++	done; \
+ 	rm -f core *.catin
+ 
+ install:
+ 
