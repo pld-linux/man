@@ -1,3 +1,6 @@
+# TODO:
+# - move http/cgi files to /usr/....
+#
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
 Summary(es):	Lector de páginas de manual (man)
