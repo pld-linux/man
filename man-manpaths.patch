@@ -1,0 +1,32 @@
+diff -Nur man-1.5g/src/man.conf.in man-1.5g.pld/src/man.conf.in
+--- man-1.5g/src/man.conf.in	Wed Apr  7 13:52:19 1999
++++ man-1.5g.pld/src/man.conf.in	Sun May 30 12:26:15 1999
+@@ -33,7 +33,7 @@
+ #
+ # Every automatically generated MANPATH includes these fields
+ #
+-MANPATH	/usr/man
++MANPATH	/usr/share/man
+ MANPATH	/usr/local/man
+ MANPATH	/usr/X11R6/man
+ # MANPATH /usr/lib/perl5/man
+@@ -44,14 +44,14 @@
+ # in the mandatory manpath already, but will keep man from statting
+ # lots of other nearby files and directories)
+ #
+-MANPATH_MAP	/bin			/usr/man
+-MANPATH_MAP	/sbin			/usr/man
+-MANPATH_MAP	/usr/bin		/usr/man
+-MANPATH_MAP	/usr/sbin		/usr/man
++MANPATH_MAP	/bin			/usr/share/man
++MANPATH_MAP	/sbin			/usr/share/man
++MANPATH_MAP	/usr/bin		/usr/share/man
++MANPATH_MAP	/usr/sbin		/usr/share/man
+ MANPATH_MAP	/usr/local/bin		/usr/local/man
+ MANPATH_MAP	/usr/X11R6/bin		/usr/X11R6/man
+ MANPATH_MAP	/usr/bin/X11		/usr/X11R6/man
+-MANPATH_MAP	/usr/bin/mh		/usr/man
++MANPATH_MAP	/usr/bin/mh		/usr/share/man
+ #
+ # Useful paths - note that COL should not be defined when
+ # NROFF is defined as "groff -Tascii" or "groff -Tlatin1";

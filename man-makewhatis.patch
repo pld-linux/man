@@ -1,0 +1,14 @@
+diff -Nur man-1.5g/src/makewhatis.sh man-1.5g.pld/src/makewhatis.sh
+--- man-1.5g/src/makewhatis.sh	Tue Apr  6 04:48:37 1999
++++ man-1.5g.pld/src/makewhatis.sh	Sun May 30 12:35:00 1999
+@@ -29,8 +29,8 @@
+ 
+ PATH=/usr/bin:/bin
+ 
+-DEFMANPATH=/usr/man
+-DEFCATPATH=/usr/man/preformat:/usr/man
++DEFMANPATH=/usr/share/man
++DEFCATPATH=/var/cache/man:/usr/share/man
+ 
+ # AWK=/usr/bin/gawk
+ AWK=%gawk%
