@@ -104,10 +104,10 @@ nie byæ bezpieczne.
 %patch8 -p1
 
 %build
-CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" LDFLAGS="%{!?degug:-s}" \
+CFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}" LDFLAGS="%{!?degug:-s}" \
 ./configure -default +fhs +lang all
 
-%{__make} CC="%{__cc} %{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
+%{__make} CC="%{__cc} %{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
