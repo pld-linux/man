@@ -131,10 +131,10 @@ Summary(pl):	Konfiguracja czytników podrêczników
 Group:		Applications/System
 
 %description config
-Configuration file for different manual page browsers
+Configuration file for different manual page browsers.
 
 %description config -l pl
-Plik konfiguracyjny dla ró¿nych czytników podrêczników
+Plik konfiguracyjny dla ró¿nych czytników podrêczników.
 
 %package -n man2html
 Summary:	manroff to html converter
@@ -143,7 +143,7 @@ Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 
 %description -n man2html
-This program can convert man pages stored in manroff format to html
+This program can convert man pages stored in manroff format to html.
 
 %description -n man2html -l pl
 Program man2html s³u¿y do konwersji plików manuala zapisanych w
@@ -163,7 +163,7 @@ still in alpha stage, could be not secure.
 %description -n man2html-cgi -l pl
 Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy
 pomocy przegl±darki WWW. Skrtpty wykorzystuj± program man2html do
-konwesji stron man na html. Programy s± ci±gle w stadium alfa i mog±
+konwersji stron man na html. Programy s± ci±gle w stadium alfa i mog±
 nie byæ bezpieczne.
 
 %prep
