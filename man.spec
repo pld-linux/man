@@ -4,7 +4,7 @@ Summary(fr): Lecteur de pages de man.
 Summary(pl): Czytnik stron man
 Summary(tr): Kýlavuz sayfasý okuyucusu
 Name:        man
-Version:     1.5d
+Version:     1.5
 Release:     5d
 Copyright:   GPL
 Group:       Utilities/System
