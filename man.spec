@@ -10,17 +10,17 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5l
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
-Patch0:		%{name}-%{name}paths.patch
+Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-gencat_glibc.patch
-Patch3:		%{name}-%{name}2html.patch
+Patch3:		%{name}-man2html.patch
 Patch4:		%{name}-fhs.patch
 Patch5:		%{name}-makewhatis.patch
 Patch6:		%{name}-safer.patch
@@ -36,7 +36,9 @@ Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_%{name}_pages.patch
 Patch17:	%{name}-pmake.patch
 Patch18:	%{name}-segv.patch
-Requires:	man-config
+BuildRequires:	less
+Requires(post,preun):	fileutils
+Requires:	%{name}-config = %{version}
 Requires:	groff
 Requires:	less
 Requires:	gzip
@@ -52,8 +54,6 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
-Prereq:		fileutils
-BuildRequires:	less
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -190,7 +190,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN zh_TW; do
+for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
@@ -206,9 +206,8 @@ done
 
 %{__make} install PREFIX="$RPM_BUILD_ROOT"
 
-(cd man2html
-%{__make} install-scripts PREFIX="$RPM_BUILD_ROOT"
-)
+%{__make} -C man2html install-scripts \
+	PREFIX="$RPM_BUILD_ROOT"
 
 # for man_db and xman compatibility
 ln -sf soelim $RPM_BUILD_ROOT%{_bindir}/zsoelim
@@ -220,12 +219,11 @@ touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
 install -d $RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
 install man/hu/man1/* $RPM_BUILD_ROOT%{_mandir}/hu/man1
-install man/ja/man1/* $RPM_BUILD_ROOT%{_mandir}/ja/man1
-install man/ja/man5/* $RPM_BUILD_ROOT%{_mandir}/ja/man5
-install man/ja/man8/* $RPM_BUILD_ROOT%{_mandir}/ja/man8
-install man/ko/man1/* $RPM_BUILD_ROOT%{_mandir}/ko/man1
-install man/ko/man5/* $RPM_BUILD_ROOT%{_mandir}/ko/man5
-install man/pl/man1/* $RPM_BUILD_ROOT%{_mandir}/pl/man1
+install man/ja/man1/{hman,man2html}.1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
+install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
+install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
+
+install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
 install -d $RPM_BUILD_ROOT/home/services
 cd $RPM_BUILD_ROOT/home
@@ -273,7 +271,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
 
-# Supported languages cs da de en es fi fr hr it nl pl pt sl  + hu ja ko
+# Supported languages bg cs da de en es fi fr hr it ja nl pl pt ro sl  + hu
 
 %{_mandir}/man1/apropos.1*
 %{_mandir}/man1/man.1*
@@ -301,7 +299,10 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pl) %{_mandir}/pl/man1/whatis.1*
 %lang(pl) %{_mandir}/pl/man[58]/*
 %lang(pt) %{_mandir}/pt/man[158]/*
-%lang(ro) %{_mandir}/ro/man[158]/*
+%lang(ro) %{_mandir}/ro/man1/apropos.1*
+%lang(ro) %{_mandir}/ro/man1/man.1*
+%lang(ro) %{_mandir}/ro/man1/whatis.1*
+%lang(ro) %{_mandir}/ro/man[58]/*
 %lang(sl) %{_mandir}/sl/man[158]/*
 
 %{_datadir}/locale/en/man
@@ -334,6 +335,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %{_mandir}/man1/man2html.1*
 %lang(ja) %{_mandir}/ja/man1/man2html.1*
 %lang(pl) %{_mandir}/pl/man1/man2html.1*
+%lang(ro) %{_mandir}/ro/man1/man2html.1*
 
 %files -n man2html-cgi
 %defattr(644,root,root,755)
