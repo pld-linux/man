@@ -1,0 +1,23 @@
+--- man-1.5g/src/man.c.security	Mon Feb 28 22:49:50 2000
++++ man-1.5g/src/man.c	Mon Feb 28 23:04:46 2000
+@@ -1095,6 +1095,20 @@
+      extern int optind;
+ #endif
+ 
++     char *s;
++#define CHECK(p, l) s=getenv(p); if(s && (strlen(s)>l)) { fprintf(stderr, "ERROR: Environment variable %s too long!\n", p); exit(1); }
++
++     CHECK("LANG", 32);
++     CHECK("MANPAGER", 128);
++     CHECK("PAGER", 128);
++     CHECK("SYSTEM", 64);
++     CHECK("MANROFFSEQ", 128);
++     CHECK("MANSECT", 128);
++     CHECK("MANPL", 128);
++     CHECK("MAN_HP_DIREXT", 128);
++     CHECK("LANGUAGE", 128);
++     CHECK("LC_MESSAGES", 128);
++
+ #ifndef __FreeBSD__ 
+      /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
+      setlocale(LC_MESSAGES, "");
