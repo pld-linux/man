@@ -1,0 +1,22 @@
+--- man-1.5h1/src/makemsg.c.orig	Sun Jan 11 17:59:46 1998
++++ man-1.5h1/src/makemsg.c	Fri Dec  8 00:11:32 2000
+@@ -126,7 +126,7 @@
+ 	ss = *s;
+ 	*s = 0;
+ 	if (makecat) {
+-	    fprintf (foc, "%d  ", ++defct); /* gencat cannot handle %2d */
++	    fprintf (foc, "%d ", ++defct); /* gencat cannot handle %2d  ...and two spaces :/ */
+ 	} else {
+ 	    fprintf (foh, "#define %s %d\n", t, ++defct);
+ 	    fprintf (foc, "/* %2d */  ", defct);
+--- man-1.5h1/msgs/mess.pl.orig	Fri Dec  8 00:14:36 2000
++++ man-1.5h1/msgs/mess.pl	Fri Dec  8 00:14:47 2000
+@@ -14,7 +14,7 @@
+ NO_NAME_FROM_SECTION
+ 	"Jak± stronê w sekcji %s chcesz przeczytaæ?\n"
+ NO_NAME_NO_SECTION
+-	"Jak± stronê chcesz przeczytaæ?"
++	"Jak± stronê chcesz przeczytaæ?\n"
+ NO_SUCH_ENTRY_IN_SECTION
+ 	"Nie ma strony %s w sekcji %s manuala\n"
+ NO_SUCH_ENTRY
