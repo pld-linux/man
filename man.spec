@@ -20,6 +20,7 @@ Patch4:		man-fhs.patch
 Patch5:		man-makewhatis.patch
 Patch6:		man-safer.patch
 Patch7:		man-security.patch
+Patch8:		man-locales.patch
 Requires:	groff
 Requires:	less
 Requires:	/bin/awk
@@ -100,6 +101,7 @@ nie byæ bezpieczne.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
