@@ -1,0 +1,18 @@
+diff -uNr man-1.5o/man2html/scripts/cgi-bin/man.orig/mansec man-1.5o/man2html/scripts/cgi-bin/man/mansec
+--- man-1.5o/man2html/scripts/cgi-bin/man.orig/mansec	2004-11-03 07:04:41.000000000 +0100
++++ man-1.5o/man2html/scripts/cgi-bin/man/mansec	2004-11-03 07:13:37.579751776 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/awk -f
++#!/bin/awk -f
+ #
+ #  Generate an index into a manual section by using find.
+ #  Michael Hamilton <michael@actrix.gen.nz>
+diff -uNr man-1.5o/man2html/scripts/cgi-bin/man.orig/manwhatis man-1.5o/man2html/scripts/cgi-bin/man/manwhatis
+--- man-1.5o/man2html/scripts/cgi-bin/man.orig/manwhatis	2004-11-03 07:04:41.000000000 +0100
++++ man-1.5o/man2html/scripts/cgi-bin/man/manwhatis	2004-11-03 07:13:41.580143624 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/awk -f
++#!/bin/awk -f
+ #
+ #  Generate a whatis index into the manual pages by using find to
+ #  locate all the whatis files.

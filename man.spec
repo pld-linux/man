@@ -39,6 +39,7 @@ Patch13:	%{name}-nls-priority.patch
 Patch14:	%{name}-pmake.patch
 Patch15:	%{name}-segv.patch
 Patch16:	%{name}-fmntbug.patch
+Patch17:	%{name}-awk_path.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
@@ -185,6 +186,7 @@ nie byæ bezpieczne.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 %build
 ./configure \
