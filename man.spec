@@ -4,18 +4,18 @@ Summary(fr):	Lecteur de pages de man.
 Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
-Version:	1.5f
-Release:	3
+Version:	1.5g
+Release:	1
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 URL:		ftp://sunsite.unc.edu/pub/Linux/apps/doctools
 Source0:	%{name}-%{version}.tar.gz
 Source1:	makewhatis.cron
-Patch0:		%{name}-1.5a-manpath.patch
-Patch1:		%{name}-1.5f-PLD.patch
-Patch2:		%{name}-1.5f-msgs.patch
-Patch3:		%{name}-1.5f-man2html.patch
+Patch0:		man-manpath.patch
+Patch1:		man-PLD.patch
+Patch2:		man-msgs.patch
+Patch3:		man-man2html.patch
 Requires:	groff
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -97,8 +97,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/cron.weekly,usr/{bin,man,sbin}}
 
 make install BINROOTDIR="$RPM_BUILD_ROOT"
-cd man2html
+
+(cd man2html
 make install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
+)
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly
 
@@ -119,6 +121,10 @@ strip $RPM_BUILD_ROOT/usr/bin/man
 #  install -d $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`
 #  cp $LNG $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`/man
 #done
+
+gzip -9fn $RPM_BUILD_ROOT/usr/man/man*/* \
+	$RPM_BUILD_ROOT/usr/man/*/man*/* \
+	man2html/README man2html/TODO	
 
 %preun
 rm -f /var/catman/cat[123456789n]/*
@@ -151,8 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %config %verify(not size mtime md5) /etc/man.config
 
 # Supported languages cs da de en es fi fr it nl pl pt sl
-
-/usr/man/man[15]/*
 
 %lang(cs) /usr/man/cs/man[15]/*
 %lang(da) /usr/man/da/man[15]/*
@@ -218,9 +222,11 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) /usr/share/locale/pt/man
 %lang(sl) /usr/share/locale/sl/man
 
+/usr/man/man[15]/*
+
 %files -n man2html
 %defattr(644,root,root,755)
-%doc man2html/README man2html/TODO
+%doc {man2html/README,man2html/TODO}.gz
 
 %attr(755,root,root) /usr/bin/man2html
 
@@ -237,6 +243,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/bin/hman
 
 %changelog
+* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.5g-1]
+- upgraded to 1.5g
+- rewrited man-man2html.patch
+- replacement in files
+- gzipped man pages and docs
+
 * Sun Dec 20 1998 Marek Obuchowicz <elephant@shadow.eu.org>
   [1.5f-2d]
 - fixed permissions
