@@ -9,12 +9,12 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5m1
-Release:	2
+Version:	1.5m2
+Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
-# Source0-md5:	e012b32d30a19ac2edee279df1b9b0ed
+Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	d27867e59d3bbb971b00058f20ef8ea4
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -48,7 +48,6 @@ Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	mktemp >= 1.5-8
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	man-cs
 Obsoletes:	man-da
 Obsoletes:	man-de
@@ -59,6 +58,7 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_servdir	/home/services
 %define		_httpdir	%{_servdir}/httpd
