@@ -8,8 +8,6 @@ Version:	1.5i2
 Release:	5
 License:	GPL
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
@@ -77,8 +75,6 @@ kullanýlabilir.
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Requires:	%{name} = %{version}
 
 %description -n man2html
@@ -92,8 +88,6 @@ formacie manroff na format html.
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Requires:	man2html = %{version}
 
 %description -n man2html-cgi
