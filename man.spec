@@ -63,7 +63,7 @@ Obsoletes:	man-pt
 Obsoletes:	man-sl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_servdir	/home/services
+%define		_servdir	/home
 %define		_httpdir	%{_servdir}/httpd
 %define		_cgidir		%{_httpdir}/cgi-bin
 
@@ -247,7 +247,7 @@ install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
 # Play with /home/services
-mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
+#mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
