@@ -8,8 +8,8 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5i2
-Release:	8
+Version:	1.5k
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-man-pages.tar.bz2
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-msgs.patch
+Patch2:		%{name}-gencat_glibc.patch
 Patch3:		%{name}-man2html.patch
 Patch4:		%{name}-fhs.patch
 Patch5:		%{name}-makewhatis.patch
@@ -166,7 +166,7 @@ nie byФ bezpieczne.
 %patch15 -p1
 
 %build
-./configure -default +fhs +lang all
+./configure -default +fhs +lang all -confdir /etc
 
 %{__make} CC="%{__cc} %{rpmcflags}" LDFLAGS="%{rpmldflags}"
 
@@ -189,7 +189,7 @@ for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN
 	done
 done
 
-%{__make} install PREFIX="$RPM_BUILD_ROOT" BINROOTDIR="$RPM_BUILD_ROOT"
+%{__make} install PREFIX="$RPM_BUILD_ROOT"
 
 (cd man2html
 %{__make} install-scripts PREFIX="$RPM_BUILD_ROOT"
@@ -211,8 +211,6 @@ install man/ja/man8/* $RPM_BUILD_ROOT%{_mandir}/ja/man8
 install man/ko/man1/* $RPM_BUILD_ROOT%{_mandir}/ko/man1
 install man/ko/man5/* $RPM_BUILD_ROOT%{_mandir}/ko/man5
 install man/pl/man1/* $RPM_BUILD_ROOT%{_mandir}/pl/man1
-
-gzip -9nf man2html/README man2html/TODO	HISTORY README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -241,6 +239,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %files -f man.lang
 %defattr(644,root,root,755)
+%doc HISTORY README TODO
 %attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis
 %attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis
 
@@ -303,7 +302,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %files -n man2html
 %defattr(644,root,root,755)
-%doc {man2html/README,man2html/TODO}.gz
+%doc {man2html/README,man2html/TODO}
 %attr(755,root,root) %{_bindir}/man2html
 %{_mandir}/man1/man2html.1*
 %lang(ja) %{_mandir}/ja/man1/man2html.1*
