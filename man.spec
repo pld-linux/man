@@ -9,8 +9,7 @@ Release:	1
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-URL:		ftp://sunsite.unc.edu/pub/Linux/apps/doctools
-Source0:	%{name}-%{version}.tar.gz
+Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/%{name}-%{version}.tar.gz
 Source1:	makewhatis.cron
 Patch0:		man-manpath.patch
 Patch1:		man-PLD.patch
@@ -48,7 +47,7 @@ Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux sisteminde
 bulunan birçok belgenin okunmasýnda kullanylyr. whatis ve apropos
 programlarý özel bir konu ile alakalý belgeleri bulmak için kullanýlabilir.
 
-%package -n	man2html
+%package -n man2html
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
 Group:		Utilities/System
@@ -61,7 +60,7 @@ This program can convert man pages stored in manroff format to html
 Program man2html s³u¿y do konwersji plików manuala zapisanych w formacie
 manroff na format html.
 
-%package -n	man2html-cgi
+%package -n man2html-cgi
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Utilities/System
@@ -80,7 +79,7 @@ konwesji stron man na html. Programy s± ci±gle w stadium alfa i mog±
 nie byæ bezpieczne.
 
 %prep
-%setup -q
+%setup  -q
 %patch0 -p1 
 %patch1 -p1
 %patch2 -p1
