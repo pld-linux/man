@@ -12,34 +12,31 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5o1
-Release:	3
+Version:	1.5p
+Release:	0.5
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
-# Source0-md5:	ff60906ee864be0fbf96cb023d113104
+# Source0-md5:	037d5644f8ef9ea0ef22b271bae0297d
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
 # Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-man2html.patch
-Patch3:		%{name}-fhs.patch
-Patch4:		%{name}-makewhatis.patch
-Patch5:		%{name}-safer.patch
-Patch6:		%{name}-security.patch
-Patch7:		%{name}-roff.patch
-Patch8:		%{name}-sofix.patch
-Patch9:		%{name}-ro-usr.patch
-Patch10:	%{name}-lookon.patch
-Patch11:	%{name}-bug11621.patch
-Patch12:	%{name}-gencat.patch
-Patch13:	%{name}-nls-priority.patch
-Patch14:	%{name}-pmake.patch
-Patch15:	%{name}-segv.patch
-Patch16:	%{name}-fmntbug.patch
-Patch17:	%{name}-awk_path.patch
+Patch2:		%{name}-fhs.patch
+Patch3:		%{name}-makewhatis.patch
+Patch4:		%{name}-safer.patch
+Patch5:		%{name}-security.patch
+Patch6:		%{name}-roff.patch
+Patch7:		%{name}-sofix.patch
+Patch8:		%{name}-ro-usr.patch
+Patch9:		%{name}-bug11621.patch
+Patch10:	%{name}-gencat.patch
+Patch11:	%{name}-nls-priority.patch
+Patch12:	%{name}-pmake.patch
+Patch13:	%{name}-fmntbug.patch
+Patch14:	%{name}-awk_path.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	/bin/awk
@@ -181,13 +178,10 @@ nie byФ bezpieczne.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-%patch11 -p1
+#%patch11 -p1
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
 
 %build
 ./configure \
