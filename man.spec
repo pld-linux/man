@@ -13,7 +13,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5o1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -42,11 +42,12 @@ Patch16:	%{name}-fmntbug.patch
 Patch17:	%{name}-awk_path.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
-Requires:	%{name}-config = %{version}
 Requires:	/bin/awk
+Requires:	bzip2
 Requires:	groff
 Requires:	gzip
 Requires:	less
+Requires:	%{name}-config = %{version}
 Requires:	mktemp >= 1.5-8
 Obsoletes:	man-cs
 Obsoletes:	man-da
