@@ -30,18 +30,10 @@ diff -Nur man-1.5k.orig/catopen/catopen.c man-1.5k/catopen/catopen.c
      lang = "";
    langsz = strlen(lang);
  
-diff -Nur man-1.5k.orig/src/gripes.c man-1.5k/src/gripes.c
---- man-1.5k.orig/src/gripes.c	Mon Mar 19 21:38:00 2001
-+++ man-1.5k/src/gripes.c	Sun Oct 14 11:06:00 2001
-@@ -35,18 +35,19 @@
- static void
- catinit (void) {
-     if (!cat_is_open) {
--	catfd = my_catopen(mantexts,0);
-+	catfd = my_catopen(mantexts,NL_CAT_LOCALE);
- 	if (catfd == (nl_catd) -1) {
- 	    /* Only complain if at least one of NLSPATH and LANG exists,
- 	       and LANG != "en" (or when debugging). Also accept en_ZA etc. */
+--- man-1.5p/src/gripes.c.orig	2005-01-08 09:01:21.000000000 +0100
++++ man-1.5p/src/gripes.c	2005-03-09 22:43:31.254314432 +0100
+@@ -49,12 +49,12 @@
+ 	     */
  	    char *s, *lg;
  	    s = getenv("NLSPATH");
 -	    lg = getenv("LANG");
@@ -50,13 +42,12 @@ diff -Nur man-1.5k.orig/src/gripes.c man-1.5k/src/gripes.c
  		    lg = getenv("LC_MESSAGES");
  	    if (!lg)
 -		    lg = getenv("LC_ALL");
--	    if ((s || lg) && (!lg || strncmp(lg, "en", 2))) {
+-	    if (lg && strncmp(lg, "en", 2) && strcmp(lg, "C")) {
 +		    lg = getenv("LANG");
-+	    if ((s || lg) && (!lg || (strncmp(lg, "en", 2) &&
-+			  strncmp(lg, "C", 1) && strncmp(lg, "POSIX", 5)))) {
- 		perror(mantexts);
++	    if (lg && strncmp(lg, "en", 2) && strcmp(lg, "C") && strcmp(lg, "POSIX")) {
  		fprintf(stderr,
- "Failed to open the message catalog %s on the path NLSPATH=%s\n\n",
+ 		  "Cannot open the message catalog \"%s\" for locale \"%s\"\n"
+ 		  "(NLSPATH=\"%s\")\n\n",
 diff -Nur man-1.5k.orig/src/man.c man-1.5k/src/man.c
 --- man-1.5k.orig/src/man.c	Sun Oct 14 11:05:49 2001
 +++ man-1.5k/src/man.c	Sun Oct 14 11:06:00 2001
