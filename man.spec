@@ -8,8 +8,8 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5k
-Release:	4
+Version:	1.5l
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -277,6 +277,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %{_mandir}/man1/whatis.1*
 %{_mandir}/man[58]/*
 
+%lang(bg) %{_mandir}/bg/man[15]/*
 %lang(cs) %{_mandir}/cs/man[158]/*
 %lang(da) %{_mandir}/da/man[158]/*
 %lang(de) %{_mandir}/de/man[158]/*
@@ -297,9 +298,11 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pl) %{_mandir}/pl/man1/whatis.1*
 %lang(pl) %{_mandir}/pl/man[58]/*
 %lang(pt) %{_mandir}/pt/man[158]/*
+%lang(ro) %{_mandir}/ro/man[158]/*
 %lang(sl) %{_mandir}/sl/man[158]/*
 
 %{_datadir}/locale/en/man
+%lang(bg) %{_datadir}/locale/bg/man
 %lang(cs) %{_datadir}/locale/cs/man
 %lang(da) %{_datadir}/locale/da/man
 %lang(de) %{_datadir}/locale/de/man
@@ -309,9 +312,11 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(hr) %{_datadir}/locale/hr/man
 %lang(it) %{_datadir}/locale/it/man
 %lang(ja) %{_datadir}/locale/ja/man
+%lang(ko) %{_datadir}/locale/ko/man
 %lang(nl) %{_datadir}/locale/nl/man
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
+%lang(ro) %{_datadir}/locale/ro/man
 %lang(ru) %{_datadir}/locale/ru/man
 %lang(sl) %{_datadir}/locale/sl/man
 
