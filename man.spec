@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	28
+Release:	29
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -128,10 +128,9 @@ nie byæ bezpieczne.
 %patch17 -p1
 
 %build
-CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
 ./configure -default +fhs +lang all
 
-%{__make} CC="%{__cc} %{rpmcflags}"
+%{__make} CC="%{__cc} %{rpmcflags}" LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -158,14 +157,15 @@ done
 %{__make} install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
 )
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly
-
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis.cron
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis.cron
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
 gzip -9nf man2html/README man2html/TODO	
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %preun
 rm -f /var/cache/man/cat[123456789n]/*
@@ -188,9 +188,6 @@ rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??_??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f man.lang
 %defattr(644,root,root,755)
