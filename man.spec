@@ -5,17 +5,19 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5g
-Release:	2
+Release:	3
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/%{name}-%{version}.tar.gz
+URL:		ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man
+Source0:	%{name}-%{version}.tar.gz
 Source1:	makewhatis.cron
-Patch0:		man-manpath.patch
+Patch0:		man-manpaths.patch
 Patch1:		man-PLD.patch
 Patch2:		man-msgs.patch
 Patch3:		man-man2html.patch
 Patch4:		man-fhs.patch
+Patch5:		man-makewhatis.patch
 Requires:	groff
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -48,7 +50,7 @@ Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux sisteminde
 bulunan birçok belgenin okunmasýnda kullanylyr. whatis ve apropos
 programlarý özel bir konu ile alakalý belgeleri bulmak için kullanýlabilir.
 
-%package -n man2html
+%package -n	man2html
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
 Group:		Utilities/System
@@ -61,7 +63,7 @@ This program can convert man pages stored in manroff format to html
 Program man2html s³u¿y do konwersji plików manuala zapisanych w formacie
 manroff na format html.
 
-%package -n man2html-cgi
+%package -n	man2html-cgi
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Utilities/System
@@ -81,11 +83,12 @@ nie byæ bezpieczne.
 
 %prep
 %setup  -q
-#%patch0 -p1 
+%patch0 -p1 
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
@@ -109,6 +112,7 @@ install -d $RPM_BUILD_ROOT/var/cache/man/{local,X11R6}
 install -d $RPM_BUILD_ROOT/var/cache/man/cat{1,2,3,4,5,6,7,8,9,n}
 install -d $RPM_BUILD_ROOT/var/cache/man/local/cat{1,2,3,4,5,6,7,8,9,n}
 install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/cat{1,2,3,4,5,6,7,8,9,n}
+
 for i in cs da de es fi fr it nl pl pt sl
 do
   install -d $RPM_BUILD_ROOT/var/cache/man/$i/cat{1,2,3,4,5,6,7,8,9,n}
@@ -117,11 +121,6 @@ do
 done
 
 strip $RPM_BUILD_ROOT%{_bindir}/man
-
-#for LNG in $RPM_BUILD_ROOT%{_libdir}/locale/man/*; do
-#  install -d $RPM_BUILD_ROOT%{_datadir}/locale/`basename $LNG`
-#  cp $LNG $RPM_BUILD_ROOT%{_datadir}/locale/`basename $LNG`/man
-#done
 
 gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	$RPM_BUILD_ROOT%{_mandir}/*/man*/* \
@@ -155,7 +154,7 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644,root,man,755)
+%defattr(644,root,root,755)
 %attr(750,root,root) %config /etc/cron.weekly/makewhatis.cron
 
 %attr(2711,root,man) %{_bindir}/man
@@ -163,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_sbindir}/makewhatis
-%attr(644,root,root) %config %verify(not size mtime md5) /etc/man.config
+%config %verify(not size mtime md5) /etc/man.config
 
 # Supported languages cs da de en es fi fr it nl pl pt sl
 
@@ -179,7 +178,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) %{_mandir}/pt/man[15]/*
 %lang(sl) %{_mandir}/sl/man[15]/*
 
-%attr(775,root, man) %dir /var/cache/man
+%attr(755,root,root) %dir /var/cache/man
 %attr(775,root, man) /var/cache/man/cat*
 %attr(775,root, man) /var/cache/man/local/cat*
 %attr(775,root, man) /var/cache/man/X11R6/cat*
