@@ -15,11 +15,11 @@ Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
-Source3:	%{name}-additional-man-pages.tar.bz2
-Patch0:		%{name}-manpaths.patch
+Source3:	%{name}-additional-%{name}-pages.tar.bz2
+Patch0:		%{name}-%{name}paths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-gencat_glibc.patch
-Patch3:		%{name}-man2html.patch
+Patch3:		%{name}-%{name}2html.patch
 Patch4:		%{name}-fhs.patch
 Patch5:		%{name}-makewhatis.patch
 Patch6:		%{name}-safer.patch
@@ -32,7 +32,7 @@ Patch12:	%{name}-lookon.patch
 Patch13:	%{name}-bug11621.patch
 Patch14:	%{name}-gencat.patch
 Patch15:	%{name}-nls-priority.patch
-Patch16:	%{name}-pl_man_pages.patch
+Patch16:	%{name}-pl_%{name}_pages.patch
 Requires:	man-config
 Requires:	groff
 Requires:	less
@@ -166,7 +166,7 @@ nie byæ bezpieczne.
 %patch15 -p1
 
 %build
-./configure -default +fhs +lang all -confdir /etc
+./configure -default +fhs +lang all -confdir %{_sysconfdir}
 
 %{__make} CC="%{__cc} %{rpmcflags}" LDFLAGS="%{rpmldflags}"
 
