@@ -127,7 +127,7 @@ nie byæ bezpieczne.
 CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}}" LDFLAGS="%{!?debug:-s}"
 ./configure -default +fhs +lang all
 
-%{__make} CC="%{__cc} %{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
+%{__make} CC="%{__cc} %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
