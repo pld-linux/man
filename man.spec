@@ -124,7 +124,7 @@ nie byæ bezpieczne.
 %patch16 -p1
 
 %build
-CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}}" LDFLAGS="%{!?debug:-s}"
+CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
 ./configure -default +fhs +lang all
 
 %{__make} CC="%{__cc} %{rpmcflags}"
@@ -133,7 +133,7 @@ CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}}" LDFLAGS="%{!?debug:-s}"
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
-: > man.lang
+echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de es fi fr it ja nl pl pt pt_BR ru sl sv; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
