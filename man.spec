@@ -41,7 +41,6 @@ BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
-Requires:	bzip2
 Requires:	groff
 Requires:	gzip
 Requires:	less
