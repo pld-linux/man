@@ -6,8 +6,9 @@ diff -Nru man-1.5h1/src/man.conf.in man-1.5h1.new/src/man.conf.in
  # Every automatically generated MANPATH includes these fields
  #
 -MANPATH	/usr/man
+-MANPATH	/usr/local/man
 +MANPATH	/usr/share/man
- MANPATH	/usr/local/man
++MANPATH	/usr/local/share/man
  MANPATH	/usr/X11R6/man
  MANPATH /usr/lib/perl5/man
 @@ -44,15 +44,15 @@
@@ -18,12 +19,14 @@ diff -Nru man-1.5h1/src/man.conf.in man-1.5h1.new/src/man.conf.in
 -MANPATH_MAP	/sbin			/usr/man
 -MANPATH_MAP	/usr/bin		/usr/man
 -MANPATH_MAP	/usr/sbin		/usr/man
+-MANPATH_MAP	/usr/local/bin		/usr/local/man
+-MANPATH_MAP	/usr/local/sbin		/usr/local/man
 +MANPATH_MAP	/bin			/usr/share/man
 +MANPATH_MAP	/sbin			/usr/share/man
 +MANPATH_MAP	/usr/bin		/usr/share/man
 +MANPATH_MAP	/usr/sbin		/usr/share/man
- MANPATH_MAP	/usr/local/bin		/usr/local/man
- MANPATH_MAP	/usr/local/sbin		/usr/local/man
++MANPATH_MAP	/usr/local/bin		/usr/local/share/man
++MANPATH_MAP	/usr/local/sbin		/usr/local/share/man
  MANPATH_MAP	/usr/X11R6/bin		/usr/X11R6/man
  MANPATH_MAP	/usr/bin/X11		/usr/X11R6/man
 -MANPATH_MAP	/usr/bin/mh		/usr/man

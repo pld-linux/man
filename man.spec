@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	20
+Release:	21
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -33,6 +33,7 @@ Patch16:	%{name}-gencat.patch
 Requires:	groff
 Requires:	less
 Requires:	/bin/awk
+Requires:	mktemp >= 1.5-8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -148,6 +149,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis.cron
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis.cron
 
+touch $RPM_BUILD_ROOT/var/cache/man/whatis
+
 gzip -9nf man2html/README man2html/TODO	
 
 %preun
@@ -196,6 +199,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_mandir}/pl/man[15]/*
 %lang(pt) %{_mandir}/pt/man[15]/*
 %lang(sl) %{_mandir}/sl/man[15]/*
+
+%config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
 
 %dir /var/cache/man
 %dir /var/cache/man/local
