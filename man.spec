@@ -319,7 +319,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %dir %attr(775,root,http) /var/cache/man2html
 /var/cache/man2html/.glimpse_filters
 
-%attr(755,root,root) /home/httpd/cgi-bin/man
-/home/httpd/cgi-aux/man
+%attr(755,root,root) /home/services/httpd/cgi-bin/man
+/home/services/httpd/cgi-aux/man
 # seems man2html-cgi it's the only package that uses it
-%dir /home/httpd/cgi-aux
+%dir /home/services/httpd/cgi-aux
