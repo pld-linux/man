@@ -1,0 +1,14 @@
+diff -ur man-1.5g.old/configure man-1.5g/configure
+--- man-1.5g.old/configure	Fri May  7 01:59:43 1999
++++ man-1.5g/configure	Fri May  7 02:02:16 1999
+@@ -528,8 +528,8 @@
+ mandir="usr/man"
+ confdir="etc"
+ if [ x"$fhs" = x ]; then
+-  mandir="share/man"
+-  confdir="share/misc"
++  mandir="usr/share/man"
++  confdir="etc"
+ fi
+ 
+ if [ x$default = x ]; then
