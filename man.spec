@@ -118,7 +118,7 @@ done
 
 strip $RPM_BUILD_ROOT/usr/bin/man
 
-#for LNG in $RPM_BUILD_ROOT/usr/lib/locale/man/*; do
+#for LNG in $RPM_BUILD_ROOT%{_libdir}/locale/man/*; do
 #  install -d $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`
 #  cp $LNG $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`/man
 #done
