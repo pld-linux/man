@@ -38,6 +38,7 @@ Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_%{name}_pages.patch
 Patch17:	%{name}-pmake.patch
 Patch18:	%{name}-segv.patch
+Patch19:	%{name}-fmntbug.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
@@ -181,6 +182,7 @@ nie byæ bezpieczne.
 %patch15 -p1
 %patch17 -p1
 %patch18 -p1
+%patch19 -p1
 
 %build
 ./configure -default +fhs +lang all -confdir %{_sysconfdir}
