@@ -372,5 +372,5 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %{_mandir}/man1/hman.1*
 %lang(el) %{_mandir}/el/man1/hman.1*
 %lang(ja) %{_mandir}/ja/man1/hman.1*
-# seems man2html-cgi it's the only package that uses it
+# it seems to be the only package using this dir
 %dir %{_httpdir}/cgi-aux
