@@ -1,0 +1,180 @@
+--- man-1.5m1/msgs/mess.bg.orig	2003-08-10 13:13:09.702162544 +0200
++++ man-1.5m1/msgs/mess.bg	2003-08-10 13:14:40.449366872 +0200
+@@ -1,3 +1,4 @@
++$ codeset=cp1251
+ BAD_CONFIG_FILE
+ 	"ÌÂ ÓÚÍËı ÒÏËÒ˙Î ‚˙‚ Ù‡ÈÎ‡ %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.cs.orig	2003-08-10 13:13:09.706161936 +0200
++++ man-1.5m1/msgs/mess.cs	2003-08-10 13:14:51.921622824 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-2
+ BAD_CONFIG_FILE
+ 	"nemohu pochopit obsah souboru %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.da.orig	2003-08-10 13:13:09.711161176 +0200
++++ man-1.5m1/msgs/mess.da	2003-08-10 13:15:01.869110576 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"Konfigurationsfilen er uforstÂelig\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.de.orig	2003-08-10 13:13:09.716160416 +0200
++++ man-1.5m1/msgs/mess.de	2003-08-10 13:15:11.668620824 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"Die Konfigurations-Datei %s ist fehlerhaft\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.el.orig	2003-08-10 13:13:09.720159808 +0200
++++ man-1.5m1/msgs/mess.el	2003-08-10 13:15:27.068279720 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-7
+ BAD_CONFIG_FILE
+ 	"·‰˝Ì·ÙÔÌ Ì· ‚„‹Î˘ Ì¸ÁÏ· ·¸ ÙÔ ·Ò˜ÂﬂÔ %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.en.orig	2003-08-10 13:13:09.725159048 +0200
++++ man-1.5m1/msgs/mess.en	2003-08-10 13:15:33.562292480 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"unable to make sense of the file %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.es.orig	2003-08-10 13:13:09.730158288 +0200
++++ man-1.5m1/msgs/mess.es	2003-08-10 13:15:40.843185616 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"imposible entender el fichero %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.fi.orig	2003-08-10 13:13:09.734157680 +0200
++++ man-1.5m1/msgs/mess.fi	2003-08-10 13:15:49.731834336 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"en ymm‰rr‰ tiedoston %s formaattia\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.fr.orig	2003-08-10 13:13:09.739156920 +0200
++++ man-1.5m1/msgs/mess.fr	2003-08-10 13:15:59.171399304 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"impossible d'interprÈter le fichier %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.hr.orig	2003-08-10 13:13:09.744156160 +0200
++++ man-1.5m1/msgs/mess.hr	2003-08-10 13:16:26.031315976 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-2
+ BAD_CONFIG_FILE
+ 	"datoteka %s nema smisla\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.it.orig	2003-08-10 13:13:09.749155400 +0200
++++ man-1.5m1/msgs/mess.it	2003-08-10 13:16:33.261216864 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"incapace di comprendere il file %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.ja.orig	2003-08-10 13:13:09.753154792 +0200
++++ man-1.5m1/msgs/mess.ja	2003-08-10 13:16:46.041274000 +0200
+@@ -1,3 +1,4 @@
++$ codeset=euc-jp
+ BAD_CONFIG_FILE
+ 	"¿ﬂƒÍ•’•°•§•Î %s §À∏Ì§Í§¨§¢§Í§ﬁ§π°£\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.ko.orig	2003-08-10 13:13:09.758154032 +0200
++++ man-1.5m1/msgs/mess.ko	2003-08-10 13:17:03.645597736 +0200
+@@ -1,3 +1,4 @@
++$ codeset=euc-kr
+ BAD_CONFIG_FILE
+ 	"º≥¡§ ∆ƒ¿œ %sø° ¿ﬂ∏¯¿Ã ¿÷Ω¿¥œ¥Ÿ.\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.nl.orig	2003-08-10 13:13:09.763153272 +0200
++++ man-1.5m1/msgs/mess.nl	2003-08-10 13:17:11.987329600 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"er staat onzin in het bestand %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.pl.orig	2003-08-10 13:13:09.768152512 +0200
++++ man-1.5m1/msgs/mess.pl	2003-08-10 13:17:24.513425344 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-2
+ BAD_CONFIG_FILE
+ 	"nie mogÍ zrozumieÊ zawarto∂ci pliku %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.pt.orig	2003-08-10 13:13:09.772151904 +0200
++++ man-1.5m1/msgs/mess.pt	2003-08-10 13:17:36.500603016 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-1
+ BAD_CONFIG_FILE
+ 	"n„o compreendi o ficheiro %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.ro.orig	2003-08-10 13:13:09.777151144 +0200
++++ man-1.5m1/msgs/mess.ro	2003-08-10 13:17:46.391099432 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-2
+ BAD_CONFIG_FILE
+ 	"imposibil de Ón˛eles fi∫ierul %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.ru.orig	2003-08-10 13:13:09.782150384 +0200
++++ man-1.5m1/msgs/mess.ru	2003-08-10 13:18:11.560273136 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-5
+ BAD_CONFIG_FILE
+ 	"Ê¡ Ã Œ¡”‘“œ≈À %s –œÃœŒ Õ¡“¡⁄Õ¡\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/mess.sl.orig	2003-08-10 13:13:09.786149776 +0200
++++ man-1.5m1/msgs/mess.sl	2003-08-10 13:18:19.703035248 +0200
+@@ -1,3 +1,4 @@
++$ codeset=iso-8859-2
+ BAD_CONFIG_FILE
+ 	"Napake v nastavitveni datoteki %s\n"
+ CONFIG_OPEN_ERROR
+--- man-1.5m1/msgs/Makefile.in.orig	2003-08-10 13:06:23.000000000 +0200
++++ man-1.5m1/msgs/Makefile.in	2003-08-10 13:26:12.301189408 +0200
+@@ -3,8 +3,6 @@
+ 	@for i in mess.??; do ../src/makemsg -c $$i $$i.catin; \
+ 	echo "==== Making $$i.cat ====" ;\
+ 	if [ -f /usr/bin/locale ]; then \
+-		langcode=`echo $$i | sed 's:mess\.::'`; \
+-		LANG=`locale -a | grep $${langcode}_ | head -1` \
+ 		./gencat $$i.cat $$i.catin; \
+ 	else \
+ 		./gencat $$i.cat $$i.catin; \
+--- man-1.5m1/src/makemsg.c.orig	2003-03-11 16:53:28.000000000 +0100
++++ man-1.5m1/src/makemsg.c	2003-08-10 13:28:13.454771264 +0200
+@@ -44,6 +44,7 @@
+     char buf[BUFSIZE];
+     int defct = 0;
+     int makecat = 0;
++    int catheaderdone = 0;
+ 
+ #define getbuf	if (fgets (buf, sizeof(buf), fin) == NULL) {\
+ 		    fprintf (stderr, "makemsg: unexpected end of input\n");\
+@@ -104,14 +105,22 @@
+ 	usage ();
+     }
+ 
+-    if (makecat)
+-      fputs ("$quote \"\n$set 1\n", foc);
+-    else
++    if (!makecat)
+       fputs ("char *msg[] = {\n  \"\",\n", foc);
+ 
+     while (fgets (buf, sizeof(buf), fin) != NULL) {
+ 	char ss;
+ 
++	if (buf[0] == '$') { /* support gencat commands */
++	    if (makecat)
++		fputs (buf, foc);
++	    continue;
++	}
++	if (!catheaderdone) {
++	    if (makecat)
++		fputs ("$quote \"\n$set 1\n", foc);
++	    catheaderdone = 1;
++	}
+ 	/* skip leading blanks and blank lines */
+ 	s = buf;
+ 	while (whitespace(*s))

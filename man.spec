@@ -9,12 +9,12 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.5l
-Release:	5
+Version:	1.5m1
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
-# Source0-md5:	07fa5ab41c39afcd59cdef5139ef563b
+# Source0-md5:	e012b32d30a19ac2edee279df1b9b0ed
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -39,6 +39,7 @@ Patch16:	%{name}-pl_%{name}_pages.patch
 Patch17:	%{name}-pmake.patch
 Patch18:	%{name}-segv.patch
 Patch19:	%{name}-fmntbug.patch
+Patch20:	%{name}-nls-codesets.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}
@@ -59,7 +60,9 @@ Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
 
-%define		_htmldir	/home/services
+%define		_servdir	/home/services
+%define		_httpdir	%{_servdir}/httpd
+%define		_cgidir		%{_httpdir}/cgi-bin
 
 %description
 The man package includes three tools for finding information and/or
@@ -185,19 +188,26 @@ nie byФ bezpieczne.
 %patch17 -p1
 %patch18 -p1
 %patch19 -p1
+%patch20 -p1
 
 %build
-./configure -default +fhs +lang all -confdir %{_sysconfdir}
+./configure \
+	-default \
+	+fhs \
+	+lang all \
+	-confdir %{_sysconfdir}
 
-%{__make} CC="%{__cc} %{rpmcflags}" LDFLAGS="%{rpmldflags}"
+%{__make} \
+	CC="%{__cc} %{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_htmldir}} \
+install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_servdir}} \
 	$RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh_CN zh_TW; do
+for i in "" bg cs da de el es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
@@ -225,6 +235,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
+install man/el/hman.man $RPM_BUILD_ROOT%{_mandir}/el/man1/hman.1
+install man/el/man2html.man $RPM_BUILD_ROOT%{_mandir}/el/man1/man2html.1
 install man/hu/man1/* $RPM_BUILD_ROOT%{_mandir}/hu/man1
 install man/ja/man1/{hman,man2html}.1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
 install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
@@ -232,7 +244,7 @@ install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
 # Play with /home/services
-mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_htmldir}
+mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -286,6 +298,10 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(cs) %{_mandir}/cs/man[158]/*
 %lang(da) %{_mandir}/da/man[158]/*
 %lang(de) %{_mandir}/de/man[158]/*
+%lang(el) %{_mandir}/el/man1/apropos.1*
+%lang(el) %{_mandir}/el/man1/man.1*
+%lang(el) %{_mandir}/el/man1/whatis.1*
+%lang(el) %{_mandir}/el/man[58]/*
 %lang(es) %{_mandir}/es/man[158]/*
 %lang(fi) %{_mandir}/fi/man[158]/*
 %lang(fr) %{_mandir}/fr/man[158]/*
@@ -314,6 +330,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(cs) %{_datadir}/locale/cs/man
 %lang(da) %{_datadir}/locale/da/man
 %lang(de) %{_datadir}/locale/de/man
+%lang(el) %{_datadir}/locale/el/man
 %lang(es) %{_datadir}/locale/es/man
 %lang(fi) %{_datadir}/locale/fi/man
 %lang(fr) %{_datadir}/locale/fr/man
@@ -337,6 +354,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %doc {man2html/README,man2html/TODO}
 %attr(755,root,root) %{_bindir}/man2html
 %{_mandir}/man1/man2html.1*
+%lang(el) %{_mandir}/el/man1/man2html.1*
 %lang(ja) %{_mandir}/ja/man1/man2html.1*
 %lang(pl) %{_mandir}/pl/man1/man2html.1*
 %lang(ro) %{_mandir}/ro/man1/man2html.1*
@@ -344,11 +362,12 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files -n man2html-cgi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hman
-%attr(755,root,root) %{_htmldir}/httpd/cgi-bin/man
-%{_htmldir}/httpd/cgi-aux/man
+%attr(755,root,root) %{_cgidir}/man
+%{_httpdir}/cgi-aux/man
 %dir %attr(775,root,http) /var/cache/man2html
 /var/cache/man2html/.glimpse_filters
 %{_mandir}/man1/hman.1*
+%lang(el) %{_mandir}/el/man1/hman.1*
 %lang(ja) %{_mandir}/ja/man1/hman.1*
 # seems man2html-cgi it's the only package that uses it
-%dir %{_htmldir}/httpd/cgi-aux
+%dir %{_httpdir}/cgi-aux

@@ -33,8 +33,8 @@ diff -urN man-1.5h1.org/src/man.c man-1.5h1/src/man.c
  		 the current position plus 10 lines.  This plus setpl()
  		 gives us a single page that just contains the whole
  		 man page. (William Webber, wew@cs.rmit.edu.au) */
--	      strcat(buft, "; echo; echo \".pl \\n(nlu+10\"");
-+	   /* strcat(buft, "; echo; echo \".pl \\n(nlu+10\"");  * GNU roff doesn't understand it */
+-	      strcat(buft, "; echo \".\\\\\\\"\"; echo \".pl \\n(nlu+10\"");
++	   /* strcat(buft, "; echo \".\\\\\\\"\"; echo \".pl \\n(nlu+10\"");  * GNU roff doesn't understand it */
 +	  }
  #if 0
  	      /* In case this doesnt work for some reason,

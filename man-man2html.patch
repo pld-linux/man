@@ -1,5 +1,12 @@
 --- man-1.5l/man2html/Makefile.in.orig	Sun Dec  8 21:50:11 2002
 +++ man-1.5l/man2html/Makefile.in	Tue Mar 11 21:53:57 2003
+@@ -1,5 +1,5 @@
+ CC = @CC@
+-CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -O
++CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes
+ OBJECTS = man2html.o cgibase.o abbrev.o strdefs.o
+ bindir = $(PREFIX)/usr/bin
+ mandir = $(PREFIX)@mandir@
 @@ -31,7 +31,7 @@
  	mkdir -p $(DESTDIR)/$(httpdir)/cgi-aux/man
  	install -m 755 scripts/cgi-bin/man/* $(DESTDIR)/$(httpdir)/cgi-bin/man
