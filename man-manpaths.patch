@@ -15,17 +15,14 @@ diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
 diff -Nur man-1.5i2.orig/src/man.conf.in man-1.5i2/src/man.conf.in
 --- man-1.5i2.orig/src/man.conf.in	Mon Mar 19 17:17:02 2001
 +++ man-1.5i2/src/man.conf.in	Sun Oct 14 00:43:36 2001
-@@ -36,9 +36,8 @@
+@@ -36,7 +36,6 @@
  #
  # Every automatically generated MANPATH includes these fields
  #
 -MANPATH	/usr/man
  MANPATH /usr/share/man
--MANPATH	/usr/local/man
-+MANPATH	/usr/local/share/man
+ MANPATH	/usr/local/man
  MANPATH	/usr/X11R6/man
- MANPATH /usr/lib/perl5/man
- #
 @@ -48,15 +47,15 @@
  # in the mandatory manpath already, but will keep man from statting
  # lots of other nearby files and directories)
@@ -34,14 +31,12 @@ diff -Nur man-1.5i2.orig/src/man.conf.in man-1.5i2/src/man.conf.in
 -MANPATH_MAP	/sbin			/usr/man
 -MANPATH_MAP	/usr/bin		/usr/man
 -MANPATH_MAP	/usr/sbin		/usr/man
--MANPATH_MAP	/usr/local/bin		/usr/local/man
--MANPATH_MAP	/usr/local/sbin		/usr/local/man
 +MANPATH_MAP	/bin			/usr/share/man
 +MANPATH_MAP	/sbin			/usr/share/man
 +MANPATH_MAP	/usr/bin		/usr/share/man
 +MANPATH_MAP	/usr/sbin		/usr/share/man
-+MANPATH_MAP	/usr/local/bin		/usr/local/share/man
-+MANPATH_MAP	/usr/local/sbin		/usr/local/share/man
+ MANPATH_MAP	/usr/local/bin		/usr/local/man
+ MANPATH_MAP	/usr/local/sbin		/usr/local/man
  MANPATH_MAP	/usr/X11R6/bin		/usr/X11R6/man
  MANPATH_MAP	/usr/bin/X11		/usr/X11R6/man
 -MANPATH_MAP	/usr/bin/mh		/usr/man
