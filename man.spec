@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -30,6 +30,7 @@ Patch12:	%{name}-lookon.patch
 Patch13:	%{name}-bug11621.patch
 Patch14:	%{name}-gencat.patch
 Patch15:	%{name}-nls-priority.patch
+Patch16:	%{name}-pl_man_pages.patch
 Requires:	groff
 Requires:	less
 Requires:	gzip
