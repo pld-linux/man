@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	7
+Release:	8
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -142,7 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN.GB2312 zh_TW.Big5; do
+for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
@@ -250,10 +250,10 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pt) %{_mandir}/pt/man[158]/*
 %lang(sl) %{_mandir}/sl/man[158]/*
 
+%{_datadir}/locale/en/man
 %lang(cs) %{_datadir}/locale/cs/man
 %lang(da) %{_datadir}/locale/da/man
 %lang(de) %{_datadir}/locale/de/man
-%lang(en) %{_datadir}/locale/en/man
 %lang(es) %{_datadir}/locale/es/man
 %lang(fi) %{_datadir}/locale/fi/man
 %lang(fr) %{_datadir}/locale/fr/man
