@@ -1,0 +1,11 @@
+--- man-1.5f/msgs/Makefile.in.orig	Wed Sep 16 23:32:40 1998
++++ man-1.5f/msgs/Makefile.in	Wed Sep 16 23:35:13 1998
+@@ -6,7 +6,7 @@
+ 	rm -f core *.catin
+ 
+ install:
+-	sh ./inst.sh "@languages@" "@locale@"
++	sh ./inst.sh "@languages@" "$(BINROOTDIR)@locale@"
+ 
+ clean:
+ 	rm -f gencat core *~ *.cat *.catin

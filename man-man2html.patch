@@ -1,0 +1,51 @@
+diff -ru man-1.5g.old/man2html/Makefile.in man-1.5g/man2html/Makefile.in
+--- man-1.5g.old/man2html/Makefile.in	Wed Apr  7 01:45:03 1999
++++ man-1.5g/man2html/Makefile.in	Wed Apr 28 12:51:53 1999
+@@ -2,12 +2,15 @@
+ CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -O
+ OBJECTS = man2html.o cgibase.o abbrev.o strdefs.o
+ mandir = $(BINROOTDIR)@mandir@
++httpdir = $(BINROOTDIR)/home/httpd
++bindir = $(BINROOTDIR)/usr/bin
++vardir = $(BINROOTDIR)/var
+ 
+ man2html:	$(OBJECTS)
+ 
+ # This installs the man2html utility
+ install:	man2html
+-	install -m 755 man2html /usr/bin
++	install -m 755 man2html $(bindir)
+ 	mkdir -p $(mandir)/man1
+ 	install -m 644 man2html.1 $(mandir)/man1/man2html.@man1ext@
+ 
+@@ -17,16 +20,16 @@
+ #   http://localhost/cgi-bin/man/man2html
+ # to work.
+ install-man-scripts:
+-	mkdir -p /home/httpd/cgi-bin/man /home/httpd/cgi-aux/man
+-	install -m 755 scripts/cgi-bin/man/* /home/httpd/cgi-bin/man
+-	install -m 644 scripts/cgi-aux/man/* /home/httpd/cgi-aux/man
+-	install -d -o nobody -g nobody -m 775 /var/man2html
++	mkdir -p $(httpdir)/cgi-bin/man $(httpdir)/cgi-aux/man
++	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
++	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
++	install -d -m 775 $(vardir)/man2html
+ # (aux was renamed to cgi-aux since aux causes problems under DOS)
+ 
+ # If you have installed glimpse, and have compressed man pages,
+ # then perhaps you also want these filters.
+ install-glimpse-stuff:
+-	install -m 644 glimpse_filters /var/man2html/.glimpse_filters
++	install -m 644 glimpse_filters $(vardir)/man2html/.glimpse_filters
+ 
+ # In order not to have to type a long command like
+ #   netscape http://localhost/cgi-bin/man/man2html?section+topic
+@@ -37,7 +40,7 @@
+ # variable MANHTMLPAGER to find out which browser you use, and
+ # you can set MANHTMLHOST if the pages are not on localhost.
+ install-hman:
+-	install -m 555 hman.sh /usr/bin/hman
++	install -m 555 hman.sh $(bindir)/hman
+ 	install -m 644 hman.1 $(mandir)/man1/hman.@man1ext@
+ 
+ clean:
