@@ -10,22 +10,21 @@ diff -Nur man-1.5k.orig/catopen/catopen.c man-1.5k/catopen/catopen.c
  #endif
  
  static nl_catd my_catopenpath(char *name, char *path);
-diff -Nur man-1.5k.orig/man2html/Makefile.in man-1.5k/man2html/Makefile.in
---- man-1.5k.orig/man2html/Makefile.in	Sun Oct 14 11:17:22 2001
-+++ man-1.5k/man2html/Makefile.in	Mon Oct 15 22:01:51 2001
-@@ -28,13 +28,13 @@
- 	mkdir -p $(DESTDIR)/$(httpdir)/cgi-aux/man
- 	install -m 755 scripts/cgi-bin/man/* $(DESTDIR)/$(httpdir)/cgi-bin/man
- 	install -m 644 scripts/cgi-aux/man/* $(DESTDIR)/$(httpdir)/cgi-aux/man
--	install -d -m 775 $(DESTDIR)/$(vardir)/man2html
-+	install -d -m 775 $(DESTDIR)/$(vardir)/cache/man2html
+--- man-1.5n/man2html/Makefile.in.orig	2004-08-03 22:11:25.745522192 +0200
++++ man-1.5n/man2html/Makefile.in	2004-08-03 22:23:56.003465648 +0200
+@@ -31,13 +31,13 @@
+ 	mkdir -p $(httpdir)/cgi-aux/man
+ 	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
+ 	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
+-	install -d -m 775 $(vardir)/man2html
++	install -d -m 775 $(vardir)/cache/man2html
  # (aux was renamed to cgi-aux since aux causes problems under DOS)
  
  # If you have installed glimpse, and have compressed man pages,
  # then perhaps you also want these filters.
  install-glimpse-stuff:
--	install -m 644 glimpse_filters $(DESTDIR)/$(vardir)/man2html/.glimpse_filters
-+	install -m 644 glimpse_filters $(DESTDIR)/$(vardir)/cache/man2html/.glimpse_filters
+-	install -m 644 glimpse_filters $(vardir)/man2html/.glimpse_filters
++	install -m 644 glimpse_filters $(vardir)/cache/man2html/.glimpse_filters
  
  # In order not to have to type a long command like
  #   netscape http://localhost/cgi-bin/man/man2html?section+topic

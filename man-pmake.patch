@@ -9,27 +9,27 @@
  	cd man; $(MAKE) subdirs
  
  %messages: gencat/gencat msgs/Makefile
---- man-1.5k/man2html/Makefile.in	Sat Mar  1 10:03:37 2003
-+++ man-1.5k.new/man2html/Makefile.in	Sat Mar  1 10:08:54 2003
-@@ -19,7 +19,7 @@
- 	mkdir -p $(DESTDIR)/$(mandir)/man1
- 	install -m 644 man2html.1 $(DESTDIR)/$(mandir)/man1/man2html.@man1ext@
+--- man-1.5n/man2html/Makefile.in.orig	2004-08-03 22:24:32.343941056 +0200
++++ man-1.5n/man2html/Makefile.in	2004-08-03 22:25:13.793639744 +0200
+@@ -21,7 +21,7 @@
+ 	mkdir -p $(mandir)/man1
+ 	install -m 644 man2html.1 $(mandir)/man1/man2html.@man1ext@
  
 -install-scripts: install-man-scripts install-glimpse-stuff install-hman
 +install-scripts: install-glimpse-stuff install-hman
  
  # These are the scripts that allow pointing a browser at
  #   http://localhost/cgi-bin/man/man2html
-@@ -34,7 +34,7 @@
+@@ -36,7 +36,7 @@
  
  # If you have installed glimpse, and have compressed man pages,
  # then perhaps you also want these filters.
 -install-glimpse-stuff:
 +install-glimpse-stuff: install-man-scripts
- 	install -m 644 glimpse_filters $(DESTDIR)/$(vardir)/cache/man2html/.glimpse_filters
+ 	install -m 644 glimpse_filters $(vardir)/cache/man2html/.glimpse_filters
  
  # In order not to have to type a long command like
-@@ -49,7 +49,7 @@
+@@ -51,7 +51,7 @@
  	rm -f hman
  	sed -e 's,%version%,@version@,' hman.sh > hman
  

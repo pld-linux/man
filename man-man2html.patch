@@ -1,18 +1,18 @@
---- man-1.5l/man2html/Makefile.in.orig	Sun Dec  8 21:50:11 2002
-+++ man-1.5l/man2html/Makefile.in	Tue Mar 11 21:53:57 2003
+--- man-1.5n/man2html/Makefile.in.orig	2004-03-23 22:48:56.000000000 +0100
++++ man-1.5n/man2html/Makefile.in	2004-08-03 22:11:11.282720872 +0200
 @@ -1,5 +1,5 @@
  CC = @CC@
 -CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -O
 +CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes
  OBJECTS = man2html.o cgibase.o abbrev.o strdefs.o
- bindir = $(PREFIX)/usr/bin
- mandir = $(PREFIX)@mandir@
+ bindir = $(DESTDIR)$(PREFIX)/usr/bin
+ mandir = $(DESTDIR)$(PREFIX)@mandir@
 @@ -31,7 +31,7 @@
- 	mkdir -p $(DESTDIR)/$(httpdir)/cgi-aux/man
- 	install -m 755 scripts/cgi-bin/man/* $(DESTDIR)/$(httpdir)/cgi-bin/man
- 	install -m 644 scripts/cgi-aux/man/* $(DESTDIR)/$(httpdir)/cgi-aux/man
--	install -d -o $(cgiowner) -g $(cgigroup) -m 775 $(DESTDIR)/$(vardir)/man2html
-+	install -d -m 775 $(DESTDIR)/$(vardir)/man2html
+ 	mkdir -p $(httpdir)/cgi-aux/man
+ 	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
+ 	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
+-	install -d -o $(cgiowner) -g $(cgigroup) -m 775 $(vardir)/man2html
++	install -d -m 775 $(vardir)/man2html
  # (aux was renamed to cgi-aux since aux causes problems under DOS)
  
  # If you have installed glimpse, and have compressed man pages,
