@@ -13,7 +13,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5p
-Release:	0.5
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -178,7 +178,7 @@ nie byФ bezpieczne.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-#%patch11 -p1
+%patch11 -p1
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
@@ -336,6 +336,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
 %lang(ro) %{_datadir}/locale/ro/man
+%lang(ru) %{_datadir}/locale/ru/man
 %lang(sl) %{_datadir}/locale/sl/man
 
 %files config
