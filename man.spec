@@ -183,6 +183,9 @@ nie byæ bezpieczne.
 %patch13 -p1
 %patch14 -p1
 
+# use gzip (not bzip2) to compress formatted man pages
+sed -i -e 's/compress=$/compress=gzip/' configure
+
 %build
 ./configure \
 	-default \
