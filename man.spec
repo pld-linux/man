@@ -1,3 +1,6 @@
+# TODO:
+# - move http/cgi files to /usr/....
+#
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
 Summary(es):	Lector de páginas de manual (man)
@@ -9,12 +12,12 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(ru):	îÁÂÏÒ ÕÔÉÌÉÔ ÄÌÑ ÄÏËÕÍÅÎÔÁÃÉÉ: man, apropos É whatis
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
-Version:	1.5m1
+Version:	1.5m2
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
-# Source0-md5:	e012b32d30a19ac2edee279df1b9b0ed
+Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	d27867e59d3bbb971b00058f20ef8ea4
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -48,7 +51,6 @@ Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	mktemp >= 1.5-8
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	man-cs
 Obsoletes:	man-da
 Obsoletes:	man-de
@@ -59,8 +61,9 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_servdir	/home/services
+%define		_servdir	/home
 %define		_httpdir	%{_servdir}/httpd
 %define		_cgidir		%{_httpdir}/cgi-bin
 
@@ -244,7 +247,7 @@ install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
 # Play with /home/services
-mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
+#mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
