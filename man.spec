@@ -39,12 +39,12 @@ Patch13:	%{name}-fmntbug.patch
 Patch14:	%{name}-awk_path.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
+Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
 Requires:	bzip2
 Requires:	groff
 Requires:	gzip
 Requires:	less
-Requires:	%{name}-config = %{version}
 Requires:	mktemp >= 1.5-8
 Obsoletes:	man-cs
 Obsoletes:	man-da
@@ -341,7 +341,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %files config
 %defattr(644,root,root,755)
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/man.config
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/man.config
 
 %files -n man2html
 %defattr(644,root,root,755)
