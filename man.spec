@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -156,6 +156,9 @@ done
 %{__make} install-scripts PREFIX="$RPM_BUILD_ROOT"
 )
 
+# for man_db and xman compatibility
+ln -sf soelim $RPM_BUILD_ROOT%{_bindir}/zsoelim
+
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
@@ -207,6 +210,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %attr(755,root,root) %{_bindir}/man2dvi
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
+%attr(755,root,root) %{_bindir}/zsoelim
 %attr(755,root,root) %{_sbindir}/makewhatis
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/man.config
 
