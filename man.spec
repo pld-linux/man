@@ -156,7 +156,7 @@ Group:		Applications/System
 Requires:	man2html = %{version}-%{release}
 
 %description -n man2html-cgi
-These scripts allows read man pages throught www browser. It uses
+These scripts allows read man pages throught WWW browser. It uses
 man2htlm program to convert man pages to html format. Scripts are
 still in alpha stage, could be not secure.
 
