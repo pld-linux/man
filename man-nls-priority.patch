@@ -1,6 +1,6 @@
-diff -Nur man-1.5i2.orig/catopen/catopen.c man-1.5i2/catopen/catopen.c
---- man-1.5i2.orig/catopen/catopen.c	Sun Oct 14 11:05:49 2001
-+++ man-1.5i2/catopen/catopen.c	Sun Oct 14 11:06:00 2001
+diff -Nur man-1.5k.orig/catopen/catopen.c man-1.5k/catopen/catopen.c
+--- man-1.5k.orig/catopen/catopen.c	Sun Oct 14 11:05:49 2001
++++ man-1.5k/catopen/catopen.c	Sun Oct 14 11:06:00 2001
 @@ -27,14 +27,6 @@
      /* The quotes below are from X/Open, XPG 1987, Vol. 3. */
  
@@ -30,10 +30,10 @@ diff -Nur man-1.5i2.orig/catopen/catopen.c man-1.5i2/catopen/catopen.c
      lang = "";
    langsz = strlen(lang);
  
-diff -Nur man-1.5i2.orig/src/gripes.c man-1.5i2/src/gripes.c
---- man-1.5i2.orig/src/gripes.c	Mon Mar 19 21:38:00 2001
-+++ man-1.5i2/src/gripes.c	Sun Oct 14 11:06:00 2001
-@@ -35,14 +35,16 @@
+diff -Nur man-1.5k.orig/src/gripes.c man-1.5k/src/gripes.c
+--- man-1.5k.orig/src/gripes.c	Mon Mar 19 21:38:00 2001
++++ man-1.5k/src/gripes.c	Sun Oct 14 11:06:00 2001
+@@ -35,18 +35,19 @@
  static void
  catinit (void) {
      if (!cat_is_open) {
@@ -41,52 +41,41 @@ diff -Nur man-1.5i2.orig/src/gripes.c man-1.5i2/src/gripes.c
 +	catfd = my_catopen(mantexts,NL_CAT_LOCALE);
  	if (catfd == (nl_catd) -1) {
  	    /* Only complain if at least one of NLSPATH and LANG exists,
- 	       and LANG != "en" (or when debugging) */
+ 	       and LANG != "en" (or when debugging). Also accept en_ZA etc. */
  	    char *s, *lg;
  	    s = getenv("NLSPATH");
 -	    lg = getenv("LANG");
--	    if ((s || lg) && (!lg || strcmp(lg, "en"))) {
 +	    lg = getenv("LC_ALL");
-+	    if(!lg) lg = getenv("LC_MESSAGES");
-+	    if(!lg) lg = getenv("LANG");
-+	    if ((s || lg) && (!lg || (strcmp(lg, "en") && strcmp(lg,"C") && strcmp(lg,"POSIX")))) {
+ 	    if (!lg)
+ 		    lg = getenv("LC_MESSAGES");
+ 	    if (!lg)
+-		    lg = getenv("LC_ALL");
+-	    if ((s || lg) && (!lg || strncmp(lg, "en", 2))) {
++		    lg = getenv("LANG");
++	    if ((s || lg) && (!lg || (strncmp(lg, "en", 2) &&
++			  strncmp(lg, "C", 1) && strncmp(lg, "POSIX", 5)))) {
  		perror(mantexts);
  		fprintf(stderr,
  "Failed to open the message catalog %s on the path NLSPATH=%s\n\n",
-diff -Nur man-1.5i2.orig/src/man.c man-1.5i2/src/man.c
---- man-1.5i2.orig/src/man.c	Sun Oct 14 11:05:49 2001
-+++ man-1.5i2/src/man.c	Sun Oct 14 11:06:00 2001
-@@ -1124,10 +1124,7 @@
+diff -Nur man-1.5k.orig/src/man.c man-1.5k/src/man.c
+--- man-1.5k.orig/src/man.c	Sun Oct 14 11:05:49 2001
++++ man-1.5k/src/man.c	Sun Oct 14 11:06:00 2001
+@@ -1217,11 +1217,7 @@
       CHECK("LC_MESSAGES", 128);
       CHECK("LC_ALL", 128);
  
 -#ifndef __FreeBSD__ 
 -     /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
+-     setlocale(LC_CTYPE, "");	/* used anywhere? maybe only isdigit()? */
 -     setlocale(LC_MESSAGES, "");
 -#endif
 +     setlocale(LC_ALL, "");
  
-      /* Handle /usr/man/man1.Z/name.1 nonsense from HP */
-      dohp = getenv("MAN_HP_DIREXT");		/* .Z */
-diff -Nur man-1.5i2.orig/src/manpath.c man-1.5i2/src/manpath.c
---- man-1.5i2.orig/src/manpath.c	Tue Jun  5 23:47:09 2001
-+++ man-1.5i2/src/manpath.c	Sun Oct 14 11:10:30 2001
-@@ -254,6 +254,7 @@
- 
- static void
- add_to_mandirlist_x (char *dir, char *lang, int perrs) {
-+	add_to_list(dir, lang, perrs);
- 	if (lang && strlen(lang) > 2) {
- 		char lang2[3];
- 
-@@ -261,7 +262,6 @@
- 		lang2[2] = 0;
- 		add_to_list(dir, lang2, perrs);
- 	}
--	add_to_list(dir, lang, perrs);
- }	
- 
- static void
+      /* No doubt we'll need some generic language code here later.
+ 	For the moment only Japanese support. */
+diff -Nur man-1.5k.orig/src/manpath.c man-1.5k/src/manpath.c
+--- man-1.5k.orig/src/manpath.c	Tue Jun  5 23:47:09 2001
++++ man-1.5k/src/manpath.c	Sun Oct 14 11:10:30 2001
 @@ -273,13 +273,11 @@
  	} else {
  		/* We cannot use "lang = setlocale(LC_MESSAGES, NULL)" or so:

@@ -1,11 +1,11 @@
---- man-1.5h1/src/man.c.sofix	Tue Aug 15 14:18:45 2000
-+++ man-1.5h1/src/man.c	Tue Aug 15 14:21:06 2000
-@@ -324,7 +325,7 @@
+--- man-1.5k/src/man.c.sofix	Tue Aug 15 14:18:45 2000
++++ man-1.5k/src/man.c	Tue Aug 15 14:21:06 2000
+@@ -334,7 +334,7 @@
  	   * .so files - we could glob for all possible extensions,
  	   * for now: only try .gz
  	   */
--	  else if (fp == NULL && get_expander(".gz")) {
-+	  if (fp == NULL && get_expander(".gz")) {
+-	  else if (fp == NULL && get_expander(".gz") &&
++	  if (fp == NULL && get_expander(".gz") &&
+ 		   strlen(name)+strlen(".gz") < BUFSIZE) {
  	       strcat(name, ".gz");
  	       fp = fopen (name, "r");
- 	  }

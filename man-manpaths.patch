@@ -1,46 +1,14 @@
-diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
---- man-1.5i2.orig/src/makewhatis.sh	Mon Mar 19 17:15:24 2001
-+++ man-1.5i2/src/makewhatis.sh	Sun Oct 14 00:41:32 2001
-@@ -32,8 +32,8 @@
- 
- program=`basename $0`
- 
+diff -Nur man-1.5k.orig/src/makewhatis.sh man-1.5k/src/makewhatis.sh
+--- man-1.5k.orig/src/makewhatis.sh	Mon Mar 19 17:15:24 2001
++++ man-1.5k/src/makewhatis.sh	Sun Oct 14 00:41:32 2001
+@@ -36,8 +36,8 @@
+ # In case both /usr/man and /usr/share/manexist, the former is local
+ # and should be first.
+ # It is a bug to add /var/cache/man to DEFCATPATH.
 -DEFMANPATH=/usr/man:/usr/share/man
--DEFCATPATH=/usr/man/preformat:/usr/man:/usr/share/man
+-DEFCATPATH=/usr/man/preformat:/usr/man:/usr/share/man/preformat:/usr/share/man
 +DEFMANPATH=/usr/share/man
 +DEFCATPATH=/usr/share/man/preformat:/usr/share/man
  
- # AWK=/usr/bin/gawk
- AWK=%gawk%
-diff -Nur man-1.5i2.orig/src/man.conf.in man-1.5i2/src/man.conf.in
---- man-1.5i2.orig/src/man.conf.in	Mon Mar 19 17:17:02 2001
-+++ man-1.5i2/src/man.conf.in	Sun Oct 14 00:43:36 2001
-@@ -36,7 +36,6 @@
- #
- # Every automatically generated MANPATH includes these fields
- #
--MANPATH	/usr/man
- MANPATH /usr/share/man
- MANPATH	/usr/local/man
- MANPATH	/usr/X11R6/man
-@@ -48,15 +47,15 @@
- # in the mandatory manpath already, but will keep man from statting
- # lots of other nearby files and directories)
- #
--MANPATH_MAP	/bin			/usr/man
--MANPATH_MAP	/sbin			/usr/man
--MANPATH_MAP	/usr/bin		/usr/man
--MANPATH_MAP	/usr/sbin		/usr/man
-+MANPATH_MAP	/bin			/usr/share/man
-+MANPATH_MAP	/sbin			/usr/share/man
-+MANPATH_MAP	/usr/bin		/usr/share/man
-+MANPATH_MAP	/usr/sbin		/usr/share/man
- MANPATH_MAP	/usr/local/bin		/usr/local/man
- MANPATH_MAP	/usr/local/sbin		/usr/local/man
- MANPATH_MAP	/usr/X11R6/bin		/usr/X11R6/man
- MANPATH_MAP	/usr/bin/X11		/usr/X11R6/man
--MANPATH_MAP	/usr/bin/mh		/usr/man
-+MANPATH_MAP	/usr/bin/mh		/usr/share/man
- #
- # NOAUTOPATH keeps man from automatically adding directories that look like
- # manual page directories to the path.
+ # In case /usr is read-only, make /usr/man/whatis (etc) a symlink to
+ # something like /var/cache/man/whatis.

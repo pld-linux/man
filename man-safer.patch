@@ -1,5 +1,5 @@
---- man-1.5i2/configure.orig	Sun Oct 14 00:49:58 2001
-+++ man-1.5i2/configure	Sun Oct 14 00:52:35 2001
+--- man-1.5k/configure.orig	Sun Oct 14 00:49:58 2001
++++ man-1.5k/configure	Sun Oct 14 00:52:35 2001
 @@ -362,20 +362,20 @@
    then
      if test $Fnroff = "missing"
@@ -24,6 +24,6 @@
      fi
 -    troff="$Fgroff -Tps -mandoc"
 +    troff="$Fgroff -S -Tps -mandoc"
+     jnroff="$Fgroff -Tnippon -mandocj"
    fi
    eqn="$Fgeqn -Tps"
-   neqn="$Fgeqn -Tlatin1"

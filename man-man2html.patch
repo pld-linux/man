@@ -2,11 +2,11 @@ diff -Nur man-1.5i2.orig/man2html/Makefile.in man-1.5i2/man2html/Makefile.in
 --- man-1.5i2.orig/man2html/Makefile.in	Mon Mar 19 17:50:22 2001
 +++ man-1.5i2/man2html/Makefile.in	Sun Oct 14 00:47:17 2001
 @@ -28,7 +28,7 @@
- 	mkdir -p $(httpdir)/cgi-bin/man $(httpdir)/cgi-aux/man
- 	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
- 	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
--	install -d -o nobody -g nobody -m 775 $(vardir)/man2html
-+	install -d -m 775 $(vardir)/man2html
+ 	mkdir -p $(DESTDIR)/$(httpdir)/cgi-aux/man
+ 	install -m 755 scripts/cgi-bin/man/* $(DESTDIR)/$(httpdir)/cgi-bin/man
+ 	install -m 644 scripts/cgi-aux/man/* $(DESTDIR)/$(httpdir)/cgi-aux/man
+-	install -d -o nobody -g nobody -m 775 $(DESTDIR)/$(vardir)/man2html
++	install -d -m 775 $(DESTDIR)/$(vardir)/man2html
  # (aux was renamed to cgi-aux since aux causes problems under DOS)
  
  # If you have installed glimpse, and have compressed man pages,

@@ -1,28 +1,20 @@
---- man-1.5f/configure.orig	Wed Sep 16 22:57:54 1998
-+++ man-1.5f/configure	Wed Sep 16 23:13:32 1998
-@@ -508,11 +508,11 @@
- # prefix="/usr/local"
- # Note: some distributions put man.conf in /etc
- # Maybe fhs wants it in /usr/share/misc
--prefix="/usr"
--bindir="bin"
--sbindir="sbin"
--mandir="man"
--confdir="lib"
-+prefix=""
-+bindir="usr/bin"
-+sbindir="usr/sbin"
-+mandir="usr/man"
-+confdir="etc"
- if [ x"$fhs" = x ]; then
-   mandir="share/man"
-   confdir="share/misc"
-@@ -1031,7 +1031,7 @@
- whatis=$bindir/whatis
- makewhatis=$sbindir/makewhatis
- man_config_dir=$confdir
--man_config_file=$confdir/man.conf
-+man_config_file=$confdir/man.config
+--- man-1.5k/configure.orig	Wed Sep 16 22:57:54 1998
++++ man-1.5k/configure	Wed Sep 16 23:13:32 1998
+@@ -144,7 +144,7 @@
+ # All documentation assumes "man.conf" - in case you invent some other name
+ # (why?), also man pages and other docs need to be patched.
+ prefix="/usr"
+-confprefix="/usr"
++confprefix=""
+ bindir="bin"
+ sbindir="sbin"
+ mandir="man"
+@@ -159,7 +159,7 @@
+ else
+   confprefix=""
+ fi
+-conffilename="man.conf"
++conffilename="man.config"
  
- if [ x$locale = x ]; then
-   sed -e 's/%.*//' < Makefile.in > Makefile
+ if test "$RANDOM" = "$RANDOM"; then
+   # Plain old Bourne shell.
