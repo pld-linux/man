@@ -9,7 +9,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5k
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -291,9 +291,11 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(fr) %{_datadir}/locale/fr/man
 %lang(hr) %{_datadir}/locale/hr/man
 %lang(it) %{_datadir}/locale/it/man
+%lang(ja) %{_datadir}/locale/ja/man
 %lang(nl) %{_datadir}/locale/nl/man
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
+%lang(ru) %{_datadir}/locale/ru/man
 %lang(sl) %{_datadir}/locale/sl/man
 
 %files config
