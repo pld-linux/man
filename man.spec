@@ -22,6 +22,7 @@ Patch6:		man-safer.patch
 Patch7:		man-security.patch
 Requires:	groff
 Requires:	less
+Requires:	/bin/awk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
