@@ -1,11 +1,11 @@
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
-Summary(fr):	Lecteur de pages de man.
+Summary(fr):	Lecteur de pages de man
 Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -104,14 +104,19 @@ nie byæ bezpieczne.
 %patch8 -p1
 
 %build
-CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" LDFLAGS="%{!?degug:-s}" \
 ./configure -default +fhs +lang all
 
-%{__make} CC="gcc $RPM_OPT_FLAGS"
+%{__make} CC="%{__cc} %{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
+for i in "" cs da de es fi fr it nl pl pt sl; do
+	install -d $RPM_BUILD_ROOT/var/cache/man/$i/cat{1,2,3,4,5,6,7,8,9,n}
+	install -d $RPM_BUILD_ROOT/var/cache/man/local/$i/cat{1,2,3,4,5,6,7,8,9,n}
+	install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/$i/cat{1,2,3,4,5,6,7,8,9,n}
+done
 
 %{__make} install BINROOTDIR="$RPM_BUILD_ROOT"
 
@@ -121,26 +126,10 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly
 
-install -d $RPM_BUILD_ROOT/var/cache/man/{local,X11R6}
-install -d $RPM_BUILD_ROOT/var/cache/man/cat{1,2,3,4,5,6,7,8,9,n}
-install -d $RPM_BUILD_ROOT/var/cache/man/local/cat{1,2,3,4,5,6,7,8,9,n}
-install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/cat{1,2,3,4,5,6,7,8,9,n}
-
-for i in cs da de es fi fr it nl pl pt sl
-do
-	install -d $RPM_BUILD_ROOT/var/cache/man/$i/cat{1,2,3,4,5,6,7,8,9,n}
-	install -d $RPM_BUILD_ROOT/var/cache/man/local/$i/cat{1,2,3,4,5,6,7,8,9,n}
-	install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/$i/cat{1,2,3,4,5,6,7,8,9,n}
-done
-
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis.cron
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis.cron
 
-strip $RPM_BUILD_ROOT%{_bindir}/man
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	$RPM_BUILD_ROOT%{_mandir}/*/man*/* \
-	man2html/README man2html/TODO	
+gzip -9nf man2html/README man2html/TODO	
 
 %preun
 rm -f /var/cache/man/cat[123456789n]/*
