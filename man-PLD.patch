@@ -1,17 +1,17 @@
---- man-1.5k/configure.orig	Wed Sep 16 22:57:54 1998
-+++ man-1.5k/configure	Wed Sep 16 23:13:32 1998
-@@ -144,7 +144,7 @@
+--- man-1.5l/configure.orig	Mon Mar 10 21:21:00 2003
++++ man-1.5l/configure	Tue Mar 11 21:52:34 2003
+@@ -183,7 +183,7 @@
  # All documentation assumes "man.conf" - in case you invent some other name
  # (why?), also man pages and other docs need to be patched.
- prefix="/usr"
--confprefix="/usr"
-+confprefix=""
- bindir="bin"
- sbindir="sbin"
- mandir="man"
-@@ -159,7 +159,7 @@
- else
-   confprefix=""
+ if [ -z "${prefix}" ]; then prefix="/usr"; fi
+-if [ -z "${confprefix}" ]; then confprefix=${prefix}; fi
++if [ -z "${confprefix}" ]; then confprefix=""; fi
+ if [ -z "${bindir}" ]; then bindir="${prefix}/bin"; fi
+ if [ -z "${sbindir}" ]; then sbindir="${prefix}/sbin"; fi
+ if [ -z "${mandir}" ]; then mandir="${prefix}/man"; fi
+@@ -197,7 +197,7 @@
+     confdir="${confprefix}/share/misc"
+   fi
  fi
 -conffilename="man.conf"
 +conffilename="man.config"

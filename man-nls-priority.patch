@@ -73,25 +73,26 @@ diff -Nur man-1.5k.orig/src/man.c man-1.5k/src/man.c
  
       /* No doubt we'll need some generic language code here later.
  	For the moment only Japanese support. */
-diff -Nur man-1.5k.orig/src/manpath.c man-1.5k/src/manpath.c
---- man-1.5k.orig/src/manpath.c	Tue Jun  5 23:47:09 2001
-+++ man-1.5k/src/manpath.c	Sun Oct 14 11:10:30 2001
-@@ -273,13 +273,11 @@
- 	} else {
+--- man-1.5l/src/manpath.c.orig	Mon Mar 10 17:46:24 2003
++++ man-1.5l/src/manpath.c	Tue Mar 11 22:00:24 2003
+@@ -281,14 +281,12 @@
  		/* We cannot use "lang = setlocale(LC_MESSAGES, NULL)" or so:
  		   the return value of setlocale is an opaque string. */
+ 		/* POSIX prescribes the order: LC_ALL, LC_MESSAGES, LANG */
+-		if((lang = getenv("LC_ALL")) != NULL)
+-			split2(dir, lang, add_to_mandirlist_x, perrs);
+-		if((lang = getenv("LC_MESSAGES")) != NULL)
+-			split2(dir, lang, add_to_mandirlist_x, perrs);
 -		if((lang = getenv("LANG")) != NULL)
 -			split2(dir, lang, add_to_mandirlist_x, perrs);
 -		if((lang = getenv("LANGUAGE")) != NULL)
 -			split2(dir, lang, add_to_mandirlist_x, perrs);
--		if((lang = getenv("LC_MESSAGES")) != NULL)
--			split2(dir, lang, add_to_mandirlist_x, perrs);
--		if((lang = getenv("LC_ALL")) != NULL)
 +		lang = getenv("LC_ALL");
 +		if(!lang) lang=getenv("LC_MESSAGES");
 +		if(!lang) lang=getenv("LANG");
 +		if(!lang) lang=getenv("LANGUAGE");
 +		if(lang != NULL)
- 			split2(dir, lang, add_to_mandirlist_x, perrs);
++  			split2(dir, lang, add_to_mandirlist_x, perrs);
  		add_to_mandirlist_x(dir, 0, perrs);
  	}
+ }
