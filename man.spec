@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	6.1
+Release:	7
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
