@@ -1,0 +1,89 @@
+diff -ur man.old/pl/apropos.man man/pl/apropos.man
+--- man.old/pl/apropos.man	Tue Dec  2 14:23:31 1997
++++ man/pl/apropos.man	Wed Oct 17 00:35:17 2001
+@@ -14,9 +14,9 @@
+ .\"
+ .\" T³umaczenie: 950322 Rafa³ Maszkowski <rzm@pdi.net>
+ .\"
+-.TH apropos 1 "Jan 15, 1991"
++.TH apropos 1 "15 stycznia 1991"
+ .LO 1
+-.SH NAME
++.SH NAZWA
+ apropos \- szuka ³añcuchów znakow w bazie whatis
+ .SH SK£ADNIA
+ .BI apropos
+@@ -25,5 +25,5 @@
+ apropos szuka s³ów kluczowych w plikach bazy danych, które
+ zawieraj± krótkie opisy komend systemowych i wy¶wietla wynik
+ u¿ywaj±c standardowego wyj¶cia.
+-.SH "ZOBACZ TE¯"
++.SH "ZOBACZ TAK¯E"
+ whatis(1), man(1).
+diff -ur man.old/pl/man.conf.man man/pl/man.conf.man
+--- man.old/pl/man.conf.man	Tue Dec  2 18:58:49 1997
++++ man/pl/man.conf.man	Wed Oct 17 00:35:59 2001
+@@ -1,7 +1,7 @@
+ .\" @(#)man.conf
+ .\" T³umaczenie: 950322 Rafa³ Maszkowski <rzm@pdi.net>
+-.TH MAN.CONF 5 "30 Mar 1994"
+-.SH NAME
++.TH MAN.CONF 5 "30 marca 1994"
++.SH NAZWA
+ man.conf \- zawiera konfiguracjê programu man
+ .SH OPIS
+ .LP
+@@ -36,6 +36,6 @@
+ .RE
+ .LP
+ ¿eby wy³±czyæ podkre¶lanie i wytluszczanie.
+-.SH "ZOBACZ TE¯"
++.SH "ZOBACZ TAK¯E"
+ col(1), (g)eqn(1), (g)pic(1), groff(1), grotty(1), (g)refer(1), (g)tbl(1),
+ less(1), man (1) i compress(1), gzip(1).
+diff -ur man.old/pl/man.man man/pl/man.man
+--- man.old/pl/man.man	Tue Dec  2 19:10:44 1997
++++ man/pl/man.man	Wed Oct 17 00:34:56 2001
+@@ -17,9 +17,9 @@
+ .\" T³umaczenie - 950322 Rafa³ Maszkowski <rzm@pdi.net>
+ .\" 960619 - aktualizacja -K
+ .\"
+-.TH man 1 "December 20, 1994"
++.TH man 1 "20 grudnia 1994"
+ .LO 1
+-.SH NAME
++.SH NAZWA
+ man \- formatowanie i wy¶wietlanie dostêpnych stron manuala
+ .br
+ manpath \- wyznaczanie ¶cie¿ki poszukiwania stron manuala odpowiedniej dla danego u¿ytkownika
+@@ -228,7 +228,7 @@
+ razem z opcj±
+ .B \-m
+ ). 
+-.SH "ZOBACZ TE¯"
++.SH "ZOBACZ TAK¯E"
+ apropos(1), whatis(1), less(1), groff(1).
+ .SH B£ÊDY
+ Opcja
+diff -ur man.old/pl/whatis.man man/pl/whatis.man
+--- man.old/pl/whatis.man	Tue Dec  2 14:23:31 1997
++++ man/pl/whatis.man	Wed Oct 17 00:35:37 2001
+@@ -14,9 +14,9 @@
+ .\"
+ .\" T³umaczenie - 950322 Rafa³ Maszkowski <rzm@pdi.net>
+ .\"
+-.TH whatis 1 "Jan 5, 1991"
++.TH whatis 1 "5 stycznia 1991"
+ .LO 1
+-.SH NAME
++.SH NAZWA
+ whatis \- szukaj s³ów w bazie whatis.
+ .SH SK£ADNIA
+ .BI whatis
+@@ -26,5 +26,5 @@
+ opisy komend systemowych i wy¶wietla rezultat przez standardowe
+ wyj¶cie. Wy¶wietlane s± tylko komendy, których nazwy pasuj± dok³adnie.
+ Baza whatis jest tworzona przy u¿yciu komendy @makewhatis@.
+-.SH "ZOBACZ TE¯"
++.SH "ZOBACZ TAK¯E"
+ apropos(1), man(1).
