@@ -1,7 +1,7 @@
-diff -ru man-1.5g.old/man2html/Makefile.in man-1.5g/man2html/Makefile.in
---- man-1.5g.old/man2html/Makefile.in	Wed Apr  7 01:45:03 1999
-+++ man-1.5g/man2html/Makefile.in	Wed Apr 28 12:51:53 1999
-@@ -2,12 +2,15 @@
+diff -Nru man-1.5h1/man2html/Makefile.in man-1.5h1.new/man2html/Makefile.in
+--- man-1.5h1/man2html/Makefile.in	Tue Jun 29 01:30:33 1999
++++ man-1.5h1.new/man2html/Makefile.in	Mon May 29 23:05:24 2000
+@@ -2,6 +2,9 @@
  CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -O
  OBJECTS = man2html.o cgibase.o abbrev.o strdefs.o
  mandir = $(BINROOTDIR)@mandir@
@@ -9,7 +9,9 @@ diff -ru man-1.5g.old/man2html/Makefile.in man-1.5g/man2html/Makefile.in
 +bindir = $(BINROOTDIR)/usr/bin
 +vardir = $(BINROOTDIR)/var
  
- man2html:	$(OBJECTS)
+ all: man2html hman
+ 
+@@ -11,7 +14,7 @@
  
  # This installs the man2html utility
  install:	man2html
@@ -18,7 +20,7 @@ diff -ru man-1.5g.old/man2html/Makefile.in man-1.5g/man2html/Makefile.in
  	mkdir -p $(mandir)/man1
  	install -m 644 man2html.1 $(mandir)/man1/man2html.@man1ext@
  
-@@ -17,16 +20,16 @@
+@@ -21,16 +24,16 @@
  #   http://localhost/cgi-bin/man/man2html
  # to work.
  install-man-scripts:
@@ -40,12 +42,12 @@ diff -ru man-1.5g.old/man2html/Makefile.in man-1.5g/man2html/Makefile.in
  
  # In order not to have to type a long command like
  #   netscape http://localhost/cgi-bin/man/man2html?section+topic
-@@ -37,7 +40,7 @@
- # variable MANHTMLPAGER to find out which browser you use, and
- # you can set MANHTMLHOST if the pages are not on localhost.
- install-hman:
--	install -m 555 hman.sh /usr/bin/hman
-+	install -m 555 hman.sh $(bindir)/hman
+@@ -45,7 +48,7 @@
+ 	sed -e 's,%version%,@version@,' hman.sh > hman
+ 
+ install-hman: hman
+-	install -m 555 hman /usr/bin/hman
++	install -m 555 hman $(bindir)
  	install -m 644 hman.1 $(mandir)/man1/hman.@man1ext@
  
  clean:

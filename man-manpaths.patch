@@ -1,6 +1,6 @@
-diff -Nur man-1.5g/src/man.conf.in man-1.5g.pld/src/man.conf.in
---- man-1.5g/src/man.conf.in	Wed Apr  7 13:52:19 1999
-+++ man-1.5g.pld/src/man.conf.in	Sun May 30 12:26:15 1999
+diff -Nru man-1.5h1/src/man.conf.in man-1.5h1.new/src/man.conf.in
+--- man-1.5h1/src/man.conf.in	Tue Feb 29 20:20:26 2000
++++ man-1.5h1.new/src/man.conf.in	Mon May 29 23:02:59 2000
 @@ -33,7 +33,7 @@
  #
  # Every automatically generated MANPATH includes these fields
@@ -9,8 +9,8 @@ diff -Nur man-1.5g/src/man.conf.in man-1.5g.pld/src/man.conf.in
 +MANPATH	/usr/share/man
  MANPATH	/usr/local/man
  MANPATH	/usr/X11R6/man
- # MANPATH /usr/lib/perl5/man
-@@ -44,14 +44,14 @@
+ MANPATH /usr/lib/perl5/man
+@@ -44,15 +44,15 @@
  # in the mandatory manpath already, but will keep man from statting
  # lots of other nearby files and directories)
  #
@@ -23,6 +23,7 @@ diff -Nur man-1.5g/src/man.conf.in man-1.5g.pld/src/man.conf.in
 +MANPATH_MAP	/usr/bin		/usr/share/man
 +MANPATH_MAP	/usr/sbin		/usr/share/man
  MANPATH_MAP	/usr/local/bin		/usr/local/man
+ MANPATH_MAP	/usr/local/sbin		/usr/local/man
  MANPATH_MAP	/usr/X11R6/bin		/usr/X11R6/man
  MANPATH_MAP	/usr/bin/X11		/usr/X11R6/man
 -MANPATH_MAP	/usr/bin/mh		/usr/man
