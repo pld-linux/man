@@ -59,7 +59,7 @@ Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
 
-%define		_htmldir	/home/services
+%define		_htmldir	/home
 
 %description
 The man package includes three tools for finding information and/or
