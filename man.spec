@@ -13,7 +13,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5o1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -205,7 +205,8 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 	$RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de el es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru sl sv zh_CN zh_TW; do
+for i in "" bg cs da de el es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru \
+	 sk sl sr sv uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
