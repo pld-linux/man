@@ -33,6 +33,7 @@ Patch13:	%{name}-bug11621.patch
 Patch14:	%{name}-gencat.patch
 Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_%{name}_pages.patch
+Patch17:	%{name}-pmake.patch
 Requires:	man-config
 Requires:	groff
 Requires:	less
@@ -174,6 +175,7 @@ nie byæ bezpieczne.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch17 -p1
 
 %build
 ./configure -default +fhs +lang all -confdir %{_sysconfdir}
