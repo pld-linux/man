@@ -10,7 +10,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5l
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.g
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
-# Source3-md5: 	16c3fde2243289524cf40c1d2e7150e4
+# Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-gencat_glibc.patch
