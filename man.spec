@@ -212,6 +212,11 @@ install man/ko/man1/* $RPM_BUILD_ROOT%{_mandir}/ko/man1
 install man/ko/man5/* $RPM_BUILD_ROOT%{_mandir}/ko/man5
 install man/pl/man1/* $RPM_BUILD_ROOT%{_mandir}/pl/man1
 
+install -d $RPM_BUILD_ROOT/home/services
+cd $RPM_BUILD_ROOT/home
+mv httpd services
+cd -
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
