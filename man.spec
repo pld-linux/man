@@ -95,6 +95,7 @@ nie byæ bezpieczne.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
