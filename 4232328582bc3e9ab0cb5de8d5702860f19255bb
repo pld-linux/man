@@ -1,0 +1,4 @@
+- updated to 1.5p
+- updated man-{fhs,fmntbug,gencat,man2html,manpaths,ro-usr}.patch
+- removed obsoletes man-{lookon,segv}.patch
+- release 0.5 (tommarow i will update man-nls-priority.patch) and will be release 1
