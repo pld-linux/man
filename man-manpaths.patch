@@ -1,17 +1,32 @@
-diff -Nru man-1.5h1/src/man.conf.in man-1.5h1.new/src/man.conf.in
---- man-1.5h1/src/man.conf.in	Tue Feb 29 20:20:26 2000
-+++ man-1.5h1.new/src/man.conf.in	Mon May 29 23:02:59 2000
-@@ -33,7 +33,7 @@
+diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
+--- man-1.5i2.orig/src/makewhatis.sh	Mon Mar 19 17:15:24 2001
++++ man-1.5i2/src/makewhatis.sh	Sun Oct 14 00:41:32 2001
+@@ -32,8 +32,8 @@
+ 
+ program=`basename $0`
+ 
+-DEFMANPATH=/usr/man:/usr/share/man
+-DEFCATPATH=/usr/man/preformat:/usr/man:/usr/share/man
++DEFMANPATH=/usr/share/man
++DEFCATPATH=/usr/share/man/preformat:/usr/share/man
+ 
+ # AWK=/usr/bin/gawk
+ AWK=%gawk%
+diff -Nur man-1.5i2.orig/src/man.conf.in man-1.5i2/src/man.conf.in
+--- man-1.5i2.orig/src/man.conf.in	Mon Mar 19 17:17:02 2001
++++ man-1.5i2/src/man.conf.in	Sun Oct 14 00:43:36 2001
+@@ -36,9 +36,8 @@
  #
  # Every automatically generated MANPATH includes these fields
  #
 -MANPATH	/usr/man
+ MANPATH /usr/share/man
 -MANPATH	/usr/local/man
-+MANPATH	/usr/share/man
 +MANPATH	/usr/local/share/man
  MANPATH	/usr/X11R6/man
  MANPATH /usr/lib/perl5/man
-@@ -44,15 +44,15 @@
+ #
+@@ -48,15 +47,15 @@
  # in the mandatory manpath already, but will keep man from statting
  # lots of other nearby files and directories)
  #
@@ -32,18 +47,5 @@ diff -Nru man-1.5h1/src/man.conf.in man-1.5h1.new/src/man.conf.in
 -MANPATH_MAP	/usr/bin/mh		/usr/man
 +MANPATH_MAP	/usr/bin/mh		/usr/share/man
  #
- # Useful paths - note that COL should not be defined when
- # NROFF is defined as "groff -Tascii" or "groff -Tlatin1";
---- man-1.5h1/src/makewhatis.sh.manpath	Wed Aug 23 11:48:02 2000
-+++ man-1.5h1/src/makewhatis.sh	Wed Aug 23 11:48:35 2000
-@@ -33,8 +33,8 @@
- 
- PATH=/usr/bin:/bin
- 
--DEFMANPATH=/usr/man
--DEFCATPATH=/usr/man/preformat:/usr/man
-+DEFMANPATH=/usr/share/man
-+DEFCATPATH=/usr/share/man/preformat:/usr/share/man
- 
- # AWK=/usr/bin/gawk
- AWK=%gawk%
+ # NOAUTOPATH keeps man from automatically adding directories that look like
+ # manual page directories to the path.

@@ -1,53 +1,12 @@
-diff -Nru man-1.5h1/man2html/Makefile.in man-1.5h1.new/man2html/Makefile.in
---- man-1.5h1/man2html/Makefile.in	Tue Jun 29 01:30:33 1999
-+++ man-1.5h1.new/man2html/Makefile.in	Mon May 29 23:05:24 2000
-@@ -2,6 +2,9 @@
- CFLAGS = -Wall -Wstrict-prototypes -Wmissing-prototypes -O
- OBJECTS = man2html.o cgibase.o abbrev.o strdefs.o
- mandir = $(BINROOTDIR)@mandir@
-+httpdir = $(BINROOTDIR)/home/httpd
-+bindir = $(BINROOTDIR)/usr/bin
-+vardir = $(BINROOTDIR)/var
- 
- all: man2html hman
- 
-@@ -11,7 +14,7 @@
- 
- # This installs the man2html utility
- install:	man2html
--	install -m 755 man2html /usr/bin
-+	install -m 755 man2html $(bindir)
- 	mkdir -p $(mandir)/man1
- 	install -m 644 man2html.1 $(mandir)/man1/man2html.@man1ext@
- 
-@@ -21,16 +24,16 @@
- #   http://localhost/cgi-bin/man/man2html
- # to work.
- install-man-scripts:
--	mkdir -p /home/httpd/cgi-bin/man /home/httpd/cgi-aux/man
--	install -m 755 scripts/cgi-bin/man/* /home/httpd/cgi-bin/man
--	install -m 644 scripts/cgi-aux/man/* /home/httpd/cgi-aux/man
--	install -d -o nobody -g nobody -m 775 /var/man2html
-+	mkdir -p $(httpdir)/cgi-bin/man $(httpdir)/cgi-aux/man
-+	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
-+	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
+diff -Nur man-1.5i2.orig/man2html/Makefile.in man-1.5i2/man2html/Makefile.in
+--- man-1.5i2.orig/man2html/Makefile.in	Mon Mar 19 17:50:22 2001
++++ man-1.5i2/man2html/Makefile.in	Sun Oct 14 00:47:17 2001
+@@ -28,7 +28,7 @@
+ 	mkdir -p $(httpdir)/cgi-bin/man $(httpdir)/cgi-aux/man
+ 	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
+ 	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
+-	install -d -o nobody -g nobody -m 775 $(vardir)/man2html
 +	install -d -m 775 $(vardir)/man2html
  # (aux was renamed to cgi-aux since aux causes problems under DOS)
  
  # If you have installed glimpse, and have compressed man pages,
- # then perhaps you also want these filters.
- install-glimpse-stuff:
--	install -m 644 glimpse_filters /var/man2html/.glimpse_filters
-+	install -m 644 glimpse_filters $(vardir)/man2html/.glimpse_filters
- 
- # In order not to have to type a long command like
- #   netscape http://localhost/cgi-bin/man/man2html?section+topic
-@@ -45,7 +48,7 @@
- 	sed -e 's,%version%,@version@,' hman.sh > hman
- 
- install-hman: hman
--	install -m 555 hman /usr/bin/hman
-+	install -m 555 hman $(bindir)
- 	install -m 644 hman.1 $(mandir)/man1/hman.@man1ext@
- 
- clean:

@@ -1,6 +1,25 @@
---- man-1.5h1/src/man.c.security	Mon Feb 28 22:55:58 2000
-+++ man-1.5h1/src/man.c	Fri Jun 30 11:45:15 2000
-@@ -1102,6 +1102,20 @@
+diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
+--- man-1.5i2.orig/src/makewhatis.sh	Mon Mar 19 17:15:24 2001
++++ man-1.5i2/src/makewhatis.sh	Mon Oct 15 22:19:42 2001
+@@ -45,12 +45,8 @@
+ # We try here to be careful (and avoid preconstructed symlinks)
+ # in case makewhatis is run as root, by creating a subdirectory of /tmp.
+ 
+-TMPFILEDIR=/tmp/whatis.tmp.dir.$$
+-rm -rf TMPFILEDIR
+-if ! mkdir -m 0700 $TMPFILEDIR; then
+-    echo Could not create $TMPFILEDIR
+-    exit 1;
+-fi
++rm -rf /var/tmp/tmpwhatis*
++TMPFILEDIR=`mktemp -d /var/tmp/tmpwhatisXXXXXX`
+ TMPFILE=$TMPFILEDIR/w
+ 
+ # make sure TMPFILEDIR is deleted if program is killed or terminates
+diff -Nur man-1.5i2.orig/src/man.c man-1.5i2/src/man.c
+--- man-1.5i2.orig/src/man.c	Wed Jun  6 00:01:47 2001
++++ man-1.5i2/src/man.c	Mon Oct 15 22:19:36 2001
+@@ -1106,6 +1106,21 @@
       extern int optind;
  #endif
  
@@ -17,20 +36,8 @@
 +     CHECK("MAN_HP_DIREXT", 128);
 +     CHECK("LANGUAGE", 128);
 +     CHECK("LC_MESSAGES", 128);
++     CHECK("LC_ALL", 128);
 +
  #ifndef __FreeBSD__ 
       /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
       setlocale(LC_MESSAGES, "");
---- man-1.5h1/src/makewhatis.sh.security	Fri Jun 30 11:46:10 2000
-+++ man-1.5h1/src/makewhatis.sh	Fri Jun 30 11:51:44 2000
-@@ -47,8 +47,8 @@
- # in case makewhatis is run as root, by creating a subdirectory of /tmp.
- # If that fails we use $HOME.
- # The code below uses  test -O  which doesnt work on all systems.
--TMPFILE=$HOME/whatis$$
--TMPFILEDIR=/tmp/whatis$$
-+TMPFILE=/var/cache/man/whatis$$
-+TMPFILEDIR=/var/cache/man/whatis$$
- if [ ! -d $TMPFILEDIR ]; then
- 	mkdir $TMPFILEDIR
- 	chmod 0700 $TMPFILEDIR

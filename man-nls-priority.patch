@@ -1,6 +1,6 @@
-diff -Nur man-1.5h1.orig/catopen/catopen.c man-1.5h1/catopen/catopen.c
---- man-1.5h1.orig/catopen/catopen.c	Thu Sep 27 20:07:17 2001
-+++ man-1.5h1/catopen/catopen.c	Thu Sep 27 20:08:18 2001
+diff -Nur man-1.5i2.orig/catopen/catopen.c man-1.5i2/catopen/catopen.c
+--- man-1.5i2.orig/catopen/catopen.c	Sun Oct 14 11:05:49 2001
++++ man-1.5i2/catopen/catopen.c	Sun Oct 14 11:06:00 2001
 @@ -27,14 +27,6 @@
      /* The quotes below are from X/Open, XPG 1987, Vol. 3. */
  
@@ -30,9 +30,9 @@ diff -Nur man-1.5h1.orig/catopen/catopen.c man-1.5h1/catopen/catopen.c
      lang = "";
    langsz = strlen(lang);
  
-diff -Nur man-1.5h1.orig/src/gripes.c man-1.5h1/src/gripes.c
---- man-1.5h1.orig/src/gripes.c	Mon Jan 12 20:08:54 1998
-+++ man-1.5h1/src/gripes.c	Thu Sep 27 20:08:50 2001
+diff -Nur man-1.5i2.orig/src/gripes.c man-1.5i2/src/gripes.c
+--- man-1.5i2.orig/src/gripes.c	Mon Mar 19 21:38:00 2001
++++ man-1.5i2/src/gripes.c	Sun Oct 14 11:06:00 2001
 @@ -35,14 +35,16 @@
  static void
  catinit (void) {
@@ -53,27 +53,25 @@ diff -Nur man-1.5h1.orig/src/gripes.c man-1.5h1/src/gripes.c
  		perror(mantexts);
  		fprintf(stderr,
  "Failed to open the message catalog %s on the path NLSPATH=%s\n\n",
-diff -Nur man-1.5h1.orig/src/man.c man-1.5h1/src/man.c
---- man-1.5h1.orig/src/man.c	Thu Sep 27 20:07:17 2001
-+++ man-1.5h1/src/man.c	Thu Sep 27 20:07:38 2001
-@@ -1121,11 +1121,9 @@
-      CHECK("MAN_HP_DIREXT", 128);
-      CHECK("LANGUAGE", 128);
+diff -Nur man-1.5i2.orig/src/man.c man-1.5i2/src/man.c
+--- man-1.5i2.orig/src/man.c	Sun Oct 14 11:05:49 2001
++++ man-1.5i2/src/man.c	Sun Oct 14 11:06:00 2001
+@@ -1124,10 +1124,7 @@
       CHECK("LC_MESSAGES", 128);
-+     CHECK("LC_ALL", 128);
+      CHECK("LC_ALL", 128);
  
 -#ifndef __FreeBSD__ 
 -     /* Slaven Rezif: FreeBSD-2.2-SNAP does not recognize LC_MESSAGES. */
 -     setlocale(LC_MESSAGES, "");
-+     setlocale(LC_ALL, "");
 -#endif
++     setlocale(LC_ALL, "");
  
       /* Handle /usr/man/man1.Z/name.1 nonsense from HP */
       dohp = getenv("MAN_HP_DIREXT");		/* .Z */
-diff -Nur man-1.5h1.orig/src/manpath.c man-1.5h1/src/manpath.c
---- man-1.5h1.orig/src/manpath.c	Tue Jul 14 00:58:52 1998
-+++ man-1.5h1/src/manpath.c	Thu Sep 27 20:07:38 2001
-@@ -242,6 +242,7 @@
+diff -Nur man-1.5i2.orig/src/manpath.c man-1.5i2/src/manpath.c
+--- man-1.5i2.orig/src/manpath.c	Tue Jun  5 23:47:09 2001
++++ man-1.5i2/src/manpath.c	Sun Oct 14 11:10:30 2001
+@@ -254,6 +254,7 @@
  
  static void
  add_to_mandirlist_x (char *dir, char *lang, int perrs) {
@@ -81,7 +79,7 @@ diff -Nur man-1.5h1.orig/src/manpath.c man-1.5h1/src/manpath.c
  	if (lang && strlen(lang) > 2) {
  		char lang2[3];
  
-@@ -249,7 +250,6 @@
+@@ -261,7 +262,6 @@
  		lang2[2] = 0;
  		add_to_list(dir, lang2, perrs);
  	}
@@ -89,15 +87,17 @@ diff -Nur man-1.5h1.orig/src/manpath.c man-1.5h1/src/manpath.c
  }	
  
  static void
-@@ -259,11 +259,11 @@
- 	if (alt_system) {
- 		add_to_list(dir, alt_system_name, perrs);
+@@ -273,13 +273,11 @@
  	} else {
+ 		/* We cannot use "lang = setlocale(LC_MESSAGES, NULL)" or so:
+ 		   the return value of setlocale is an opaque string. */
 -		if((lang = getenv("LANG")) != NULL)
 -			split2(dir, lang, add_to_mandirlist_x, perrs);
 -		if((lang = getenv("LANGUAGE")) != NULL)
 -			split2(dir, lang, add_to_mandirlist_x, perrs);
 -		if((lang = getenv("LC_MESSAGES")) != NULL)
+-			split2(dir, lang, add_to_mandirlist_x, perrs);
+-		if((lang = getenv("LC_ALL")) != NULL)
 +		lang = getenv("LC_ALL");
 +		if(!lang) lang=getenv("LC_MESSAGES");
 +		if(!lang) lang=getenv("LANG");

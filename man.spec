@@ -4,8 +4,8 @@ Summary(fr):	Lecteur de pages de man
 Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
-Version:	1.5h1
-Release:	30
+Version:	1.5i2
+Release:	1
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -13,6 +13,7 @@ Group(pl):	Aplikacje/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
+Source3:	%{name}-additional-man-pages.tar.bz2
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-msgs.patch
@@ -24,13 +25,11 @@ Patch7:		%{name}-security.patch
 Patch8:		%{name}-locales.patch
 Patch9:		%{name}-roff.patch
 Patch10:	%{name}-sofix.patch
-Patch11:	%{name}-sec.patch
-Patch12:	%{name}-ro-usr.patch
-Patch13:	%{name}-mansect.patch
-Patch14:	%{name}-lookon.patch
-Patch15:	%{name}-bug11621.patch
-Patch16:	%{name}-gencat.patch
-Patch17:	%{name}-nls-priority.patch
+Patch11:	%{name}-ro-usr.patch
+Patch12:	%{name}-lookon.patch
+Patch13:	%{name}-bug11621.patch
+Patch14:	%{name}-gencat.patch
+Patch15:	%{name}-nls-priority.patch
 Requires:	groff
 Requires:	less
 Requires:	gzip
@@ -107,7 +106,7 @@ konwesji stron man na html. Programy s± ci±gle w stadium alfa i mog±
 nie byæ bezpieczne.
 
 %prep
-%setup  -q
+%setup -q -a3
 %patch0 -p1 
 %patch1 -p1
 %patch2 -p1
@@ -124,8 +123,6 @@ nie byæ bezpieczne.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
-%patch16 -p1
-%patch17 -p1
 
 %build
 ./configure -default +fhs +lang all
@@ -137,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de es fi fr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN.GB2312 zh_TW.Big5; do
+for i in "" bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN.GB2312 zh_TW.Big5; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
@@ -151,10 +148,10 @@ for i in "" bg cs da de es fi fr hu id it ja ko nl pl pt pt_BR ru sl sv zh_CN.GB
 	done
 done
 
-%{__make} install BINROOTDIR="$RPM_BUILD_ROOT"
+%{__make} install PREFIX="$RPM_BUILD_ROOT" BINROOTDIR="$RPM_BUILD_ROOT"
 
 (cd man2html
-%{__make} install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
+%{__make} install-scripts PREFIX="$RPM_BUILD_ROOT"
 )
 
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
@@ -162,7 +159,16 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
-gzip -9nf man2html/README man2html/TODO	
+install -d $RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
+install man/hu/man1/* $RPM_BUILD_ROOT%{_mandir}/hu/man1
+install man/ja/man1/* $RPM_BUILD_ROOT%{_mandir}/ja/man1
+install man/ja/man5/* $RPM_BUILD_ROOT%{_mandir}/ja/man5
+install man/ja/man8/* $RPM_BUILD_ROOT%{_mandir}/ja/man8
+install man/ko/man1/* $RPM_BUILD_ROOT%{_mandir}/ko/man1
+install man/ko/man5/* $RPM_BUILD_ROOT%{_mandir}/ko/man5
+install man/pl/man1/* $RPM_BUILD_ROOT%{_mandir}/pl/man1
+
+gzip -9nf man2html/README man2html/TODO	HISTORY README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -196,6 +202,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %attr(2755,root,man) %{_bindir}/man
 
+%attr(755,root,root) %{_bindir}/man2dvi
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_sbindir}/makewhatis
@@ -203,21 +210,34 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
 
-# Supported languages cs da de en es fi fr it nl pl pt sl
+# Supported languages cs da de en es fi fr hr it nl pl pt sl  + hu ja ko
 
-%{_mandir}/man[15]/*
+%{_mandir}/man1/apropos.1*
+%{_mandir}/man1/man.1*
+%{_mandir}/man1/whatis.1*
+%{_mandir}/man[58]/*
 
-%lang(cs) %{_mandir}/cs/man[15]/*
-%lang(da) %{_mandir}/da/man[15]/*
-%lang(de) %{_mandir}/de/man[15]/*
-%lang(es) %{_mandir}/es/man[15]/*
-%lang(fi) %{_mandir}/fi/man[15]/*
-%lang(fr) %{_mandir}/fr/man[15]/*
-%lang(it) %{_mandir}/it/man[15]/*
-%lang(nl) %{_mandir}/nl/man[15]/*
-%lang(pl) %{_mandir}/pl/man[15]/*
-%lang(pt) %{_mandir}/pt/man[15]/*
-%lang(sl) %{_mandir}/sl/man[15]/*
+%lang(cs) %{_mandir}/cs/man[158]/*
+%lang(da) %{_mandir}/da/man[158]/*
+%lang(de) %{_mandir}/de/man[158]/*
+%lang(es) %{_mandir}/es/man[158]/*
+%lang(fi) %{_mandir}/fi/man[158]/*
+%lang(fr) %{_mandir}/fr/man[158]/*
+%lang(hr) %{_mandir}/hr/man[158]/*
+%lang(hu) %{_mandir}/hu/man[158]/*
+%lang(it) %{_mandir}/it/man[158]/*
+%lang(ja) %{_mandir}/ja/man1/apropos.1*
+%lang(ja) %{_mandir}/ja/man1/man.1*
+%lang(ja) %{_mandir}/ja/man1/whatis.1*
+%lang(ja) %{_mandir}/ja/man[58]/*
+%lang(ko) %{_mandir}/ko/man[158]/*
+%lang(nl) %{_mandir}/nl/man[158]/*
+%lang(pl) %{_mandir}/pl/man1/apropos.1*
+%lang(pl) %{_mandir}/pl/man1/man.1*
+%lang(pl) %{_mandir}/pl/man1/whatis.1*
+%lang(pl) %{_mandir}/pl/man[58]/*
+%lang(pt) %{_mandir}/pt/man[158]/*
+%lang(sl) %{_mandir}/sl/man[158]/*
 
 %lang(cs) %{_datadir}/locale/cs/man
 %lang(da) %{_datadir}/locale/da/man
@@ -226,6 +246,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(es) %{_datadir}/locale/es/man
 %lang(fi) %{_datadir}/locale/fi/man
 %lang(fr) %{_datadir}/locale/fr/man
+%lang(hr) %{_datadir}/locale/hr/man
 %lang(it) %{_datadir}/locale/it/man
 %lang(nl) %{_datadir}/locale/nl/man
 %lang(pl) %{_datadir}/locale/pl/man
@@ -235,17 +256,21 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files -n man2html
 %defattr(644,root,root,755)
 %doc {man2html/README,man2html/TODO}.gz
-
 %attr(755,root,root) %{_bindir}/man2html
+%{_mandir}/man1/man2html.1*
+%lang(ja) %{_mandir}/ja/man1/man2html.1*
+%lang(pl) %{_mandir}/pl/man1/man2html.1*
 
 %files -n man2html-cgi
 %defattr(644,root,root,755)
-/home/httpd/cgi-aux/man/*
-
-%dir /home/httpd/cgi-bin/man
-%attr(755,root,root) /home/httpd/cgi-bin/man/*
-
-%dir %attr(755,nobody,nobody) /var/man2html
-/var/man2html/.glimpse_filters
-
 %attr(755,root,root) %{_bindir}/hman
+%{_mandir}/man1/hman.1*
+%lang(ja) %{_mandir}/ja/man1/hman.1*
+
+%dir %attr(775,root,http) /var/cache/man2html
+/var/cache/man2html/.glimpse_filters
+
+%attr(755,root,root) /home/httpd/cgi-bin/man
+/home/httpd/cgi-aux/man
+# seems man2html-cgi it's the only package that uses it
+%dir /home/httpd/cgi-aux

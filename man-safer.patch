@@ -1,19 +1,29 @@
---- man-1.5g/configure.orig	Wed Apr  7 04:16:05 1999
-+++ man-1.5g/configure	Mon Nov 15 09:52:12 1999
-@@ -349,12 +349,12 @@
-   done
-   if test $Fgroff = "missing"
+--- man-1.5i2/configure.orig	Sun Oct 14 00:49:58 2001
++++ man-1.5i2/configure	Sun Oct 14 00:52:35 2001
+@@ -362,20 +362,20 @@
    then
+     if test $Fnroff = "missing"
+     then
+-      nroff="nroff -mandoc"
++      nroff="nroff -msafer -Tlatin1 -mandoc"
+     else
+-      nroff="$Fnroff -mandoc"
++      nroff="$Fnroff -msafer -Tlatin1 -mandoc"
+     fi
 -    troff="troff -mandoc"
--    nroff="nroff -mandoc"
 +    troff="troff -msafer -mandoc"
-+    nroff="nroff -msafer -mandoc"
-     echo "Warning: could not find groff - assuming troff, nroff"
+     echo "Warning: could not find groff"
    else
+     if test $Fnroff = "missing"
+     then
+-      nroff="$Fgroff -Tlatin1 -mandoc"
++      nroff="$Fgroff -S -Tlatin1 -mandoc"
+     else
+-      nroff="$Fnroff -mandoc"
++      nroff="$Fnroff -msafer -Tlatin1 -mandoc"
+     fi
 -    troff="$Fgroff -Tps -mandoc"
--    nroff="$Fgroff -Tlatin1 -mandoc"
 +    troff="$Fgroff -S -Tps -mandoc"
-+    nroff="$Fgroff -S -Tlatin1 -mandoc"
    fi
    eqn="$Fgeqn -Tps"
    neqn="$Fgeqn -Tlatin1"

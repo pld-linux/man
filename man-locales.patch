@@ -1,14 +1,3 @@
---- man-1.5h1/src/makemsg.c.orig	Sun Jan 11 17:59:46 1998
-+++ man-1.5h1/src/makemsg.c	Fri Dec  8 00:11:32 2000
-@@ -126,7 +126,7 @@
- 	ss = *s;
- 	*s = 0;
- 	if (makecat) {
--	    fprintf (foc, "%d  ", ++defct); /* gencat cannot handle %2d */
-+	    fprintf (foc, "%d ", ++defct); /* gencat cannot handle %2d  ...and two spaces :/ */
- 	} else {
- 	    fprintf (foh, "#define %s %d\n", t, ++defct);
- 	    fprintf (foc, "/* %2d */  ", defct);
 --- man-1.5h1/msgs/mess.pl.orig	Thu Sep 27 21:36:32 2001
 +++ man-1.5h1/msgs/mess.pl	Thu Sep 27 21:35:37 2001
 @@ -14,13 +14,13 @@
