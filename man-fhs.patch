@@ -1,22 +1,11 @@
-diff -Nur man-1.5k.orig/catopen/catopen.c man-1.5k/catopen/catopen.c
---- man-1.5k.orig/catopen/catopen.c	Mon Mar 19 21:37:38 2001
-+++ man-1.5k/catopen/catopen.c	Sun Oct 14 00:48:37 2001
-@@ -10,7 +10,7 @@
- extern char *my_malloc(int);	/* in util.c */
- 
- #ifndef DEFAULT_NLSPATH
--#define DEFAULT_NLSPATH "/usr/lib/locale/%N/%L"
-+#define DEFAULT_NLSPATH "/usr/share/locale/%N/%L"
- #endif
- 
- static nl_catd my_catopenpath(char *name, char *path);
---- man-1.5n/man2html/Makefile.in.orig	2004-08-03 22:11:25.745522192 +0200
-+++ man-1.5n/man2html/Makefile.in	2004-08-03 22:23:56.003465648 +0200
+diff -ur man-1.5p/man2html/Makefile.in man-1.5p.new/man2html/Makefile.in
+--- man-1.5p/man2html/Makefile.in	2005-01-08 00:49:37.000000000 +0000
++++ man-1.5p.new/man2html/Makefile.in	2005-03-07 21:38:26.480729032 +0000
 @@ -31,13 +31,13 @@
  	mkdir -p $(httpdir)/cgi-aux/man
  	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
  	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
--	install -d -m 775 $(vardir)/man2html
+-	install -d -o $(cgiowner) -g $(cgigroup) -m 775 $(vardir)/man2html
 +	install -d -m 775 $(vardir)/cache/man2html
  # (aux was renamed to cgi-aux since aux causes problems under DOS)
  
@@ -28,9 +17,9 @@ diff -Nur man-1.5k.orig/catopen/catopen.c man-1.5k/catopen/catopen.c
  
  # In order not to have to type a long command like
  #   netscape http://localhost/cgi-bin/man/man2html?section+topic
-diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/mansearch man-1.5k/man2html/scripts/cgi-bin/man/mansearch
---- man-1.5k.orig/man2html/scripts/cgi-bin/man/mansearch	Mon Mar 19 17:14:06 2001
-+++ man-1.5k/man2html/scripts/cgi-bin/man/mansearch	Mon Oct 15 22:00:21 2001
+diff -ur man-1.5p/man2html/scripts/cgi-bin/man/mansearch man-1.5p.new/man2html/scripts/cgi-bin/man/mansearch
+--- man-1.5p/man2html/scripts/cgi-bin/man/mansearch	2003-03-11 15:53:30.000000000 +0000
++++ man-1.5p.new/man2html/scripts/cgi-bin/man/mansearch	2005-03-07 21:39:11.761845256 +0000
 @@ -62,7 +62,7 @@
    sedcmd = ENVIRON["SED"];
    truncate_at = 11;		# Single page display match limit.
@@ -40,9 +29,9 @@ diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/mansearch man-1.5k/man2html
  
    for (i = 1; i < ARGC; i++) {
      string = string " " ARGV[i];
-diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/mansec man-1.5k/man2html/scripts/cgi-bin/man/mansec
---- man-1.5k.orig/man2html/scripts/cgi-bin/man/mansec	Sun Mar  1 13:25:40 1998
-+++ man-1.5k/man2html/scripts/cgi-bin/man/mansec	Mon Oct 15 22:00:11 2001
+diff -ur man-1.5p/man2html/scripts/cgi-bin/man/mansec man-1.5p.new/man2html/scripts/cgi-bin/man/mansec
+--- man-1.5p/man2html/scripts/cgi-bin/man/mansec	2004-08-23 00:17:40.000000000 +0000
++++ man-1.5p.new/man2html/scripts/cgi-bin/man/mansec	2005-03-07 21:39:33.692511288 +0000
 @@ -40,7 +40,7 @@
      cache_suffix = "h";
    }
@@ -52,9 +41,9 @@ diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/mansec man-1.5k/man2html/sc
    cache_file = "manindex" cache_suffix "-" section ".html";
    cache = cache_dir "/" cache_file;
    cache_tmp = cache "_" pid;
-diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/manwhatis man-1.5k/man2html/scripts/cgi-bin/man/manwhatis
---- man-1.5k.orig/man2html/scripts/cgi-bin/man/manwhatis	Sat Sep 12 18:14:05 1998
-+++ man-1.5k/man2html/scripts/cgi-bin/man/manwhatis	Mon Oct 15 22:00:02 2001
+diff -ur man-1.5p/man2html/scripts/cgi-bin/man/manwhatis man-1.5p.new/man2html/scripts/cgi-bin/man/manwhatis
+--- man-1.5p/man2html/scripts/cgi-bin/man/manwhatis	2003-03-11 15:53:29.000000000 +0000
++++ man-1.5p.new/man2html/scripts/cgi-bin/man/manwhatis	2005-03-07 21:39:47.450419768 +0000
 @@ -39,7 +39,7 @@
      cache_suffix = "h";
    }
@@ -63,4 +52,3 @@ diff -Nur man-1.5k.orig/man2html/scripts/cgi-bin/man/manwhatis man-1.5k/man2html
 +  cache_dir  = "/var/cache/man2html";
    cache_file = "whatis" cache_suffix "-" section ".html";
    cache = cache_dir "/" cache_file;
- 

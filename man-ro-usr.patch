@@ -1,7 +1,6 @@
-diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
---- man-1.5i2.orig/src/makewhatis.sh	Sun Oct 14 11:01:23 2001
-+++ man-1.5i2/src/makewhatis.sh	Sun Oct 14 11:03:00 2001
-@@ -122,7 +122,7 @@
+--- man-1.5p/src/makewhatis.sh	2005-01-08 18:04:00.000000000 +0000
++++ man-1.5p.new/src/makewhatis.sh	2005-03-07 21:44:16.818469600 +0000
+@@ -156,7 +156,7 @@
        eval path="\$$pages"path
        for mandir in $path
        do
@@ -10,16 +9,16 @@ diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
        done
     done
  fi
-@@ -136,7 +136,7 @@
+@@ -170,7 +170,7 @@
       if [ x$verbose != x ]; then
- 	echo "about to enter $mandir" > /dev/tty
+ 	echo "about to enter $mandir" > /dev/stderr
       fi
 -     if [ -s ${mandir}/whatis -a $pages = man -a x$update = x ]; then
 +     if [ -s /var/cache/man/whatis -a $pages = man -a x$update = x ]; then
  	if [ x$verbose != x ]; then
- 	   echo skipping $mandir - we did it already > /dev/tty
+ 	   echo skipping $mandir - we did it already > /dev/stderr
  	fi
-@@ -350,13 +350,13 @@
+@@ -401,13 +401,13 @@
  	 mandir1=$mandir
         fi
  
@@ -29,8 +28,7 @@ diff -Nur man-1.5i2.orig/src/makewhatis.sh man-1.5i2/src/makewhatis.sh
 -	 cat ${mandir1}/whatis >> $TMPFILE
 +	 cat /var/cache/man/whatis >> $TMPFILE
         fi
--       sed '/^$/d' < $TMPFILE | sort | uniq > ${mandir1}/whatis
-+       sed '/^$/d' < $TMPFILE | sort | uniq > /var/cache/man/whatis
+        tr -s '\n' < $TMPFILE | sort -u > ${mandir1}/whatis
  
 -       chmod 644 ${mandir1}/whatis
 +       chmod 644 /var/cache/man/whatis

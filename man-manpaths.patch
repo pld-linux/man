@@ -1,11 +1,12 @@
---- man-1.5l/src/makewhatis.sh.orig	Mon Mar 10 21:14:51 2003
-+++ man-1.5l/src/makewhatis.sh	Tue Mar 11 21:50:50 2003
+diff -ur man-1.5p/src/makewhatis.sh man-1.5p.new/src/makewhatis.sh
+--- man-1.5p/src/makewhatis.sh	2005-01-08 18:04:00.000000000 +0000
++++ man-1.5p.new/src/makewhatis.sh	2005-03-07 21:29:44.671056160 +0000
 @@ -41,7 +41,7 @@
  # and should be first.
  # It is a bug to add /var/cache/man to DEFCATPATH.
  dm=
--for d in /usr/man /usr/share/man
-+for d in /usr/share/man
+-for d in /usr/man /usr/share/man /usr/X11R6/man /usr/local/man
++for d in /usr/share/man /usr/X11R6/man /usr/local/man
  do
      if [ -d $d ]; then
  	if [ x$dm = x ]; then dm=$d; else dm=$dm:$d; fi
@@ -18,7 +19,7 @@
  do
      if [ -d $d ]; then
  	if [ x$dc = x ]; then dc=$d; else dc=$dc:$d; fi
-@@ -391,13 +391,7 @@
+@@ -393,13 +393,7 @@
  
         cd $here
  
