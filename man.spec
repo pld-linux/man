@@ -162,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
-%attr(755,root,root) /usr/sbin/makewhatis
+%attr(755,root,root) %{_sbindir}/makewhatis
 %attr(644,root,root) %config %verify(not size mtime md5) /etc/man.config
 
 # Supported languages cs da de en es fi fr it nl pl pt sl
