@@ -32,6 +32,7 @@ Patch15:	%{name}-bug11621.patch
 Patch16:	%{name}-gencat.patch
 Requires:	groff
 Requires:	less
+Requires:	gzip
 Requires:	/bin/awk
 Requires:	mktemp >= 1.5-8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
