@@ -4,8 +4,8 @@ Summary(fr): Lecteur de pages de man.
 Summary(pl): Czytnik stron man
 Summary(tr): Kýlavuz sayfasý okuyucusu
 Name:        man
-Version:     1.5
-Release:     5d
+Version:     1.5d
+Release:     5
 Copyright:   GPL
 Group:       Utilities/System
 Source0:     ftp://sunsite.unc.edu/pub/Linux/apps/doctools/%{name}-%{version}.tar.gz
