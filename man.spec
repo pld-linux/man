@@ -231,9 +231,6 @@ install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
 install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
-# Play with /home/services
-mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_htmldir}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
