@@ -123,12 +123,12 @@ strip $RPM_BUILD_ROOT/usr/bin/man
 #  cp $LNG $RPM_BUILD_ROOT/usr/share/locale/`basename $LNG`/man
 #done
 
-gzip -9fn $RPM_BUILD_ROOT/usr/share/man/man*/* \
-	$RPM_BUILD_ROOT/usr/share/man/*/man*/* \
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
+	$RPM_BUILD_ROOT%{_mandir}/*/man*/* \
 	man2html/README man2html/TODO	
 %pre
-if [ -e /usr/man ] && [ ! -L /usr/man ]; then
-	cp -a /usr/man/* /usr/share/man
+if [ -e %{_mandir} ] && [ ! -L /usr/man ]; then
+	cp -a %{_mandir}/* %{_mandir}
 fi
 
 %preun
@@ -146,9 +146,9 @@ rm -f /var/cache/man/X11/cat[123456789n]/*
 rm -f /var/cache/man/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
-if [ -e /usr/man ] && [ ! -L /usr/man ]; then
-	rm -rf /usr/man
-	ln -s share/man /usr/man
+if [ -e %{_mandir} ] && [ ! -L /usr/man ]; then
+	rm -rf %{_mandir}
+	ln -s share/man %{_mandir}
 fi
 
 %clean
@@ -167,17 +167,17 @@ rm -rf $RPM_BUILD_ROOT
 
 # Supported languages cs da de en es fi fr it nl pl pt sl
 
-%lang(cs) /usr/share/man/cs/man[15]/*
-%lang(da) /usr/share/man/da/man[15]/*
-%lang(de) /usr/share/man/de/man[15]/*
-%lang(es) /usr/share/man/es/man[15]/*
-%lang(fi) /usr/share/man/fi/man[15]/*
-%lang(fr) /usr/share/man/fr/man[15]/*
-%lang(it) /usr/share/man/it/man[15]/*
-%lang(nl) /usr/share/man/nl/man[15]/*
-%lang(pl) /usr/share/man/pl/man[15]/*
-%lang(pt) /usr/share/man/pt/man[15]/*
-%lang(sl) /usr/share/man/sl/man[15]/*
+%lang(cs) %{_mandir}/cs/man[15]/*
+%lang(da) %{_mandir}/da/man[15]/*
+%lang(de) %{_mandir}/de/man[15]/*
+%lang(es) %{_mandir}/es/man[15]/*
+%lang(fi) %{_mandir}/fi/man[15]/*
+%lang(fr) %{_mandir}/fr/man[15]/*
+%lang(it) %{_mandir}/it/man[15]/*
+%lang(nl) %{_mandir}/nl/man[15]/*
+%lang(pl) %{_mandir}/pl/man[15]/*
+%lang(pt) %{_mandir}/pt/man[15]/*
+%lang(sl) %{_mandir}/sl/man[15]/*
 
 %attr(775,root, man) %dir /var/cache/man
 %attr(775,root, man) /var/cache/man/cat*
@@ -231,7 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) /usr/share/locale/pt/man
 %lang(sl) /usr/share/locale/sl/man
 
-/usr/share/man/man[15]/*
+%{_mandir}/man[15]/*
 
 %files -n man2html
 %defattr(644,root,root,755)
