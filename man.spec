@@ -5,23 +5,31 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	5
+Release:	20
 License:	GPL
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
-Patch0:		man-manpaths.patch
-Patch1:		man-PLD.patch
-Patch2:		man-msgs.patch
-Patch3:		man-man2html.patch
-Patch4:		man-fhs.patch
-Patch5:		man-makewhatis.patch
-Patch6:		man-safer.patch
-Patch7:		man-security.patch
-Patch8:		man-locales.patch
-Patch9:		man-roff.patch
+Patch0:		%{name}-manpaths.patch
+Patch1:		%{name}-PLD.patch
+Patch2:		%{name}-msgs.patch
+Patch3:		%{name}-man2html.patch
+Patch4:		%{name}-fhs.patch
+Patch5:		%{name}-makewhatis.patch
+Patch6:		%{name}-safer.patch
+Patch7:		%{name}-security.patch
+Patch8:		%{name}-locales.patch
+Patch9:		%{name}-roff.patch
+Patch10:	%{name}-sofix.patch
+Patch11:	%{name}-sec.patch
+Patch12:	%{name}-ro-usr.patch
+Patch13:	%{name}-mansect.patch
+Patch14:	%{name}-lookon.patch
+Patch15:	%{name}-bug11621.patch
+Patch16:	%{name}-gencat.patch
 Requires:	groff
 Requires:	less
 Requires:	/bin/awk
@@ -63,8 +71,9 @@ kullanýlabilir.
 %package -n man2html
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
 Requires:	%{name} = %{version}
 
 %description -n man2html
@@ -77,8 +86,9 @@ formacie manroff na format html.
 %package -n man2html-cgi
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
 Requires:	man2html = %{version}
 
 %description -n man2html-cgi
@@ -104,9 +114,16 @@ nie byæ bezpieczne.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
 
 %build
-CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}" LDFLAGS="%{!?degug:-s}" \
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}}" LDFLAGS="%{!?debug:-s}"
 ./configure -default +fhs +lang all
 
 %{__make} CC="%{__cc} %{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
