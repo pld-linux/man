@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5g
-Release:	7
+Release:	8
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -19,6 +19,7 @@ Patch3:		man-man2html.patch
 Patch4:		man-fhs.patch
 Patch5:		man-makewhatis.patch
 Patch6:		man-loop.patch
+Patch7:		man-safer.patch
 Requires:	groff
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -96,6 +97,7 @@ nie byæ bezpieczne.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
