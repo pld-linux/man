@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	6
+Release:	6.1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -29,6 +29,7 @@ Patch13:	%{name}-bug11621.patch
 Patch14:	%{name}-gencat.patch
 Patch15:	%{name}-nls-priority.patch
 Patch16:	%{name}-pl_man_pages.patch
+Requires:	man-config
 Requires:	groff
 Requires:	less
 Requires:	gzip
@@ -71,6 +72,17 @@ sisteminde bulunan birçok belgenin okunmasýnda kullanylyr. whatis ve
 apropos programlarý özel bir konu ile alakalý belgeleri bulmak için
 kullanýlabilir.
 
+%package config
+Summary:	Manual page reader configuration
+Summary(pl):	Konfiguracja czytników podrêczników
+Group:		Applications/System
+
+%description config
+Configuration file for different manual page browsers
+
+%description config -l pl
+Plik konfiguracyjny dla ró¿nych czytników podrêczników
+
 %package -n man2html
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
@@ -80,7 +92,7 @@ Requires:	%{name} = %{version}
 %description -n man2html
 This program can convert man pages stored in manroff format to html
 
-%description -l pl -n man2html
+%description -n man2html -l pl
 Program man2html s³u¿y do konwersji plików manuala zapisanych w
 formacie manroff na format html.
 
@@ -95,7 +107,7 @@ These scripts allows read man pages throught www browser. It uses
 man2htlm program to convert man pages to html format. Scripts are
 still in alpha stage, could be not secure.
 
-%description -l pl -n man2html-cgi
+%description -n man2html-cgi -l pl
 Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy
 pomocy przegl±darki WWW. Skrtpty wykorzystuj± program man2html do
 konwesji stron man na html. Programy s± ci±gle w stadium alfa i mog±
@@ -103,7 +115,7 @@ nie byæ bezpieczne.
 
 %prep
 %setup -q -a3
-%patch0 -p1 
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -206,7 +218,6 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_bindir}/zsoelim
 %attr(755,root,root) %{_sbindir}/makewhatis
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/man.config
 
 %config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
 
@@ -252,6 +263,10 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
 %lang(sl) %{_datadir}/locale/sl/man
+
+%files config
+%defattr(644,root,root,755)
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/man.config
 
 %files -n man2html
 %defattr(644,root,root,755)
