@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5i2
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -37,6 +37,7 @@ Requires:	gzip
 Requires:	/bin/awk
 Requires:	mktemp >= 1.5-8
 Prereq:		fileutils
+BuildRequires:	less
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
