@@ -5,7 +5,7 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5h1
-Release:	4
+Release:	5
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -21,6 +21,7 @@ Patch5:		man-makewhatis.patch
 Patch6:		man-safer.patch
 Patch7:		man-security.patch
 Patch8:		man-locales.patch
+Patch9:		man-roff.patch
 Requires:	groff
 Requires:	less
 Requires:	/bin/awk
@@ -102,6 +103,7 @@ nie byæ bezpieczne.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}" LDFLAGS="%{!?degug:-s}" \
@@ -148,7 +150,7 @@ rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
@@ -164,6 +166,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # Supported languages cs da de en es fi fr it nl pl pt sl
 
+%{_mandir}/man[15]/*
+
 %lang(cs) %{_mandir}/cs/man[15]/*
 %lang(da) %{_mandir}/da/man[15]/*
 %lang(de) %{_mandir}/de/man[15]/*
@@ -176,41 +180,76 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) %{_mandir}/pt/man[15]/*
 %lang(sl) %{_mandir}/sl/man[15]/*
 
-%attr(755,root,root) %dir /var/cache/man
+%dir /var/cache/man
+%dir /var/cache/man/local
+%dir /var/cache/man/X11R6
 %attr(775,root, man) /var/cache/man/cat*
 %attr(775,root, man) /var/cache/man/local/cat*
 %attr(775,root, man) /var/cache/man/X11R6/cat*
 
+%lang(cs) %dir /var/cache/man/cs
+%lang(cs) %dir /var/cache/man/local/cs
+%lang(cs) %dir /var/cache/man/X11R6/cs
 %lang(cs) %attr(775,root, man) /var/cache/man/cs/cat[1-9n]
 %lang(cs) %attr(775,root, man) /var/cache/man/local/cs/cat[1-9n]
 %lang(cs) %attr(775,root, man) /var/cache/man/X11R6/cs/cat[1-9n]
+%lang(da) %dir /var/cache/man/da
+%lang(da) %dir /var/cache/man/local/da
+%lang(da) %dir /var/cache/man/X11R6/da
 %lang(da) %attr(775,root, man) /var/cache/man/da/cat[1-9n]
 %lang(da) %attr(775,root, man) /var/cache/man/local/da/cat[1-9n]
 %lang(da) %attr(775,root, man) /var/cache/man/X11R6/da/cat[1-9n]
+%lang(de) %dir /var/cache/man/de
+%lang(de) %dir /var/cache/man/local/de
+%lang(de) %dir /var/cache/man/X11R6/de
 %lang(de) %attr(775,root, man) /var/cache/man/de/cat[1-9n]
 %lang(de) %attr(775,root, man) /var/cache/man/local/de/cat[1-9n]
 %lang(de) %attr(775,root, man) /var/cache/man/X11R6/de/cat[1-9n]
+%lang(es) %dir /var/cache/man/es
+%lang(es) %dir /var/cache/man/local/es
+%lang(es) %dir /var/cache/man/X11R6/es
 %lang(es) %attr(775,root, man) /var/cache/man/es/cat[1-9n]
 %lang(es) %attr(775,root, man) /var/cache/man/local/es/cat[1-9n]
 %lang(es) %attr(775,root, man) /var/cache/man/X11R6/es/cat[1-9n]
+%lang(fi) %dir /var/cache/man/fi
+%lang(fi) %dir /var/cache/man/local/fi
+%lang(fi) %dir /var/cache/man/X11R6/fi
 %lang(fi) %attr(775,root, man) /var/cache/man/fi/cat[1-9n]
 %lang(fi) %attr(775,root, man) /var/cache/man/local/fi/cat[1-9n]
 %lang(fi) %attr(775,root, man) /var/cache/man/X11R6/fi/cat[1-9n]
+%lang(fr) %dir /var/cache/man/fr
+%lang(fr) %dir /var/cache/man/local/fr
+%lang(fr) %dir /var/cache/man/X11R6/fr
 %lang(fr) %attr(775,root, man) /var/cache/man/fr/cat[1-9n]
 %lang(fr) %attr(775,root, man) /var/cache/man/local/fr/cat[1-9n]
 %lang(fr) %attr(775,root, man) /var/cache/man/X11R6/fr/cat[1-9n]
+%lang(it) %dir /var/cache/man/it
+%lang(it) %dir /var/cache/man/local/it
+%lang(it) %dir /var/cache/man/X11R6/it
 %lang(it) %attr(775,root, man) /var/cache/man/it/cat[1-9n]
 %lang(it) %attr(775,root, man) /var/cache/man/local/it/cat[1-9n]
 %lang(it) %attr(775,root, man) /var/cache/man/X11R6/it/cat[1-9n]
+%lang(nl) %dir /var/cache/man/nl
+%lang(nl) %dir /var/cache/man/local/nl
+%lang(nl) %dir /var/cache/man/X11R6/nl
 %lang(nl) %attr(775,root, man) /var/cache/man/nl/cat[1-9n]
 %lang(nl) %attr(775,root, man) /var/cache/man/local/nl/cat[1-9n]
 %lang(nl) %attr(775,root, man) /var/cache/man/X11R6/nl/cat[1-9n]
+%lang(pl) %dir /var/cache/man/pl
+%lang(pl) %dir /var/cache/man/local/pl
+%lang(pl) %dir /var/cache/man/X11R6/pl
 %lang(pl) %attr(775,root, man) /var/cache/man/pl/cat[1-9n]
 %lang(pl) %attr(775,root, man) /var/cache/man/local/pl/cat[1-9n]
 %lang(pl) %attr(775,root, man) /var/cache/man/X11R6/pl/cat[1-9n]
+%lang(pt) %dir /var/cache/man/pt
+%lang(pt) %dir /var/cache/man/local/pt
+%lang(pt) %dir /var/cache/man/X11R6/pt
 %lang(pt) %attr(775,root, man) /var/cache/man/pt/cat[1-9n]
 %lang(pt) %attr(775,root, man) /var/cache/man/local/pt/cat[1-9n]
 %lang(pt) %attr(775,root, man) /var/cache/man/X11R6/pt/cat[1-9n]
+%lang(sl) %dir /var/cache/man/sl
+%lang(sl) %dir /var/cache/man/local/sl
+%lang(sl) %dir /var/cache/man/X11R6/sl
 %lang(sl) %attr(775,root, man) /var/cache/man/sl/cat[1-9n]
 %lang(sl) %attr(775,root, man) /var/cache/man/local/sl/cat[1-9n]
 %lang(sl) %attr(775,root, man) /var/cache/man/X11R6/sl/cat[1-9n]
@@ -227,8 +266,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_datadir}/locale/pl/man
 %lang(pt) %{_datadir}/locale/pt/man
 %lang(sl) %{_datadir}/locale/sl/man
-
-%{_mandir}/man[15]/*
 
 %files -n man2html
 %defattr(644,root,root,755)
