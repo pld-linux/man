@@ -5,33 +5,33 @@ Summary(pl):	Czytnik stron man
 Summary(tr):	Kýlavuz sayfasý okuyucusu
 Name:		man
 Version:	1.5g
-Release:	3
+Release:	7
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-URL:		ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man
-Source0:	%{name}-%{version}.tar.gz
-Source1:	makewhatis.cron
+Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
+Source1:	makewhatis.crondaily
+Source2:	makewhatis.cronweekly
 Patch0:		man-manpaths.patch
 Patch1:		man-PLD.patch
 Patch2:		man-msgs.patch
 Patch3:		man-man2html.patch
 Patch4:		man-fhs.patch
 Patch5:		man-makewhatis.patch
+Patch6:		man-loop.patch
 Requires:	groff
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
-The man page suite, including man, apropos, and whatis.  These programs are
-used to read most of the documentation available on a Linux system.  The
-whatis and apropos programs can be used to find documentation related to a
-particular subject.
-
-%description -l pl
-Pakiet man zawiera man, apropos i whatis. Te programy s± u¿ywane do
-czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy whatis
-i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy powi±zane z
-poszukiwanym.
+The man package includes three tools for finding information and/or
+documentation about your Linux system: man, apropos and whatis. The man
+system formats and displays on-line manual pages about commands or functions
+on your system. Apropos searches the whatis database (containing short
+descriptions of system commands) for a string. Whatis searches its own
+database for a complete word.
+                                                                                                              
+The man package should be installed on your system because it is the primary
+way to find documentation on a Linux system.
 
 %description -l de
 Die man-Seiten-Suite, einschließlich Handbuch, Apropos und Whatis.  Diese
@@ -44,6 +44,12 @@ Ensemble des pages man. Contient man, apropos et whatis. Ces programmes
 servent à lire la plupart de la documentation disponible sur un système
 Linux. Les programmes whatis et apropos servent à trouver la documentation
 relative à un sujet précis.
+
+%description -l pl
+Pakiet man zawiera man, apropos i whatis. Te programy s± u¿ywane do
+czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy whatis
+i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy powi±zane z
+poszukiwanym.
 
 %description -l tr
 Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux sisteminde
@@ -98,7 +104,7 @@ make CC="gcc $RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/cron.weekly,usr/{bin,share/man,sbin}}
+install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
 make install BINROOTDIR="$RPM_BUILD_ROOT"
 
@@ -115,20 +121,19 @@ install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/cat{1,2,3,4,5,6,7,8,9,n}
 
 for i in cs da de es fi fr it nl pl pt sl
 do
-  install -d $RPM_BUILD_ROOT/var/cache/man/$i/cat{1,2,3,4,5,6,7,8,9,n}
-  install -d $RPM_BUILD_ROOT/var/cache/man/local/$i/cat{1,2,3,4,5,6,7,8,9,n}
-  install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/$i/cat{1,2,3,4,5,6,7,8,9,n}
+	install -d $RPM_BUILD_ROOT/var/cache/man/$i/cat{1,2,3,4,5,6,7,8,9,n}
+	install -d $RPM_BUILD_ROOT/var/cache/man/local/$i/cat{1,2,3,4,5,6,7,8,9,n}
+	install -d $RPM_BUILD_ROOT/var/cache/man/X11R6/$i/cat{1,2,3,4,5,6,7,8,9,n}
 done
+
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis.cron
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis.cron
 
 strip $RPM_BUILD_ROOT%{_bindir}/man
 
 gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	$RPM_BUILD_ROOT%{_mandir}/*/man*/* \
 	man2html/README man2html/TODO	
-%pre
-if [ -e %{_mandir} ] && [ ! -L /usr/man ]; then
-	cp -a %{_mandir}/* %{_mandir}
-fi
 
 %preun
 rm -f /var/cache/man/cat[123456789n]/*
@@ -145,10 +150,6 @@ rm -f /var/cache/man/X11/cat[123456789n]/*
 rm -f /var/cache/man/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
-if [ -e %{_mandir} ] && [ ! -L /usr/man ]; then
-	rm -rf %{_mandir}
-	ln -s share/man %{_mandir}
-fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -156,8 +157,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(750,root,root) %config /etc/cron.weekly/makewhatis.cron
+%attr(750,root,root) %config /etc/cron.daily/makewhatis.cron
 
-%attr(2711,root,man) %{_bindir}/man
+%attr(2755,root,man) %{_bindir}/man
 
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
