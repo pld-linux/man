@@ -104,16 +104,16 @@ nie byæ bezpieczne.
 CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
 ./configure -default +fhs +lang all
 
-make CC="gcc $RPM_OPT_FLAGS"
+%{__make} CC="gcc $RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir}}
 
-make install BINROOTDIR="$RPM_BUILD_ROOT"
+%{__make} install BINROOTDIR="$RPM_BUILD_ROOT"
 
 (cd man2html
-make install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
+%{__make} install-scripts BINROOTDIR="$RPM_BUILD_ROOT"
 )
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly
