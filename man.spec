@@ -1,8 +1,12 @@
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
+Summary(es):	Lector de pАginas de manual (man)
 Summary(fr):	Lecteur de pages de man
 Summary(pl):	Czytnik stron man
+Summary(pt_BR):	Leitor de pАginas de manuais (man)
 Summary(tr):	KЩlavuz sayfasЩ okuyucusu
+Summary(ru):	Набор утилит для документации: man, apropos и whatis
+Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5i2
 Release:	8
@@ -54,6 +58,13 @@ die auf einem Linux-System verfЭgbar ist. Die Whatis- und
 Apropos-Programme dienen dazu, Beschreibungen zu bestimmten Themen zu
 finden.
 
+%description -l es
+Es un conjunto de pАginas de manual, incluyendo man, apropos y whatis.
+Estos programas se usan para leer la mayorМa de la documentaciСn
+disponible en el sistema Linux. Los programas whatis y apropos pueden
+ser usados para encontrar documentaciСn relacionada con un asunto
+particular.
+
 %description -l fr
 Ensemble des pages man. Contient man, apropos et whatis. Ces
 programmes servent Ю lire la plupart de la documentation disponible
@@ -66,11 +77,33 @@ czytania wiЙkszo╤ci dokumentacji dostЙpnej w systemie Linux. Programy
 whatis i apropos mog╠ byФ u©yte do znalezienia dokumentacji na tematy
 powi╠zane z poszukiwanym.
 
+%description -l pt_BR
+и um conjunto de pАginas de manual, incluindo man, apropos e whatis.
+Estes programas sЦo usados para ler a maioria da documentaГЦo
+disponМvel no sistema Linux. Os programas whatis e apropos podem ser
+usados para achar documentaГЦo relacionada com um assunto particular.
+
 %description -l tr
 KЩlavuz sayfa takЩmЩ: man, apropos, whatis. Bu programlar Linux
 sisteminde bulunan birГok belgenin okunmasЩnda kullanylyr. whatis ve
 apropos programlarЩ Жzel bir konu ile alakalЩ belgeleri bulmak iГin
 kullanЩlabilir.
+
+%description -l ru
+Пакет man содержит три утилиты для поиска информации и/или
+документации о вашей системе: man, apropos и whatis. Система man
+форматирует и показывает онлайновые страницы мануала о командах и
+функциях вашей системы. Apropos ищет заданную строку в базе данных
+whatis (содержащей короткие описания системных команд). Whatis ищет в
+своей базе данных завершенные слова.
+
+%description -l uk
+Пакет man м╕стить три утил╕ти для пошуку ╕нформац╕╖ та/або
+документац╕╖ про вашу систему: man, apropos та whatis. Система man
+формату╓ та показу╓ онлайнов╕ стор╕нки мануалу про команди та функц╕╖
+вашо╖ системи. Apropos шука╓ заданий рядок у баз╕ даних whatis (яка
+м╕стить коротк╕ описи системних команд). Whatis шука╓ у сво╖й баз╕
+зак╕нчен╕ слова.
 
 %package config
 Summary:	Manual page reader configuration
