@@ -13,7 +13,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5m2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/%{name}/%{name}-%{version}.tar.gz
