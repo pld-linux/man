@@ -1,5 +1,6 @@
---- man-1.5h1/src/man.c.orig	Thu Feb 22 11:46:13 2001
-+++ man-1.5h1/src/man.c	Thu Feb 22 12:30:35 2001
+diff -urN man-1.5h1.org/src/man.c man-1.5h1/src/man.c
+--- man-1.5h1.org/src/man.c	Tue Mar 13 21:03:10 2001
++++ man-1.5h1/src/man.c	Tue Mar 13 21:04:24 2001
 @@ -307,7 +307,9 @@
  	       gripe (EXPANSION_FAILED, command);
  	       return (NULL);
@@ -22,12 +23,19 @@
  	  fclose (fp);
       }
  
-@@ -511,7 +515,7 @@
+@@ -506,12 +510,13 @@
+      /* tail */
+      buft[0] = 0;
+      if (ll || pl) {
+-	  if (pl && !strcmp(pl, VERY_LONG_PAGE))
++	  if (pl && !strcmp(pl, VERY_LONG_PAGE)) {
+ 	      /* At end of the nroff source, set the page length to
  		 the current position plus 10 lines.  This plus setpl()
  		 gives us a single page that just contains the whole
  		 man page. (William Webber, wew@cs.rmit.edu.au) */
 -	      strcat(buft, "; echo \".pl \\n(nlu+10\"");
 +	   /* strcat(buft, "; echo \".pl \\n(nlu+10\"");  * GNU roff doesn't understand it */
++	  }
  #if 0
  	      /* In case this doesnt work for some reason,
  		 michaelkjohnson suggests: I've got a simple
