@@ -21,7 +21,7 @@ Patch5:		man-makewhatis.patch
 Patch6:		man-loop.patch
 Patch7:		man-safer.patch
 Requires:	groff
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The man package includes three tools for finding information and/or
@@ -84,7 +84,6 @@ stage, could be not secure.
 Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy  pomocy
 przegl±darki WWW. Skrtpty wykorzystuj± program man2html do  konwesji stron
 man na html. Programy s± ci±gle w stadium alfa i mog±  nie byæ bezpieczne.
-
 
 %prep
 %setup  -q
