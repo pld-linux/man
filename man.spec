@@ -9,7 +9,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5k
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/doctools/man/%{name}-%{version}.tar.gz
@@ -39,6 +39,16 @@ Requires:	less
 Requires:	gzip
 Requires:	/bin/awk
 Requires:	mktemp >= 1.5-8
+Obsoletes:	man-cs
+Obsoletes:	man-da
+Obsoletes:	man-de
+Obsoletes:	man-es
+Obsoletes:	man-fr
+Obsoletes:	man-it
+Obsoletes:	man-nl
+Obsoletes:	man-pl
+Obsoletes:	man-pt
+Obsoletes:	man-sl
 Prereq:		fileutils
 BuildRequires:	less
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
