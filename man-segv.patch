@@ -1,0 +1,11 @@
+--- man-1.5j/src/man-getopt.c.segv	2002-09-03 15:16:45.000000000 +0200
++++ man-1.5j/src/man-getopt.c	2002-09-03 15:17:11.000000000 +0200
+@@ -170,7 +170,7 @@
+ 	char **argvec;
+ 	int optindsv;
+ 
+-	if (!s)
++	if (!s || *s==0)
+ 		return;
+ 
+ 	/* In order to avoid having a list of options in two places,
