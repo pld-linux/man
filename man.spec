@@ -252,6 +252,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/bin/hman
 
 %changelog
+* Fri May  7 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.5g-2]
+- FHS 2.0 compilant changes.
+
 * Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
   [1.5g-1]
 - upgraded to 1.5g
