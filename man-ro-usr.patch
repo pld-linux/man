@@ -5,7 +5,7 @@
        for mandir in $path
        do
 -	 cp /dev/null $mandir/whatis
-+	 cp /dev/null /var/cache/man/whatis
++	 :> /var/cache/man/whatis
        done
     done
  fi
