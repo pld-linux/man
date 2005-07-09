@@ -1,0 +1,273 @@
+diff -Nur man-1.5p.b/man/el/man2html.man man-1.5p.n/man/el/man2html.man
+--- man-1.5p.b/man/el/man2html.man	2003-07-24 17:34:59.000000000 +0200
++++ man-1.5p.n/man/el/man2html.man	2005-07-09 09:24:23.800917872 +0200
+@@ -91,7 +91,7 @@
+ .TP
+ .B \-\^l
+ Ορίζει τη μέθοδο:διαδρομή_cgi σε
+-.RI lynxcgi: /home/httpd .
++.RI lynxcgi: /usr/lib .
+ .TP
+ .BI \-\^L " dir"
+ Ορίζει τη μέθοδο:διαδρομή_cgi σε
+@@ -123,7 +123,7 @@
+ χρησιμοποιώντας τη μέθοδο http.
+ Η επιλογή \-l (από το « lynxcgi ») διαλέγει τον πρώτο τρόπο.
+ Με αυτό τον τρόπο, 
+-η προεπιλεγμένη διαδρομή_cgip είναι \fI/home/httpd\fP.
++η προεπιλεγμένη διαδρομή_cgip είναι \fI/usr/lib\fP.
+ 
+ Γενικώς, ένα σενάριο cgi μπορεί να κληθεί από τη
+ .LP
+diff -Nur man-1.5p.b/man/ja/man1/man2html.1 man-1.5p.n/man/ja/man1/man2html.1
+--- man-1.5p.b/man/ja/man1/man2html.1	2001-09-14 17:10:28.000000000 +0200
++++ man-1.5p.n/man/ja/man1/man2html.1	2005-07-09 09:24:23.761923800 +0200
+@@ -93,7 +93,7 @@
+ .TP
+ .B \-\^l
+ method:cgipath ¤ς
+-.RI lynxcgi: /home/httpd
++.RI lynxcgi: /usr/lib
+ ¤ΛΐίΔκ¤·¤ή¤Ή΅£
+ .TP
+ .BI \-\^L " dir"
+@@ -118,7 +118,7 @@
+ ¤Η lynxcgi ¤ςΝΡ¤¤¤μ¤Π¥ή¥σ΅¦¥Ϊ΅Ό¥Έ¤ς±άΝχ¤Ή¤λ¤³¤Θ¤¬¤Η¤­¤ή¤Ή΅£
+ http ¥Η΅Ό¥β¥σ¤¬²ΤΖ°¤·¤Ζ¤¤¤λΎμΉη¤Ο΅Ά lynx ¤Η¤βΒΎ¤Ξ¥Φ¥ι¥¦¥¶¤Η¤β±άΝχ¤Η¤­
+ ¤ή¤Ή΅£¥ª¥Χ¥·¥η¥σ \-l (`lynxcgi' ¤Ξ°ΥΜ£) ¤ΟΑ°ΌΤ¤ςΑªΒς¤·¤ή¤Ή΅£¤³¤μ¤ς»ΨΔκ
+-¤Ή¤λ¤Θ΅Ά¥Η¥Υ¥©¥λ¥Θ¤Ξ cgipath ¤Ο \fI/home/httpd/\fP ¤Λ¤Κ¤κ¤ή¤Ή΅£
++¤Ή¤λ¤Θ΅Ά¥Η¥Υ¥©¥λ¥Θ¤Ξ cgipath ¤Ο \fI/usr/lib/\fP ¤Λ¤Κ¤κ¤ή¤Ή΅£
+ 
+ °μΘΜ¤Λ¤Ο cgi ¥Ή¥―¥κ¥Χ¥Θ¤Ο
+ .IP
+diff -Nur man-1.5p.b/man/pl/man1/man2html.1 man-1.5p.n/man/pl/man1/man2html.1
+--- man-1.5p.b/man/pl/man1/man2html.1	2000-04-17 16:16:49.000000000 +0200
++++ man-1.5p.n/man/pl/man1/man2html.1	2005-07-09 09:24:23.705932312 +0200
+@@ -91,7 +91,7 @@
+ .TP
+ .B \-\^l
+ Ustawia metoda:¶cieΏkacgi na
+-.RI lynxcgi: /home/httpd .
++.RI lynxcgi: /usr/lib .
+ .TP
+ .BI \-\^L " katalog"
+ Ustawia metoda:¶cieΏkacgi na
+@@ -114,7 +114,7 @@
+ wykorzystuj±c metodκ lynxcgi. JeΏeli pracuje jaki¶ demon http, do przegl±dania
+ moΏna uΏyζ lynx-a, czy jakiejkolwiek innej przegl±darki, wykorzystuj±c metodκ
+ http. Opcja \-l (oznaczaj±ca `lynxcgi') wybiera pierwsze z opisanych zachowaρ.
+-Przy jej zastosowaniu domy¶ln± ¶cieΏk± cgi jest \fI/home/httpd\fP.
++Przy jej zastosowaniu domy¶ln± ¶cieΏk± cgi jest \fI/usr/lib\fP.
+ 
+ Ogσlnie skrypt cgi wywo³uje siκ przez
+ .IP
+diff -Nur man-1.5p.b/man/ro/man2html.man man-1.5p.n/man/ro/man2html.man
+--- man-1.5p.b/man/ro/man2html.man	2003-03-11 16:53:34.000000000 +0100
++++ man-1.5p.n/man/ro/man2html.man	2005-07-09 09:24:23.782920608 +0200
+@@ -89,7 +89,7 @@
+ .TP
+ .B \-\^l
+ Configureazγ metodγ:cale_cgi ca
+-.RI lynxcgi: /home/httpd .
++.RI lynxcgi: /usr/lib .
+ .TP
+ .BI \-\^L " dir"
+ Configureazγ metodγ:cale_cgi ca
+@@ -113,7 +113,7 @@
+ un demon http ruleazγ, lynx, sau orice alt navigator, poate fi folosit
+ pentru a naviga prin paginile de manual, folosind metoda http. Opώiunea
+ \-l (pentru `lynxcgi') selecteazγ comportamentul precedent. Cu ea,
+-cale_cgi este \fI/home/httpd\fP.
++cale_cgi este \fI/usr/lib\fP.
+ 
+ Ξn general, un script cgi poate fi apelat prin
+ .IP
+diff -Nur man-1.5p.b/man2html/cgibase.c man-1.5p.n/man2html/cgibase.c
+--- man-1.5p.b/man2html/cgibase.c	2003-03-11 16:53:29.000000000 +0100
++++ man-1.5p.n/man2html/cgibase.c	2005-07-09 09:24:23.582951008 +0200
+@@ -18,7 +18,7 @@
+ /*
+  * Either the user is non-local (or local, but using httpd),
+  * in which case we use http:/cgi-bin, or the user is local
+- * and uses lynx, and we use lynxcgi:/home/httpd/cgi-bin.
++ * and uses lynx, and we use lynxcgi:/usr/lib/cgi-bin.
+  */
+ 
+ static char *man2htmlpath = "/cgi-bin/man/man2html"; 	/* default */
+diff -Nur man-1.5p.b/man2html/hman.sh man-1.5p.n/man2html/hman.sh
+--- man-1.5p.b/man2html/hman.sh	2003-03-11 16:53:29.000000000 +0100
++++ man-1.5p.n/man2html/hman.sh	2005-07-09 09:24:23.579951464 +0200
+@@ -57,7 +57,7 @@
+ case $BROWSER in
+      lynxcgi)
+ 	BROWSER=lynx
+-	CG="lynxcgi:/home/httpd/cgi-bin/man"
++	CG="lynxcgi:/usr/lib/cgi-bin/man"
+ 	;;
+      netscape)
+         BROWSER=nsfunc
+diff -Nur man-1.5p.b/man2html/Makefile.in man-1.5p.n/man2html/Makefile.in
+--- man-1.5p.b/man2html/Makefile.in	2005-07-09 07:27:02.000000000 +0200
++++ man-1.5p.n/man2html/Makefile.in	2005-07-09 09:24:23.610946752 +0200
+@@ -4,7 +4,7 @@
+ bindir = $(DESTDIR)$(PREFIX)/usr/bin
+ mandir = $(DESTDIR)$(PREFIX)@mandir@
+ vardir = $(DESTDIR)$(PREFIX)/var
+-httpdir = $(DESTDIR)$(PREFIX)/home/httpd
++httpdir = $(DESTDIR)$(PREFIX)/usr/lib
+ cgiowner = nobody
+ cgigroup = nobody
+ 
+@@ -28,9 +28,9 @@
+ # to work.
+ install-man-scripts:
+ 	mkdir -p $(httpdir)/cgi-bin/man
+-	mkdir -p $(httpdir)/cgi-aux/man
++	mkdir -p $(httpdir)/share/man2html-cgi
+ 	install -m 755 scripts/cgi-bin/man/* $(httpdir)/cgi-bin/man
+-	install -m 644 scripts/cgi-aux/man/* $(httpdir)/cgi-aux/man
++	install -m 644 scripts/cgi-aux/man/* $(DESTDIR)$(PREFIX)/usr/share/man2html-cgi
+ 	install -d -m 775 $(vardir)/cache/man2html
+ # (aux was renamed to cgi-aux since aux causes problems under DOS)
+ 
+@@ -42,7 +42,7 @@
+ # In order not to have to type a long command like
+ #   netscape http://localhost/cgi-bin/man/man2html?section+topic
+ # or
+-#   lynx lynxcgi:/home/httpd/cgi-bin/man/man2html?section+topic
++#   lynx lynxcgi:/usr/lib/cgi-bin/man/man2html?section+topic
+ # it is convenient to have some shell script as a wrapper.
+ # The script hman can be aliased to man. It uses an environment
+ # variable MANHTMLPAGER to find out which browser you use, and
+diff -Nur man-1.5p.b/man2html/man2html.1 man-1.5p.n/man2html/man2html.1
+--- man-1.5p.b/man2html/man2html.1	2003-03-11 16:53:30.000000000 +0100
++++ man-1.5p.n/man2html/man2html.1	2005-07-09 09:24:23.628944016 +0200
+@@ -87,7 +87,7 @@
+ .TP
+ .B \-\^l
+ Set method:cgipath to
+-.RI lynxcgi: /home/httpd .
++.RI lynxcgi: /usr/lib .
+ .TP
+ .BI \-\^L " dir"
+ Set method:cgipath to
+@@ -114,7 +114,7 @@
+ When some http daemon is running, lynx, or any other browser,
+ can be used to browse the man pages, using the http method.
+ The option \-l (for `lynxcgi') selects the former behaviour.
+-With it, the default cgipath is \fI/home/httpd\fP.
++With it, the default cgipath is \fI/usr/lib\fP.
+ 
+ In general, a cgi script can be called by
+ .IP
+diff -Nur man-1.5p.b/man2html/man2html.c man-1.5p.n/man2html/man2html.c
+--- man-1.5p.b/man2html/man2html.c	2004-09-28 21:24:52.000000000 +0200
++++ man-1.5p.n/man2html/man2html.c	2005-07-09 09:24:23.606947360 +0200
+@@ -3101,7 +3101,7 @@
+ 	 case 'H':
+ 	      set_cgibase(optarg); break;
+ 	 case 'l':
+-	      set_lynxcgibase("/home/httpd"); break;
++	      set_lynxcgibase("/usr/lib"); break;
+ 	 case 'L':
+ 	      set_lynxcgibase(optarg); break;
+ 	 case 'M':
+diff -Nur man-1.5p.b/man2html/README man-1.5p.n/man2html/README
+--- man-1.5p.b/man2html/README	2003-03-11 16:53:29.000000000 +0100
++++ man-1.5p.n/man2html/README	2005-07-09 09:24:23.609946904 +0200
+@@ -10,7 +10,7 @@
+ The contents of FILENAME (or STDIN, in case FILENAME is "-" or absent)
+ are converted from man-style nroff to html, and printed on STDOUT.
+ 
+-With "-l" URLs of the form "lynxcgi:/home/httpd/cgi-bin/..." are generated.
++With "-l" URLs of the form "lynxcgi:/usr/lib/cgi-bin/..." are generated.
+ With "-H host" we make URLs of the form "http://host/cgi-bin/...".
+ The default is "http://localhost/cgi-bin/...".
+ 
+@@ -29,7 +29,7 @@
+ 2A. man stuff
+ 
+ This first part (that can be done separately with "make install-man-scripts")
+-puts various scripts under /home/httpd/cgi-bin and /home/httpd/cgi-aux
++puts various scripts under /usr/lib/cgi-bin and /usr/share/man2html-cgi
+ in a subdirectory man.
+ It will create a directory /var/man2html to hold the indices.
+ (This directory should be writable by the cgi scripts;
+diff -Nur man-1.5p.b/man2html/scripts/cgi-aux/man/man.aux man-1.5p.n/man2html/scripts/cgi-aux/man/man.aux
+--- man-1.5p.b/man2html/scripts/cgi-aux/man/man.aux	2003-03-11 16:53:30.000000000 +0100
++++ man-1.5p.n/man2html/scripts/cgi-aux/man/man.aux	2005-07-09 09:24:23.623944776 +0200
+@@ -4,7 +4,7 @@
+ <HEAD>
+ <TITLE>Manual Pages - Main Contents</TITLE>
+ <!-- Note: this is not html, but requires preprocessing -->
+-<!-- It is used by /home/httpd/cgi-bin/man/man2html -->
++<!-- It is used by /usr/lib/cgi-bin/man/man2html -->
+ </HEAD>
+ <BODY>
+ <H1>Manual Pages - Main Contents</H1>
+diff -Nur man-1.5p.b/man2html/scripts/cgi-bin/man/man2html man-1.5p.n/man2html/scripts/cgi-bin/man/man2html
+--- man-1.5p.b/man2html/scripts/cgi-bin/man/man2html	2003-03-11 16:53:29.000000000 +0100
++++ man-1.5p.n/man2html/scripts/cgi-bin/man/man2html	2005-07-09 09:24:23.612946448 +0200
+@@ -1,10 +1,10 @@
+ #!/bin/sh
+ # man2html cgi script - uses /usr/bin/man2html to format man pages
+-# auxiliary text files in /home/httpd/cgi-aux/man
++# auxiliary text files in /usr/share/man2html-cgi
+ # aeb@cwi.nl - 980109
+ 
+ MAN2HTML="/usr/bin/man2html"
+-MANX="/home/httpd/cgi-aux/man/man.aux"
++MANX="/usr/share/man2html-cgi/man.aux"
+ 
+ # Do we need lynxcgi URLs? For the moment our criterion is
+ # 1) HTTP_USER_AGENT=Lynx*  and 2) HTTP_HOST is unset.
+@@ -25,7 +25,7 @@
+ case "$HH" in
+     nohh)
+ 	LL="-l"
+-	CG="lynxcgi:/home/httpd/cgi-bin/man"
++	CG="lynxcgi:/usr/lib/cgi-bin/man"
+ 	;;
+     *)
+ 	LL="-H$SERVER"
+diff -Nur man-1.5p.b/man2html/scripts/cgi-bin/man/mansearch man-1.5p.n/man2html/scripts/cgi-bin/man/mansearch
+--- man-1.5p.b/man2html/scripts/cgi-bin/man/mansearch	2005-07-09 07:27:02.000000000 +0200
++++ man-1.5p.n/man2html/scripts/cgi-bin/man/mansearch	2005-07-09 09:24:23.621945080 +0200
+@@ -23,7 +23,7 @@
+ SERVER="${SERVER_NAME-localhost}"
+ case "$HH" in
+     nohh)
+-	CG="lynxcgi:/home/httpd/cgi-bin/man"
++	CG="lynxcgi:/usr/lib/cgi-bin/man"
+ 	;;
+     *)
+ 	CG="http://$SERVER/cgi-bin/man"
+@@ -56,7 +56,7 @@
+ 
+ BEGIN {
+ 
+-  searchdocument = "/home/httpd/cgi-aux/man/mansearch.aux";
++  searchdocument = "/usr/share/man2html-cgi/mansearch.aux";
+   quote = ENVIRON["QUOTE"];
+   cgipath = ENVIRON["CG"];
+   sedcmd = ENVIRON["SED"];
+diff -Nur man-1.5p.b/man2html/scripts/cgi-bin/man/mansearchhelp man-1.5p.n/man2html/scripts/cgi-bin/man/mansearchhelp
+--- man-1.5p.b/man2html/scripts/cgi-bin/man/mansearchhelp	2003-03-11 16:53:30.000000000 +0100
++++ man-1.5p.n/man2html/scripts/cgi-bin/man/mansearchhelp	2005-07-09 09:24:23.622944928 +0200
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ MAN2HTML=/usr/bin/man2html
+-MANSH=/home/httpd/cgi-aux/man/mansearchhelp.aux
++MANSH=/usr/share/man2html-cgi/mansearchhelp.aux
+ 
+ # Do we need lynxcgi URLs? For the moment our criterion is
+ # 1) HTTP_USER_AGENT=Lynx*  and 2) HTTP_HOST is unset.
+@@ -17,7 +17,7 @@
+ SERVER="${SERVER_NAME-localhost}"
+ case "$HH" in
+     nohh)
+-	CG="lynxcgi:/home/httpd/cgi-bin/man"
++	CG="lynxcgi:/usr/lib/cgi-bin/man"
+ 	;;
+     *)
+ 	CG="http://$SERVER/cgi-bin/man"
