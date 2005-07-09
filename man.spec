@@ -1,6 +1,3 @@
-# TODO:
-# - move http/cgi files to /usr/....
-#
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
 Summary(es):	Lector de pАginas de manual (man)
@@ -13,7 +10,7 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.5p
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
@@ -37,6 +34,7 @@ Patch11:	%{name}-nls-priority.patch
 Patch12:	%{name}-pmake.patch
 Patch13:	%{name}-fmntbug.patch
 Patch14:	%{name}-awk_path.patch
+Patch15:	%{name}-cgi_paths.patch
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
@@ -45,6 +43,7 @@ Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	mktemp >= 1.5-8
+Requires:	FHS >= 2.3-12
 Obsoletes:	man-cs
 Obsoletes:	man-da
 Obsoletes:	man-de
@@ -57,9 +56,8 @@ Obsoletes:	man-pt
 Obsoletes:	man-sl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_servdir	/home/services
-%define		_httpdir	%{_servdir}/httpd
-%define		_cgidir		%{_httpdir}/cgi-bin
+%define		_cgibinmandir		/usr/lib/cgi-bin/man
+%define		_cgiauxmandir		/usr/share/man2html-cgi
 
 %description
 The man package includes three tools for finding information and/or
@@ -181,6 +179,7 @@ nie byФ bezpieczne.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 # use gzip (not bzip2) to compress formatted man pages
 sed -i -e 's/compress=$/compress=gzip/' configure
@@ -198,8 +197,8 @@ sed -i -e 's/compress=$/compress=gzip/' configure
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_servdir}} \
-	$RPM_BUILD_ROOT%{_mandir}/{hu,ja,ko}/man{1,5,8}
+install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_cgibinmandir},%{_cgiauxmandir}} \
+	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_sysconfdir}/man}
 
 echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de el es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru \
@@ -239,8 +238,9 @@ install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
 install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
-# Play with /home/services
-mv $RPM_BUILD_ROOT/home/httpd $RPM_BUILD_ROOT%{_servdir}
+cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/man/apache-man2html-cgi.conf
+ScriptAlias /cgi-bin/man %{_cgibinmandir}
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -266,6 +266,18 @@ rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??_??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
+
+%triggerin -n man2html-cgi -- apache1 >= 1.3.33-2
+%apache_config_install -v 1 -c %{_sysconfdir}/man/apache-man2html-cgi.conf -n 09
+
+%triggerun -n man2html-cgi -- apache1 >= 1.3.33-2
+%apache_config_uninstall -v 1 -n 09
+
+%triggerin -n man2html-cgi -- apache >= 2.0.0
+%apache_config_install -v 2 -c %{_sysconfdir}/man/apache-man2html-cgi.conf -n 09
+
+%triggerun -n man2html-cgi -- apache >= 2.0.0
+%apache_config_uninstall -v 2 -n 09
 
 %files -f man.lang
 %defattr(644,root,root,755)
@@ -358,12 +370,13 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files -n man2html-cgi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hman
-%attr(755,root,root) %{_cgidir}/man
-%{_httpdir}/cgi-aux/man
+%dir %{_cgibinmandir}
+%attr(755,root,root) %{_cgibinmandir}/*
+%{_cgiauxmandir}
 %dir %attr(775,root,http) /var/cache/man2html
 /var/cache/man2html/.glimpse_filters
 %{_mandir}/man1/hman.1*
 %lang(el) %{_mandir}/el/man1/hman.1*
 %lang(ja) %{_mandir}/ja/man1/hman.1*
 # it seems to be the only package using this dir
-%dir %{_httpdir}/cgi-aux
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/man/apache-man2html-cgi.conf
