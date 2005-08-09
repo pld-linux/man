@@ -132,6 +132,21 @@ Configuration file for different manual page browsers.
 %description config -l pl
 Plik konfiguracyjny dla ró¿nych czytników podrêczników.
 
+%package whatis
+Summary:	whatis utilities
+Summary(pl):	Narzêdzia whatis
+Group:		Applications/System
+Requires:	%{name} = %{version}-%{release}
+Requires:	crondaemon
+
+%description whatis
+This package provides the following utilities:
+apropos, whatis and makewhatis.
+
+%description whatis -l pl
+Ten pakiet dostracza nastêpuj±ce narzêdzia:
+apropos, whatis i makewhatis.
+
 %package -n man2html
 Summary:	manroff to html converter
 Summary(pl):	Konwerter formatu manroff na html
@@ -149,6 +164,7 @@ formacie manroff na format html.
 Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
+Requires:	%{name}-whatis = %{version}-%{release}
 Requires:	man2html = %{version}-%{release}
 
 %description -n man2html-cgi
@@ -225,8 +241,8 @@ done
 # for man_db and xman compatibility
 ln -sf soelim $RPM_BUILD_ROOT%{_bindir}/zsoelim
 
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
 
@@ -282,56 +298,30 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files -f man.lang
 %defattr(644,root,root,755)
 %doc HISTORY README TODO
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis
-
 %attr(2755,root,man) %{_bindir}/man
-
 %attr(755,root,root) %{_bindir}/man2dvi
-%attr(755,root,root) %{_bindir}/apropos
-%attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_bindir}/zsoelim
-%attr(755,root,root) %{_sbindir}/makewhatis
-
-%config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
+%{_mandir}/man1/man.1*
 
 # Supported languages bg cs da de en es fi fr hr it ja nl pl pt ro sl  + hu
-
-%{_mandir}/man1/apropos.1*
-%{_mandir}/man1/man.1*
-%{_mandir}/man1/whatis.1*
-%{_mandir}/man[58]/*
-
-%lang(bg) %{_mandir}/bg/man[15]/*
-%lang(cs) %{_mandir}/cs/man[158]/*
-%lang(da) %{_mandir}/da/man[158]/*
-%lang(de) %{_mandir}/de/man[158]/*
-%lang(el) %{_mandir}/el/man1/apropos.1*
+%lang(bg) %{_mandir}/bg/man1/man.1*
+%lang(cs) %{_mandir}/cs/man1/man.1*
+%lang(da) %{_mandir}/da/man1/man.1*
+%lang(de) %{_mandir}/de/man1/man.1*
 %lang(el) %{_mandir}/el/man1/man.1*
-%lang(el) %{_mandir}/el/man1/whatis.1*
-%lang(el) %{_mandir}/el/man[58]/*
-%lang(es) %{_mandir}/es/man[158]/*
-%lang(fi) %{_mandir}/fi/man[158]/*
-%lang(fr) %{_mandir}/fr/man[158]/*
-%lang(hr) %{_mandir}/hr/man[158]/*
-%lang(hu) %{_mandir}/hu/man[158]/*
-%lang(it) %{_mandir}/it/man[158]/*
-%lang(ja) %{_mandir}/ja/man1/apropos.1*
+%lang(es) %{_mandir}/es/man1/man.1*
+%lang(fi) %{_mandir}/fi/man1/man.1*
+%lang(fr) %{_mandir}/fr/man1/man.1*
+%lang(hr) %{_mandir}/hr/man1/man.1*
+%lang(hu) %{_mandir}/hu/man1/man.1*
+%lang(it) %{_mandir}/it/man1/man.1*
 %lang(ja) %{_mandir}/ja/man1/man.1*
-%lang(ja) %{_mandir}/ja/man1/whatis.1*
-%lang(ja) %{_mandir}/ja/man[58]/*
-%lang(ko) %{_mandir}/ko/man[158]/*
-%lang(nl) %{_mandir}/nl/man[158]/*
-%lang(pl) %{_mandir}/pl/man1/apropos.1*
+%lang(ko) %{_mandir}/ko/man1/man.1*
+%lang(nl) %{_mandir}/nl/man1/man.1*
 %lang(pl) %{_mandir}/pl/man1/man.1*
-%lang(pl) %{_mandir}/pl/man1/whatis.1*
-%lang(pl) %{_mandir}/pl/man[58]/*
-%lang(pt) %{_mandir}/pt/man[158]/*
-%lang(ro) %{_mandir}/ro/man1/apropos.1*
+%lang(pt) %{_mandir}/pt/man1/man.1*
 %lang(ro) %{_mandir}/ro/man1/man.1*
-%lang(ro) %{_mandir}/ro/man1/whatis.1*
-%lang(ro) %{_mandir}/ro/man[58]/*
-%lang(sl) %{_mandir}/sl/man[158]/*
+%lang(sl) %{_mandir}/sl/man1/man.1*
 
 %{_datadir}/locale/en/man
 %lang(bg) %{_datadir}/locale/bg/man
@@ -356,6 +346,57 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %files config
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/man.config
+%{_mandir}/man5/*
+%lang(bg) %{_mandir}/bg/man5/*
+%lang(cs) %{_mandir}/cs/man5/*
+%lang(da) %{_mandir}/da/man5/*
+%lang(de) %{_mandir}/de/man5/*
+%lang(el) %{_mandir}/el/man5/*
+%lang(es) %{_mandir}/es/man5/*
+%lang(fi) %{_mandir}/fi/man5/*
+%lang(fr) %{_mandir}/fr/man5/*
+%lang(hr) %{_mandir}/hr/man5/*
+%lang(it) %{_mandir}/it/man5/*
+%lang(ja) %{_mandir}/ja/man5/*
+%lang(ko) %{_mandir}/ko/man5/*
+%lang(nl) %{_mandir}/nl/man5/*
+%lang(pl) %{_mandir}/pl/man5/*
+%lang(pt) %{_mandir}/pt/man5/*
+%lang(ro) %{_mandir}/ro/man5/*
+%lang(sl) %{_mandir}/sl/man5/*
+
+%files whatis
+%defattr(644,root,root,755)
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis
+%attr(755,root,root) %{_bindir}/apropos
+%attr(755,root,root) %{_bindir}/whatis
+%attr(755,root,root) %{_sbindir}/makewhatis
+%config(noreplace,missingok) %verify(not md5 mtime size) /var/cache/man/whatis
+%{_mandir}/man1/[aw]*
+%{_mandir}/man8/*
+%lang(bg) %{_mandir}/bg/man1/[aw]*
+%lang(cs) %{_mandir}/cs/man1/[aw]*
+%lang(da) %{_mandir}/da/man1/[aw]*
+%lang(de) %{_mandir}/de/man1/[aw]*
+%lang(el) %{_mandir}/el/man1/[aw]*
+%lang(el) %{_mandir}/el/man8/*
+%lang(es) %{_mandir}/es/man1/[aw]*
+%lang(fi) %{_mandir}/fi/man1/[aw]*
+%lang(fr) %{_mandir}/fr/man1/[aw]*
+%lang(hr) %{_mandir}/hr/man1/[aw]*
+%lang(hu) %{_mandir}/hu/man1/[aw]*
+%lang(it) %{_mandir}/it/man1/[aw]*
+%lang(it) %{_mandir}/it/man8/*
+%lang(ja) %{_mandir}/ja/man1/[aw]*
+%lang(ja) %{_mandir}/ja/man8/*
+%lang(ko) %{_mandir}/ko/man1/[aw]*
+%lang(nl) %{_mandir}/nl/man1/[aw]*
+%lang(pl) %{_mandir}/pl/man1/[aw]*
+%lang(pt) %{_mandir}/pt/man1/[aw]*
+%lang(ro) %{_mandir}/ro/man1/[aw]*
+%lang(ro) %{_mandir}/ro/man8/*
+%lang(sl) %{_mandir}/sl/man1/[aw]*
 
 %files -n man2html
 %defattr(644,root,root,755)
