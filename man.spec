@@ -9,12 +9,12 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(ru):	îÁÂÏÒ ÕÔÉÌÉÔ ÄÌÑ ÄÏËÕÍÅÎÔÁÃÉÉ: man, apropos É whatis
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
-Version:	1.5p
-Release:	2
+Version:	1.6a
+Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.win.tue.nl/pub/linux-local/utils/man/%{name}-%{version}.tar.gz
-# Source0-md5:	037d5644f8ef9ea0ef22b271bae0297d
+Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
+# Source0-md5:	d53114b9ec030be32b858b1618da3c25
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -35,15 +35,16 @@ Patch12:	%{name}-pmake.patch
 Patch13:	%{name}-fmntbug.patch
 Patch14:	%{name}-awk_path.patch
 Patch15:	%{name}-cgi_paths.patch
+URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
+Requires:	FHS >= 2.3-12
 Requires:	groff
 Requires:	gzip
 Requires:	less
 Requires:	mktemp >= 1.5-8
-Requires:	FHS >= 2.3-12
 Obsoletes:	man-cs
 Obsoletes:	man-da
 Obsoletes:	man-de
@@ -140,12 +141,12 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	crondaemon
 
 %description whatis
-This package provides the following utilities:
-apropos, whatis and makewhatis.
+This package provides the following utilities: apropos, whatis and
+makewhatis.
 
 %description whatis -l pl
-Ten pakiet dostracza nastêpuj±ce narzêdzia:
-apropos, whatis i makewhatis.
+Ten pakiet dostracza nastêpuj±ce narzêdzia: apropos, whatis i
+makewhatis.
 
 %package -n man2html
 Summary:	manroff to html converter
@@ -207,7 +208,7 @@ sed -i -e 's/compress=$/compress=gzip/' configure
 	+lang all \
 	-confdir %{_sysconfdir}
 
-%{__make} \
+	make \
 	CC="%{__cc} %{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
@@ -367,8 +368,8 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %files whatis
 %defattr(644,root,root,755)
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.weekly/makewhatis
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/makewhatis
+%attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.weekly/makewhatis
+%attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/makewhatis
 %attr(755,root,root) %{_bindir}/apropos
 %attr(755,root,root) %{_bindir}/whatis
 %attr(755,root,root) %{_sbindir}/makewhatis
