@@ -208,7 +208,7 @@ sed -i -e 's/compress=$/compress=gzip/' configure
 	+lang all \
 	-confdir %{_sysconfdir}
 
-	%{__make} \
+%{__make} -j1 \
 	CC="%{__cc} %{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
