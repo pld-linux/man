@@ -40,7 +40,6 @@ BuildRequires:	less
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
-Requires:	FHS >= 2.3-12
 Requires:	groff
 Requires:	gzip
 Requires:	less
@@ -167,6 +166,7 @@ Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
 Requires:	man2html = %{version}-%{release}
+Requires:	FHS >= 2.3-12
 
 %description -n man2html-cgi
 These scripts allows read man pages throught WWW browser. It uses
