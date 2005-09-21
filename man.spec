@@ -9,12 +9,12 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.6a
+Version:	1.6b
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
-# Source0-md5:	d53114b9ec030be32b858b1618da3c25
+# Source0-md5:	81d96091482b6445cbfa248fadb422b8
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -385,6 +385,7 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %lang(es) %{_mandir}/es/man1/[aw]*
 %lang(fi) %{_mandir}/fi/man1/[aw]*
 %lang(fr) %{_mandir}/fr/man1/[aw]*
+%lang(fr) %{_mandir}/fr/man8/*
 %lang(hr) %{_mandir}/hr/man1/[aw]*
 %lang(hu) %{_mandir}/hu/man1/[aw]*
 %lang(it) %{_mandir}/it/man1/[aw]*
