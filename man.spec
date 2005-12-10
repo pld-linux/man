@@ -218,7 +218,7 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_sysconfdir}/man}
 
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de el es fi fr hr hu id it ja ko nl pl pt pt_BR ro ru \
+for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
