@@ -165,8 +165,8 @@ Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
-Requires:	man2html = %{version}-%{release}
 Requires:	FHS >= 2.3-12
+Requires:	man2html = %{version}-%{release}
 
 %description -n man2html-cgi
 These scripts allows read man pages throught WWW browser. It uses
