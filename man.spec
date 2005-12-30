@@ -5,12 +5,12 @@ Summary(fr):	Lecteur de pages de man
 Summary(ko):	¹®¼­ °ü·Ã µµ±¸ ¸ðÀ½ : ¸Ç, apropos ±×¸®°í whatis
 Summary(pl):	Czytnik stron man
 Summary(pt_BR):	Leitor de páginas de manuais (man)
-Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(ru):	îÁÂÏÒ ÕÔÉÌÉÔ ÄÌÑ ÄÏËÕÍÅÎÔÁÃÉÉ: man, apropos É whatis
+Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6b
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -37,6 +37,8 @@ Patch14:	%{name}-awk_path.patch
 Patch15:	%{name}-cgi_paths.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	less
+BuildRequires:	rpmbuild(macros) >= 1.276
+BuildRequires:	sed >= 4.0
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
@@ -58,6 +60,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_cgibinmandir		/usr/lib/cgi-bin/man
 %define		_cgiauxmandir		/usr/share/man2html-cgi
+%define		_webapps	/etc/webapps
+%define		_webapp		man2html
+%define		_webappdir	%{_webapps}/%{_webapp}
 
 %description
 The man package includes three tools for finding information and/or
@@ -167,6 +172,9 @@ Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
 Requires:	FHS >= 2.3-12
 Requires:	man2html = %{version}-%{release}
+Requires:	webapps
+Conflicts:	apache-base < 2.2.0-7.2
+Conflicts:	apache1 < 1.3.34-5.11
 
 %description -n man2html-cgi
 These scripts allows read man pages throught WWW browser. It uses
@@ -201,6 +209,13 @@ nie byæ bezpieczne.
 # use gzip (not bzip2) to compress formatted man pages
 sed -i -e 's/compress=$/compress=gzip/' configure
 
+cat << 'EOF' > apache.conf
+ScriptAlias /cgi-bin/man %{_cgibinmandir}
+<Directory %{_cgibinmandir}>
+	Allow from all
+</Directory>
+EOF
+
 %build
 ./configure \
 	-default \
@@ -215,7 +230,7 @@ sed -i -e 's/compress=$/compress=gzip/' configure
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_cgibinmandir},%{_cgiauxmandir}} \
-	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_sysconfdir}/man}
+	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_webappdir}}
 
 echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
@@ -255,9 +270,8 @@ install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
 install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
 install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
-cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/man/apache-man2html-cgi.conf
-ScriptAlias /cgi-bin/man %{_cgibinmandir}
-EOF
+install apache.conf $RPM_BUILD_ROOT%{_webappdir}/apache.conf
+install apache.conf $RPM_BUILD_ROOT%{_webappdir}/httpd.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -284,17 +298,49 @@ rm -f /var/cache/man/local/??_??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
-%triggerin -n man2html-cgi -- apache1 >= 1.3.33-2
-%apache_config_install -v 1 -c %{_sysconfdir}/man/apache-man2html-cgi.conf -n 09
+%triggerin -n man2html-cgi -- apache1
+%webapp_register apache %{_webapp}
 
-%triggerun -n man2html-cgi -- apache1 >= 1.3.33-2
-%apache_config_uninstall -v 1 -n 09
+%triggerun -n man2html-cgi -- apache1
+%webapp_unregister apache %{_webapp}
 
 %triggerin -n man2html-cgi -- apache >= 2.0.0
-%apache_config_install -v 2 -c %{_sysconfdir}/man/apache-man2html-cgi.conf -n 09
+%webapp_register httpd %{_webapp}
 
 %triggerun -n man2html-cgi -- apache >= 2.0.0
-%apache_config_uninstall -v 2 -n 09
+%webapp_unregister httpd %{_webapp}
+
+%triggerpostun -n man2html-cgi -- man2html-cgi < 1.6b-2.16
+# rescue apache config
+if [ -f /etc/man/apache-man2html-cgi.conf.rpmsave ]; then
+	if [ -d /etc/apache/webapps.d ]; then
+		cp -f %{_webappdir}/apache.conf{,.rpmnew}
+		cp -f /etc/man/apache-man2html-cgi.conf.rpmsave %{_webappdir}/apache.conf
+	fi
+
+	if [ -d /etc/httpd/webapps.d ]; then
+		cp -f %{_webappdir}/httpd.conf{,.rpmnew}
+		cp -f /etc/man/apache-man2html-cgi.conf.rpmsave %{_webappdir}/httpd.conf
+	fi
+	rm -f /etc/man/apache-man2html-cgi.conf.rpmsave
+fi
+
+# re-register with webapp
+if [ -L /etc/apache/conf.d/09_man.conf ]; then
+	rm -f /etc/apache/conf.d/09_man.conf
+	/usr/sbin/webapp register apache %{_webapp}
+	if [ -f /var/lock/subsys/apache ]; then
+		/etc/rc.d/init.d/apache reload 1>&2
+	fi
+fi
+if [ -L /etc/httpd/httpd.conf/09_man.conf ]; then
+	rm -f /etc/httpd/httpd.conf/09_man.conf
+	/usr/sbin/webapp register httpd %{_webapp}
+	if [ -f /var/lock/subsys/httpd ]; then
+		/etc/rc.d/init.d/httpd reload 1>&2
+	fi
+fi
+exit 0
 
 %files -f man.lang
 %defattr(644,root,root,755)
@@ -421,5 +467,6 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %{_mandir}/man1/hman.1*
 %lang(el) %{_mandir}/el/man1/hman.1*
 %lang(ja) %{_mandir}/ja/man1/hman.1*
-# it seems to be the only package using this dir
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/man/apache-man2html-cgi.conf
+%dir %attr(750,root,http) %{_webappdir}
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_webappdir}/apache.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_webappdir}/httpd.conf
