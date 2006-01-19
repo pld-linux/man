@@ -72,6 +72,8 @@ functions on your system. Apropos searches the whatis database
 (containing short descriptions of system commands) for a string.
 Whatis searches its own database for a complete word.
 
+Whatis and apropos are in a separate package, man-whatis.
+
 %description -l de
 Die man-Seiten-Suite, einschlieﬂlich Handbuch, Apropos und Whatis.
 Diese Programme dienen zum Einsehen des Groﬂteils der Dokumentation,
