@@ -81,6 +81,8 @@ die auf einem Linux-System verfügbar ist. Die Whatis- und
 Apropos-Programme dienen dazu, Beschreibungen zu bestimmten Themen zu
 finden.
 
+whatis und apropos sind im Paket man-whatis.
+
 %description -l es
 Es un conjunto de páginas de manual, incluyendo man, apropos y whatis.
 Estos programas se usan para leer la mayoría de la documentación
@@ -99,6 +101,8 @@ Pakiet man zawiera man, apropos i whatis. Te programy s± u¿ywane do
 czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy
 whatis i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy
 powi±zane z poszukiwanym.
+
+Narzêdzia whatis i apropos s± w oddzielnym pakiecie - man-whatis.
 
 %description -l pt_BR
 É um conjunto de páginas de manual, incluindo man, apropos e whatis.
