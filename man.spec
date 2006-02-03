@@ -310,10 +310,10 @@ rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 %triggerun -n man2html-cgi -- apache1
 %webapp_unregister apache %{_webapp}
 
-%triggerin -n man2html-cgi -- apache >= 2.0.0
+%triggerin -n man2html-cgi -- apache < 2.2.0, apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -n man2html-cgi -- apache >= 2.0.0
+%triggerun -n man2html-cgi -- apache < 2.2.0, apache-base
 %webapp_unregister httpd %{_webapp}
 
 %triggerpostun -n man2html-cgi -- man2html-cgi < 1.6b-2.16
