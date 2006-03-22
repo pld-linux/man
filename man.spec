@@ -236,8 +236,9 @@ EOF
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_cgibinmandir},%{_cgiauxmandir}} \
-	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_webappdir}}
+	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_webappdir},/etc/tmpwatch}
 
+echo "# Cleanup man temporary files:" > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
@@ -249,6 +250,7 @@ for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	fi
 	for cdir in "" /local /X11R6 ; do
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
+		echo "/var/cache/man${cdir}$i 240" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
 		echo "${lng}%attr(775,root, man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
 	done
@@ -351,6 +353,7 @@ exit 0
 %files -f man.lang
 %defattr(644,root,root,755)
 %doc HISTORY README TODO
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/tmpwatch/*.conf
 %attr(2755,root,man) %{_bindir}/man
 %attr(755,root,root) %{_bindir}/man2dvi
 %attr(755,root,root) %{_bindir}/zsoelim
