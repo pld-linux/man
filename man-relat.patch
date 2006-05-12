@@ -1,0 +1,11 @@
+--- man-1.6c.old/man2html/cgibase.c	2006-05-12 18:48:02.000000000 +0200
++++ man-1.6c/man2html/cgibase.c	2006-05-12 19:59:22.000000000 +0200
+@@ -107,7 +107,7 @@
+ 			printf("<A HREF=\"../index.html\">"
+ 			       "Return to Main Contents</A>");
+ 		else
+-			printf("<A HREF=\"../man%s/%s.%s.html\">%s</A>",
++			printf("<A HREF=\"../html%s/%s.%s.html\">%s</A>",
+ 			       sec, h, sec, h);
+ 	} else {
+ 		if (!h)
