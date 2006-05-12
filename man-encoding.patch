@@ -1,0 +1,85 @@
+--- man-1.6c.old/man2html/man2html.1	2006-05-12 21:14:10.000000000 +0200
++++ man-1.6c/man2html/man2html.1	2006-05-12 21:51:22.000000000 +0200
+@@ -68,6 +68,10 @@
+ from a cgi script.
+ .LP
+ .TP
++.B \-\^e encoding
++Set encoding of a page.
++.LP
++.TP
+ .B \-\^E string
+ Output an error page containing the given error message.
+ .LP
+--- man-1.6c.old/man2html/man2html.c	2006-05-12 21:14:10.000000000 +0200
++++ man-1.6c/man2html/man2html.c	2006-05-12 22:16:13.000000000 +0200
+@@ -35,6 +35,7 @@
+ 
+ char *fname;
+ char *directory;
++char *encoding;
+ FILE *idxfile;
+ 
+ char eqndelimopen=0, eqndelimclose=0;
+@@ -96,6 +97,11 @@
+ 	return NULL;
+ }
+ 
++static void
++set_encoding(char *s)
++{
++    encoding = xstrdup(s);
++}
+ 
+ static char outbuffer[1024];
+ static int obp=0;
+@@ -2094,7 +2100,13 @@
+ 		*sl = 0;
+ 		if (words > 1) {
+ 		    output_possible=1;
+-		    out_html("<HTML><HEAD><TITLE>Manpage of ");
++		    out_html("<HTML><HEAD>");
++		    if (encoding) {
++		        out_html("<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; CHARSET=");
++		        out_html(encoding);
++		        out_html("\">");
++		    }
++		    out_html("<TITLE>Manpage of ");
+ 		    out_html(wordlist[0]);
+ 		    out_html("</TITLE>\n</HEAD><BODY>\n<H1>");
+ 		    out_html(wordlist[0]);
+@@ -3079,6 +3091,8 @@
+     struct stat stbuf;
+     int l, c;
+     char *buf, *filename, *fnam = NULL;
++    int header = 1;
++    int i;
+ 
+ #ifdef __CYGWIN32__
+     int opterr;
+@@ -3087,13 +3101,22 @@
+     extern char *optarg;
+ #endif
+ 
+-    printf("Content-type: text/html\n\n");
+-
+     opterr = 0;			/* no stderr error messages */
+-    while ((c = getopt (argc, argv, "D:E:hH:lL:M:pqr?vVf")) != -1) {
++
++    for (i = 1; i < argc; i++) {
++      if (!strcmp(argv[i], "-e")) {
++        header = 0;
++	 break;
++      }
++    }
++    if (header) printf("Content-type: text/html\n\n");
++
++    while ((c = getopt (argc, argv, "D:e:E:hH:lL:M:pqr?vVf")) != -1) {
+ 	 switch(c) {
+ 	 case 'D':
+ 	      goto_dir(optarg, 0, 0); break;
++	 case 'e':
++	      set_encoding(optarg); break;
+ 	 case 'E':
+ 	      error_page("Error", "%s", optarg); break;
+ 	 case 'h':
