@@ -10,7 +10,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6c
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -36,6 +36,7 @@ Patch13:	%{name}-fmntbug.patch
 Patch14:	%{name}-awk_path.patch
 Patch15:	%{name}-cgi_paths.patch
 Patch16:	%{name}-relat.patch
+Patch17:    %{name}-encoding.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	less
 BuildRequires:	rpmbuild(macros) >= 1.276
@@ -213,6 +214,7 @@ nie byæ bezpieczne.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 # use gzip (not bzip2) to compress formatted man pages
 sed -i -e 's/compress=$/compress=gzip/' configure
