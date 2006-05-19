@@ -10,7 +10,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6c
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -39,7 +39,7 @@ Patch16:	%{name}-relat.patch
 Patch17:    %{name}-encoding.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	less
-BuildRequires:	rpmbuild(macros) >= 1.276
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sed >= 4.0
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
@@ -341,18 +341,13 @@ fi
 if [ -L /etc/apache/conf.d/09_man.conf ]; then
 	rm -f /etc/apache/conf.d/09_man.conf
 	/usr/sbin/webapp register apache %{_webapp}
-	if [ -f /var/lock/subsys/apache ]; then
-		/etc/rc.d/init.d/apache reload 1>&2
-	fi
+	%service -q apache reload
 fi
 if [ -L /etc/httpd/httpd.conf/09_man.conf ]; then
 	rm -f /etc/httpd/httpd.conf/09_man.conf
 	/usr/sbin/webapp register httpd %{_webapp}
-	if [ -f /var/lock/subsys/httpd ]; then
-		/etc/rc.d/init.d/httpd reload 1>&2
-	fi
+	%service -q httpd reload
 fi
-exit 0
 
 %files -f man.lang
 %defattr(644,root,root,755)
