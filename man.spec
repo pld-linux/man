@@ -234,6 +234,7 @@ EOF
 	-confdir %{_sysconfdir}
 
 %{__make} \
+	BUILD_CC="%{__cc} %{rpmcflags} %{rpmldflags}" \
 	CC="%{__cc} %{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
