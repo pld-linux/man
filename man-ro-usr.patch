@@ -22,14 +22,14 @@
      -w) manpath=`man --path`
  	catpath=$manpath
  	continue;;
--    -*) echo "Usage: makewhatis [-u] [-v] [-w] [manpath] [-c [catpath]]"
-+    -*) echo "Usage: makewhatis [-r] [-u] [-v] [-w] [manpath] [-c [catpath]]"
+-    -*) echo "Usage: makewhatis [-s sections] [-u] [-v] [-w] [manpath] [-c [catpath]]"
++    -*) echo "Usage: makewhatis [-r] [-s sections] [-u] [-v] [-w] [manpath] [-c [catpath]]"
  	echo "       This will build the whatis database for the man pages"
  	echo "       found in manpath and the cat pages found in catpath."
 +	echo "       -r: allow make the whatis database if /usr is read-only"
+         echo "       -s: sections (default: $sections)"
  	echo "       -u: update database with new pages"
  	echo "       -v: verbose"
- 	echo "       -w: use manpath obtained from \`man --path\`"
 @@ -144,17 +147,28 @@
  fi
  catpath=`echo ${catpath} | tr : ' '`

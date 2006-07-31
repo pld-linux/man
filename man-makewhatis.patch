@@ -11,12 +11,3 @@
  
  # Find a place for our temporary files. If security is not a concern, use
  #	TMPFILE=/tmp/whatis$$; TMPFILEDIR=none
-@@ -258,7 +258,7 @@
- 		   $2 ~ /^N[ÉE]V/ || $2 ~ /^NAMA/ || $2 ~ /^Ì¾Á°/ ||
- 		   $2 ~ /^Ì¾¾Î/ || $2 ~ /^ÀÌ¸§/ || $2 ~ /^NAZWA/ ||
- 		   $2 ~ /^מבתקבמיו/ || $2 ~ /^Ãû³Æ/ || $2 ~ /^¦W÷Ù/ ||
--		   $2 ~ /^NOME/ || $2 ~ /^NAAM/) || $2 ~ /^ÈÌÅ/)) ||
-+		   $2 ~ /^NOME/ || $2 ~ /^NAAM/) || $2 ~ /^ÈÌÅ/) ||
- 		  (pages == "cat" && $1 ~ /^NAME/)) {
- 		    if (!insh) {
- 		      insh = 1;
