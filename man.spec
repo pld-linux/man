@@ -9,12 +9,12 @@ Summary(ru):	Набор утилит для документации: man, apropos и whatis
 Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
-Version:	1.6c
-Release:	6
+Version:	1.6d
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
-# Source0-md5:	ac1e7d60dfedb7d1c6f398ae5b038996
+# Source0-md5:	36d3f65bcc10f0754a3234e00d92ad6d
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -36,7 +36,7 @@ Patch13:	%{name}-fmntbug.patch
 Patch14:	%{name}-awk_path.patch
 Patch15:	%{name}-cgi_paths.patch
 Patch16:	%{name}-relat.patch
-Patch17:    %{name}-encoding.patch
+Patch17:	%{name}-encoding.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	less
 BuildRequires:	rpmbuild(macros) >= 1.268
