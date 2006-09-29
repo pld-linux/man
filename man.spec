@@ -311,10 +311,10 @@ rm -f /var/cache/man/local/??_??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
 rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
-%triggerin -n man2html-cgi -- apache1
+%triggerin -n man2html-cgi -- apache1 < 1.3.37-3, apache1-base
 %webapp_register apache %{_webapp}
 
-%triggerun -n man2html-cgi -- apache1
+%triggerun -n man2html-cgi -- apache1 < 1.3.37-3, apache1-base
 %webapp_unregister apache %{_webapp}
 
 %triggerin -n man2html-cgi -- apache < 2.2.0, apache-base
