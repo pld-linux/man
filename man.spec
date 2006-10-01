@@ -10,7 +10,7 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.6d
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
