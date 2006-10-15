@@ -1,3 +1,5 @@
+# TODO:
+# - PLD patch renames man.conf to man.config, but all manuals are named man.conf(5)
 Summary:	Manual page reader
 Summary(de):	Manual-Page-Reader
 Summary(es):	Lector de páginas de manual (man)
