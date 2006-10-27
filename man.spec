@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -180,7 +180,7 @@ Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
-Requires:	FHS >= 2.3-12
+Requires:	filesystem >= 3.0-11
 Requires:	man2html = %{version}-%{release}
 Requires:	webapps
 Conflicts:	apache-base < 2.2.0-7.2
