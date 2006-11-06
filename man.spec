@@ -25,26 +25,25 @@ Source4:	%{name}-mess.ru
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-fhs.patch
-Patch3:		%{name}-makewhatis.patch
-Patch4:		%{name}-safer.patch
-Patch5:		%{name}-security.patch
-Patch6:		%{name}-roff.patch
-Patch7:		%{name}-sofix.patch
-Patch8:		%{name}-bug11621.patch
-Patch9:		%{name}-gencat.patch
-Patch10:	%{name}-nls-priority.patch
-Patch11:	%{name}-pmake.patch
-Patch12:	%{name}-fmntbug.patch
-Patch13:	%{name}-awk_path.patch
-Patch14:	%{name}-cgi_paths.patch
-Patch15:	%{name}-relat.patch
-Patch16:	%{name}-encoding.patch
-Patch17:	%{name}-man-pages.patch
-Patch18:	%{name}-i18n_nroff.patch
-Patch19:	%{name}-i18n_makewhatis.patch
-Patch20:	%{name}-apropos.patch
-Patch21:	%{name}-sec.patch
-Patch22:	%{name}-rpm.patch
+Patch3:		%{name}-safer.patch
+Patch4:		%{name}-security.patch
+Patch5:		%{name}-roff.patch
+Patch6:		%{name}-sofix.patch
+Patch7:		%{name}-bug11621.patch
+Patch8:		%{name}-gencat.patch
+Patch9:		%{name}-nls-priority.patch
+Patch10:	%{name}-pmake.patch
+Patch11:	%{name}-fmntbug.patch
+Patch12:	%{name}-awk_path.patch
+Patch13:	%{name}-cgi_paths.patch
+Patch14:	%{name}-relat.patch
+Patch15:	%{name}-encoding.patch
+Patch16:	%{name}-man-pages.patch
+Patch17:	%{name}-i18n_nroff.patch
+Patch18:	%{name}-i18n_makewhatis.patch
+Patch29:	%{name}-apropos.patch
+Patch20:	%{name}-sec.patch
+Patch21:	%{name}-rpm.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	iconv
 BuildRequires:	less
@@ -229,7 +228,6 @@ nie byæ bezpieczne.
 %patch19 -p1
 %patch20 -p1
 %patch21 -p1
-%patch22 -p1
 
 cp -f %{SOURCE3} msgs   # replace bad ru trans
 
