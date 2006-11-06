@@ -1,0 +1,11 @@
+--- man-1.6d/src/makewhatis.sh.pom	2006-06-22 14:13:06.000000000 +0200
++++ man-1.6d/src/makewhatis.sh	2006-06-22 14:14:28.000000000 +0200
+@@ -121,7 +121,7 @@
+ # first truncate all the whatis files that will be created new,
+ # then only update - we might visit the same directory twice
+ if [ x$update = x ]; then
+-   :> $whatisdb
++   rpm -qa --queryformat '%-19{NAME} (rpm) - %{SUMMARY}\r' | tr -d '\n' | tr '\r' '\n' >$whatisdb
+ fi
+ 
+ for pages in man cat
