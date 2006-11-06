@@ -229,7 +229,7 @@ nie byæ bezpieczne.
 %patch20 -p1
 %patch21 -p1
 
-cp -f %{SOURCE3} msgs   # replace bad ru trans
+cp -f %{SOURCE4} msgs/mess.ru   # replace bad ru trans
 
 for i in $(find man -name man.conf.man); do
 	mv $i ${i%man.conf.man}man.config.man
