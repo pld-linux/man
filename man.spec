@@ -180,7 +180,7 @@ Summary:	CGI interface to man2html
 Summary(pl):	Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
-Requires:	filesystem >= 3.0-11
+Requires:	filesystem >= 2.0-1
 Requires:	man2html = %{version}-%{release}
 Requires:	webapps
 Conflicts:	apache-base < 2.2.0-7.2
