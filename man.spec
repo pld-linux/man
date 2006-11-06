@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	3
+Release:	3.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -20,6 +20,7 @@ Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
+Source4:	%{name}-mess.ru
 # Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
@@ -29,25 +30,32 @@ Patch4:		%{name}-safer.patch
 Patch5:		%{name}-security.patch
 Patch6:		%{name}-roff.patch
 Patch7:		%{name}-sofix.patch
-Patch8:		%{name}-ro-usr.patch
-Patch9:		%{name}-bug11621.patch
-Patch10:	%{name}-gencat.patch
-Patch11:	%{name}-nls-priority.patch
-Patch12:	%{name}-pmake.patch
-Patch13:	%{name}-fmntbug.patch
-Patch14:	%{name}-awk_path.patch
-Patch15:	%{name}-cgi_paths.patch
-Patch16:	%{name}-relat.patch
-Patch17:	%{name}-encoding.patch
+Patch8:		%{name}-bug11621.patch
+Patch9:		%{name}-gencat.patch
+Patch10:	%{name}-nls-priority.patch
+Patch11:	%{name}-pmake.patch
+Patch12:	%{name}-fmntbug.patch
+Patch13:	%{name}-awk_path.patch
+Patch14:	%{name}-cgi_paths.patch
+Patch15:	%{name}-relat.patch
+Patch16:	%{name}-encoding.patch
+Patch17:	%{name}-man-pages.patch
+Patch18:	%{name}-i18n_nroff.patch
+Patch19:	%{name}-i18n_makewhatis.patch
+Patch20:	%{name}-apropos.patch
+Patch21:	%{name}-sec.patch
+Patch22:	%{name}-rpm.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
+BuildRequires:	iconv
 BuildRequires:	less
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sed >= 4.0
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
-Requires:	groff
+Requires:	groff >= 1.19.1-4
 Requires:	gzip
+Requires:	iconv
 Requires:	less
 Requires:	mktemp >= 1.5-8
 Obsoletes:	man-cs
@@ -217,6 +225,45 @@ nie byæ bezpieczne.
 %patch15 -p1
 %patch16 -p1
 %patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+
+cp -f %{SOURCE3} msgs   # replace bad ru trans
+
+for i in $(find man -name man.conf.man); do
+	mv $i ${i%man.conf.man}man.config.man
+done
+
+for src in $(find msgs -type f -name 'mess.[a-z][a-z]'); do
+	lang=$(echo ${src} | sed -r 's;.*([a-z]{2})$;\1;')
+	if   [ ${lang} = ja ]; then charset=euc-jp
+	elif [ ${lang} = ko ]; then charset=euc-kr
+	elif [ ${lang} = ru ]; then charset=koi8-r
+	elif [ ${lang} = da ]; then charset=iso-8859-1
+	elif [ ${lang} = de ]; then charset=iso-8859-1
+	elif [ ${lang} = en ]; then charset=iso-8859-1
+	elif [ ${lang} = es ]; then charset=iso-8859-1
+	elif [ ${lang} = fi ]; then charset=iso-8859-1
+	elif [ ${lang} = fr ]; then charset=iso-8859-1
+	elif [ ${lang} = it ]; then charset=iso-8859-1
+	elif [ ${lang} = pt ]; then charset=iso-8859-1
+	elif [ ${lang} = nl ]; then charset=iso-8859-1
+	elif [ ${lang} = cs ]; then charset=iso-8859-2
+	elif [ ${lang} = hr ]; then charset=iso-8859-2
+	elif [ ${lang} = pl ]; then charset=iso-8859-2
+	elif [ ${lang} = ro ]; then charset=iso-8859-2
+	elif [ ${lang} = sl ]; then charset=iso-8859-2
+	elif [ ${lang} = bg ]; then charset=cp1251
+	elif [ ${lang} = el ]; then charset=iso-8859-7
+	else
+		echo === LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING
+		exit 1
+	fi
+	iconv -t utf-8 -f ${charset} -o ${src}.utf ${src} && mv ${src}.utf ${src}
+done
 
 # use gzip (not bzip2) to compress formatted man pages
 sed -i -e 's/compress=$/compress=gzip/' configure
@@ -234,6 +281,9 @@ EOF
 	+fhs \
 	+lang all \
 	-confdir %{_sysconfdir}
+
+# HACK: Make output default to using -c; otherwise it appears broken.
+perl -pi -e "s/nroff /nroff -c /" conf_script
 
 %{__make} \
 	BUILD_CC="%{__cc} %{rpmcflags} %{rpmldflags}" \
@@ -268,6 +318,46 @@ done
 
 %{__make} -C man2html install-scripts \
 	PREFIX="$RPM_BUILD_ROOT"
+
+for src in $(find man -type f -name '*.[1-9n]'); do
+   lang=$(echo ${src} | sed -r 's;.*/([a-z]{2})/.*;\1;')
+   page=$(basename ${src})
+   sect=$(echo ${page} | sed -r 's;.*([1-9n])$;man\1;')
+   dir=${RPM_BUILD_ROOT}%{_mandir}
+   if   [ ${lang} = ja ]; then charset=euc-jp
+   elif [ ${lang} = ko ]; then charset=euc-kr
+   elif [ ${lang} = da ]; then charset=iso-8859-1
+   elif [ ${lang} = de ]; then charset=iso-8859-1
+   elif [ ${lang} = en ]; then charset=iso-8859-1
+   elif [ ${lang} = es ]; then charset=iso-8859-1
+   elif [ ${lang} = fi ]; then charset=iso-8859-1
+   elif [ ${lang} = fr ]; then charset=iso-8859-1
+   elif [ ${lang} = it ]; then charset=iso-8859-1
+   elif [ ${lang} = pt ]; then charset=iso-8859-1
+   elif [ ${lang} = nl ]; then charset=iso-8859-1
+   elif [ ${lang} = cs ]; then charset=iso-8859-2
+   elif [ ${lang} = hr ]; then charset=iso-8859-2
+   elif [ ${lang} = pl ]; then charset=iso-8859-2
+   elif [ ${lang} = ro ]; then charset=iso-8859-2
+   elif [ ${lang} = sl ]; then charset=iso-8859-2
+   elif [ ${lang} = hu ]; then charset=iso-8859-2
+   elif [ ${lang} = bg ]; then charset=cp1251
+   elif [ ${lang} = el ]; then charset=iso-8859-7
+   else
+      echo === LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING
+      exit 1
+   fi
+   mkdir -p ${dir}/${lang}/${sect}
+   iconv -t utf-8 -f ${charset} -o ${dir}/${lang}/${sect}/${page} ${src}
+
+   # ensure POSIX/C locale only has ASCII subset and no latin-1
+   if [ ${lang} = en ]; then
+      mkdir -p ${dir}/${sect}
+      iconv -t ascii//translit -f ${charset} -o ${dir}/${sect}/${page} ${src}
+   fi
+done
+
+rm -rf $RPM_BUILD_ROOT%{_mandir}/en
 
 # for man_db and xman compatibility
 ln -sf soelim $RPM_BUILD_ROOT%{_bindir}/zsoelim
@@ -464,6 +554,7 @@ fi
 %attr(755,root,root) %{_bindir}/man2html
 %{_mandir}/man1/man2html.1*
 %lang(el) %{_mandir}/el/man1/man2html.1*
+%lang(fr) %{_mandir}/fr/man1/man2html.1*
 %lang(ja) %{_mandir}/ja/man1/man2html.1*
 %lang(pl) %{_mandir}/pl/man1/man2html.1*
 %lang(ro) %{_mandir}/ro/man1/man2html.1*
