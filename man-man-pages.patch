@@ -1,0 +1,799 @@
+diff -urN man-1.6d/man/Makefile.in man-1.6d-man/man/Makefile.in
+--- man-1.6d/man/Makefile.in	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/Makefile.in	2006-11-06 16:41:44.000000000 +0100
+@@ -1,8 +1,8 @@
+ # only executed from a subdir
+ MAN1 = man whatis apropos
+-MAN5 = man.conf
++MAN5 = man.config
+ MAN8 = makewhatis
+-ALL = man.1 whatis.1 apropos.1 man.conf.5
++ALL = man.1 whatis.1 apropos.1 man.config.5
+ MAYBE8 = makewhatis
+ 
+ .SUFFIXES: .man .1 .5 .8
+diff -urN man-1.6d/man/bg/man.conf.man man-1.6d-man/man/bg/man.conf.man
+--- man-1.6d/man/bg/man.conf.man	2006-01-12 02:31:04.000000000 +0100
++++ man-1.6d-man/man/bg/man.conf.man	2006-11-06 16:44:29.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "21 àâãóñò 2005"
+ .SH ÈÌÅ
+-man.conf \- êîíôèãóğàöèîííè äàííè çà man
++man.config \- êîíôèãóğàöèîííè äàííè çà man
+ .SH ÎÏÈÑÀÍÈÅ
+ .LP
+ Òîçè ôàéë ñå ÷åòå îò
+@@ -14,7 +14,7 @@
+ ìîæå äà áúäå óêàçàí ñ:
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ Èìåíàòà íà êîìàíäèòå ìîãàò äà âêëş÷âàò è ñúîòâåòíè îïöèè.  
+diff -urN man-1.6d/man/bg/man.man man-1.6d-man/man/bg/man.man
+--- man-1.6d/man/bg/man.man	2006-01-12 02:31:04.000000000 +0100
++++ man-1.6d-man/man/bg/man.man	2006-11-06 16:44:47.000000000 +0100
+@@ -73,7 +73,7 @@
+ Óêàçâà êîé êîíôèãóğàöèîíåí ôàéë äà ñå èçïîëçâà. Ïîäğàçáèğà ñå
+ .BR @man_config_file@ .
+ (Âèæòå
+-.BR man.conf (5)).
++.BR man.config (5)).
+ .TP
+ .B \-\^M " ñïèñúê_ñ_ïúòèùà"
+ Ñïèñúê îò äèğåêòîğèè, ğàçäåëåíè ñ äâîåòî÷èå, â êîèòî äà ñå 
+@@ -211,7 +211,7 @@
+ ìîæå äà ñå óêàæå äğóãè ñúîòâåòñòâèÿ. Ãîòîâèòå ñòğàíèöè íå ñå
+ ñúõğàíÿâàò, àêî íåîáõîäèìàòà çà òîâà äèğåêòîğèÿ ëèïñâà, 
+ ôîğìàòèğàíèòå âåğñèè èçïîëçâàò øèğèíà íà òåêñòà ğàçëè÷íà îò 
+-80 ñèìâîëà èëè man.conf ñúäúğæà äèğåêòèâàòà NOCACHE.
++80 ñèìâîëà èëè man.config ñúäúğæà äèğåêòèâàòà NOCACHE.
+ .PP
+ Âúçìîæíî å ïğàâàòà çà ïîòğåáèòåë ïğè èçïúëíåíèå íà
+ .B man
+@@ -469,4 +469,4 @@
+ .BR whatis(1),
+ .BR less(1),
+ .BR groff(1),
+-.BR man.conf(5).
++.BR man.config(5).
+diff -urN man-1.6d/man/cs/man.conf.man man-1.6d-man/man/cs/man.conf.man
+--- man-1.6d/man/cs/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/cs/man.conf.man	2006-11-06 16:45:20.000000000 +0100
+@@ -1,10 +1,10 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Autorem èeského pøekladu je Pavel JANÍK ml.
+ .\"                             Pavel.JANIK@inet.cz
+ .\"
+ .TH MAN.CONF 5 "7. ledna, 1997"
+ .SH JMÉNO
+-man.conf \- konfiguraèní soubor pro man
++man.config \- konfiguraèní soubor pro man
+ .SH POPIS
+ .LP
+ Tento soubor je èten programem
+@@ -15,7 +15,7 @@
+ pøípon. U¾ivatelská verze tohoto souboru mù¾e bıt specifikována takto:
+ .LP
+ .RS
+-man -C soukromı_man.conf ...
++man -C soukromı_man.config ...
+ .RE
+ .LP
+ Jména pøíkazù mohou bıt uvedena na pøíkazové øádce.
+diff -urN man-1.6d/man/da/man.conf.man man-1.6d-man/man/da/man.conf.man
+--- man-1.6d/man/da/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/da/man.conf.man	2006-11-06 16:45:33.000000000 +0100
+@@ -1,11 +1,11 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\"
+ .\" edited and translated to danish by Bo Vagner Hoejer 1996
+ .\" email bo@petshop.ping.dk - bo@image.dk
+ .\"
+ .TH MAN.CONF 5 "30 Marts 1994" "da" "Linux filformater" 
+ .SH NAVN
+-man.conf \- konfigurationsfil for manual kommandoen
++man.config \- konfigurationsfil for manual kommandoen
+ .SH BESKRIVELSE
+ .LP
+ Denne fil bliver læst af
+diff -urN man-1.6d/man/de/man.conf.man man-1.6d-man/man/de/man.conf.man
+--- man-1.6d/man/de/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/de/man.conf.man	2006-11-06 16:40:53.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH NAME
+-man.conf \- Konfigurationsdatei für man
++man.config \- Konfigurationsdatei für man
+ .SH BESCHREIBUNG
+ .LP
+ Diese Datei wird von
+@@ -13,7 +13,7 @@
+ Eine alternative Version dieser Datei benutzt werden mit
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ Die Programm-Namen können mit Optionen angegeben werden. Nützliche Optionen
+diff -urN man-1.6d/man/de/man.man man-1.6d-man/man/de/man.man
+--- man-1.6d/man/de/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/de/man.man	2006-11-06 16:40:42.000000000 +0100
+@@ -55,14 +55,14 @@
+ .SH OPTIONEN
+ .TP
+ .B \-\^C " config_file"
+-bestimmt welche man.conf-Datei als Steuerdatei verwendet wird.
++bestimmt welche man.config-Datei als Steuerdatei verwendet wird.
+ .TP
+ .B \-\^M " path"
+ bestimmt eine Liste von Verzeichnissen, die nach Handbuch-Seiten durchsucht 
+ werden. Wenn diese Option nicht angegeben ist, so wird die Umgebungsvariable
+ .B MANPATH
+ benutzt. Ist diese Variable nicht gesetzt, so wird diese Liste aus der
+-Datei man.conf erstellt.
++Datei man.config erstellt.
+ .TP
+ .B \-\^P " pager"
+ bestimmt welches Programm zur Anzeige der Handbuch-Seiten benutzt wird.
+diff -urN man-1.6d/man/el/man.conf.man man-1.6d-man/man/el/man.conf.man
+--- man-1.6d/man/el/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/el/man.conf.man	2006-11-06 16:46:10.000000000 +0100
+@@ -1,8 +1,8 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" ÅëëçíéêŞ ìåôÜöñáóç Ë. ÄçìçôñïõëÜêçò edimitro@tee.gr Éïıëéïò 2003
+ .TH MAN.CONF 5 "30 Ìáñôßïõ 1994" "Åã÷åéñßäéï Ëßíïõî" "Äéáìüñöùóç áñ÷åßùí"
+ .SH ÏÍÏÌÁ
+-man.conf \- ğëçñïöïñßåò äéåõèİôçóçò ãéá ôç man
++man.config \- ğëçñïöïñßåò äéåõèİôçóçò ãéá ôç man
+ .SH ĞÅÑÉÃÑÁÖÇ
+ .LP
+ Áõôü ôï áñ÷åßï äéáâÜæåôáé áğü ôç
+@@ -14,7 +14,7 @@
+ ÌéÜ åíáëëáêôéêŞ İêäïóç áõôïı ôïõ áñ÷åßïõ ìğïñåß íá ïñéóôåß ìå ôçí
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ Ôá ïíüìáôá ôùí åíôïëşí ìğïñåß íá ğåñéëáìâÜíïõí åğéëïãİò. 
+diff -urN man-1.6d/man/el/man.man man-1.6d-man/man/el/man.man
+--- man-1.6d/man/el/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/el/man.man	2006-11-06 16:46:33.000000000 +0100
+@@ -74,7 +74,7 @@
+ ç ğñïåğéëïãŞ åßíáé
+ .BR @man_config_file@ .
+ (Âëİğå
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " äéáäñïìŞ"
+ Ğñïóäéïñßæåé ôç ëßóôá ôùí êáôáëüãùí ğñïò áíáæŞôçóç óåëßäùí åã÷åéñéäßïõ.
+@@ -208,7 +208,7 @@
+ ôüôå äåí äéáóşæïíôáé ïé óåëßäåò cat.
+ ¼ôáí ïé óåëßäåò cat åßíáé ìïñöïğïéçìİíåò ãéá ìŞêïò ãñáììŞò
+ äéáöïñåôéêü áğü ôï 80, ôüôå åğßóçò äåí äéáóşæïíôáé.
+-Ïõäåìßá óåëßäá cat äéáóşæåôáé áí ôï áñ÷åßï man.conf 
++Ïõäåìßá óåëßäá cat äéáóşæåôáé áí ôï áñ÷åßï man.config 
+ ğåñéİ÷åé ôç ãñáììŞ NOCACHE.
+ .PP
+ Åßíáé äõíáôüí íá ãßíåé ç
+@@ -466,7 +466,7 @@
+ .B \-m 
+ ) .
+ .SH "ÂËÅĞÅ ÅĞÉÓÇÓ"
+-apropos(1), whatis(1), less(1), groff(1), man.conf(5).
++apropos(1), whatis(1), less(1), groff(1), man.config(5).
+ .SH ÓÖÁËÌÁÔÁ
+ Ç åğéëïãŞ
+ .B \-t
+diff -urN man-1.6d/man/en/makewhatis.man man-1.6d-man/man/en/makewhatis.man
+--- man-1.6d/man/en/makewhatis.man	2006-04-28 23:27:26.000000000 +0200
++++ man-1.6d-man/man/en/makewhatis.man	2006-11-06 16:38:56.000000000 +0100
+@@ -49,7 +49,7 @@
+ .SH OPTIONS
+ .TP
+ .B -u
+-Update database with new pages.
++Update database with new pages (file's status was last changed 24 hours ago)
+ .TP
+ .B -v
+ Verbose output
+diff -urN man-1.6d/man/en/man.conf.man man-1.6d-man/man/en/man.conf.man
+--- man-1.6d/man/en/man.conf.man	2005-09-19 08:30:42.000000000 +0200
++++ man-1.6d-man/man/en/man.conf.man	2006-11-06 16:38:56.000000000 +0100
+@@ -1,7 +1,7 @@
+ .\" @(#)man.conf
+-.TH MAN.CONF 5 "September 19, 2005"
++.TH MAN.CONFIG 5 "September 19, 2005"
+ .SH NAME
+-man.conf \- configuration data for man
++man.config \- configuration data for man
+ .SH DESCRIPTION
+ .LP
+ This file is read by
+@@ -12,7 +12,7 @@
+ An alternative version of this file can be specified with
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ The command names may be provided with options. 
+diff -urN man-1.6d/man/en/man.man man-1.6d-man/man/en/man.man
+--- man-1.6d/man/en/man.man	2006-02-28 09:50:10.000000000 +0100
++++ man-1.6d-man/man/en/man.man	2006-11-06 16:38:56.000000000 +0100
+@@ -72,7 +72,7 @@
+ Specify the configuration file to use; the default is
+ .BR @man_config_file@ .
+ (See
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " path"
+ Specify the list of directories to search for man pages.
+@@ -218,7 +218,7 @@
+ No cat pages are saved when the required cat directory does not exist.
+ No cat pages are saved when they are formatted for a line length
+ different from 80.
+-No cat pages are saved when man.conf contains the line NOCACHE.
++No cat pages are saved when man.config contains the line NOCACHE.
+ .PP
+ It is possible to make
+ .B man
+@@ -492,4 +492,4 @@
+ versions 1.3 thru 1.5p.
+ Federico Lucifredi <flucifredi@acm.org> is the current maintainer.
+ .SH "SEE ALSO"
+-apropos(1), whatis(1), less(1), groff(1), man.conf(5).
++apropos(1), whatis(1), less(1), groff(1), man.config(5).
+diff -urN man-1.6d/man/es/man.conf.man man-1.6d-man/man/es/man.conf.man
+--- man-1.6d/man/es/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/es/man.conf.man	2006-11-06 16:46:48.000000000 +0100
+@@ -1,9 +1,9 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Traducido del portugués por Pablo Saratxag <srtxg@f2219.n293.z2.fidonet.org>
+ .\"
+ .TH MAN.CONF 5 "25 Mayo 1996" "Manual Linux" "Comandos utilisador"
+ .SH NOMBRE
+-man.conf \- fichero de configuración para el comando man
++man.config \- fichero de configuración para el comando man
+ .SH DESCRIPCIÓN
+ .LP
+ Este ficheiro es leido por
+diff -urN man-1.6d/man/fi/man.conf.man man-1.6d-man/man/fi/man.conf.man
+--- man-1.6d/man/fi/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/fi/man.conf.man	2006-11-06 16:47:07.000000000 +0100
+@@ -1,8 +1,8 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Translated into Finnish by Raimo Koski <rkoski@pp.weppi.fi>
+ .TH MAN.CONF 5 "30 Maaliskuu 1994"
+ .SH NIMI
+-man.conf \- man-ohjelman konfigurointitiedot
++man.config \- man-ohjelman konfigurointitiedot
+ .SH KUVAUS
+ .LP
+ Tämän tiedoston lukee
+@@ -13,7 +13,7 @@
+ Vaihtoehtoinen versio tästä tiedostosta voidaan ottaa käyttöön komennolla
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ Komentojen nimille voidaan antaa optioita. Käyttökelpoiset optiot nroff-ohjelmalle löytyvät sivulta  grotty(1).
+diff -urN man-1.6d/man/fi/man.man man-1.6d-man/man/fi/man.man
+--- man-1.6d/man/fi/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/fi/man.man	2006-11-06 16:47:18.000000000 +0100
+@@ -66,10 +66,10 @@
+ .SH OPTIOT
+ .TP
+ .B \-\^C " config_file"
+-Määrittele käytettävä man.conf -tiedosto. Oletus on
++Määrittele käytettävä man.config -tiedosto. Oletus on
+ .BR @man_config_file@ .
+ (Katso
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " polku"
+ Määrittele hakemistolista, joista man-sivuja etsitään.
+diff -urN man-1.6d/man/fr/man.conf.man man-1.6d-man/man/fr/man.conf.man
+--- man-1.6d/man/fr/man.conf.man	2006-01-26 00:19:14.000000000 +0100
++++ man-1.6d-man/man/fr/man.conf.man	2006-11-06 16:47:48.000000000 +0100
+@@ -1,9 +1,9 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Traduction française René Cougnenc - Mai 1995
+ .\"
+ .TH MAN.CONF 5 "19 septembre 2005" "Manuel Linux" "Commandes utilisateur"
+ .SH NOM
+-man.conf \- fichier de configuration de la commande man
++man.config \- fichier de configuration de la commande man
+ .SH DESCRIPTION
+ .LP
+ Ce fichier est lu par
+@@ -17,7 +17,7 @@
+ précisant\ :
+ .LP
+ .RS
+-man -C man.conf_personnel ...
++man -C man.config_personnel ...
+ .RE
+ .LP
+ Les noms de commandes peuvent comporter des options.
+@@ -71,7 +71,7 @@
+ .PP
+ L'équipe de traduction a fait le maximum pour réaliser une adaptation
+ française de qualité. La version anglaise la plus à jour de ce document est
+-toujours consultable via la commande\ : «\ \fBLANG=en\ man\ 5\ man.conf\fR\ ».
++toujours consultable via la commande\ : «\ \fBLANG=en\ man\ 5\ man.config\fR\ ».
+ N'hésitez pas à signaler à l'auteur ou au traducteur, selon le cas, toute
+ erreur dans cette page de manuel.
+ 
+diff -urN man-1.6d/man/fr/man.man man-1.6d-man/man/fr/man.man
+--- man-1.6d/man/fr/man.man	2006-01-26 00:20:15.000000000 +0100
++++ man-1.6d-man/man/fr/man.man	2006-11-06 16:47:54.000000000 +0100
+@@ -72,7 +72,7 @@
+ Spécifie le fichier de configuration à utiliser\ ; par défaut il s'agit de
+ .BR @man_config_file@ .
+ (Voir
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " chemin"
+ Indique la liste des répertoires dans lesquels la recherche des pages 
+@@ -482,7 +482,7 @@
+ .BR whatis (1),
+ .BR less (1),
+ .BR groff (1),
+-.BR man.conf (5).
++.BR man.config (5).
+ .SH TRADUCTION
+ .PP
+ Ce document est une traduction réalisée par René Cougnenc en mai 1995 et mise
+diff -urN man-1.6d/man/hr/man.conf.man man-1.6d-man/man/hr/man.conf.man
+--- man-1.6d/man/hr/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/hr/man.conf.man	2006-11-06 16:48:07.000000000 +0100
+@@ -1,9 +1,9 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\"
+ .\" 9. studenog 1998. preveo Matej Vela <mvela@public.srce.hr>, META.
+ .TH MAN.CONF 5 "30. o¾ujka 1994."
+ .SH IME
+-man.conf \- konfiguracijski podaci za man
++man.config \- konfiguracijski podaci za man
+ .SH OPIS
+ Ovu datoteku èita
+ .BR man (1),
+@@ -16,7 +16,7 @@
+ Neka druga verzija ove datoteke mo¾e se odrediti pomoæu
+ .LP
+ .RS
+-man -C osobni_man.conf ...
++man -C osobni_man.config ...
+ .RE
+ .LP
+ Imenima naredbi mogu se dodati opcije.
+diff -urN man-1.6d/man/hr/man.man man-1.6d-man/man/hr/man.man
+--- man-1.6d/man/hr/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/hr/man.man	2006-11-06 16:48:12.000000000 +0100
+@@ -49,11 +49,11 @@
+ .TP
+ .B \-\^C " konfiguracijska_datoteka"
+ Koristi drugi
+-.IR man.conf ;
++.IR man.config ;
+ predodreğeni je
+ .BR @man_config_file@ .
+ (Pogledajte
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " staza"
+ .I staza
+diff -urN man-1.6d/man/it/man.conf.man man-1.6d-man/man/it/man.conf.man
+--- man-1.6d/man/it/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/it/man.conf.man	2006-11-06 16:48:27.000000000 +0100
+@@ -1,4 +1,4 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Traduzione italiana by Michele Dalla Silvestra - dalla@maya.dei.unipd.it
+ .\" Luglio 1996
+ .\" Correzioni stilistiche di Daniele Giacomini <daniele@evo.it>
+@@ -6,7 +6,7 @@
+ .\"
+ .TH MAN.CONF 5 "30 marzo 1994"
+ .SH NOME
+-man.conf \- configurazione di man
++man.config \- configurazione di man
+ .SH DESCRIZIONE
+ .LP
+ Questo file è letto da
+@@ -18,7 +18,7 @@
+ specificata con:
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ I nomi dei comandi possono essere forniti con opzioni.
+diff -urN man-1.6d/man/it/man.man man-1.6d-man/man/it/man.man
+--- man-1.6d/man/it/man.man	2006-04-29 07:14:40.000000000 +0200
++++ man-1.6d-man/man/it/man.man	2006-11-06 16:48:52.000000000 +0100
+@@ -56,9 +56,9 @@
+ .SH OPZIONI
+ .TP
+ .B \-\^C " file_configurazione"
+-Specifica il file man.conf da usare; il valore di default è
++Specifica il file man.config da usare; il valore di default è
+ @man_config_file@ (vedere
+-.BR man.conf (5)).
++.BR man.config (5)).
+ .TP
+ .B \-\^M " percorso"
+ Specifica la lista di directory in cui cercare le pagine di guida. Se
+@@ -162,7 +162,7 @@
+ risparmiare il tempo di formattazione la volta successiva che quelle
+ pagine saranno necessarie. Tradizionalmente, le versioni formattate
+ delle pagine in DIR/manX sono salvate in DIR/catX, ma altri tipi di
+-mappatura possono essere specificati in /usr/lib/man.conf.
++mappatura possono essere specificati in /etc/man.config.
+ Le pagine formattate non sono salvate quando la directory cat
+ corrispondente non esiste.
+ .PP
+diff -urN man-1.6d/man/ja/man.conf.man man-1.6d-man/man/ja/man.conf.man
+--- man-1.6d/man/ja/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/ja/man.conf.man	2006-11-06 16:49:05.000000000 +0100
+@@ -1,4 +1,4 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\"
+ .\" Japanese Version Copyright (c) 1997 HANATAKA Shinya
+ .\"         all rights reserved.
+@@ -7,7 +7,7 @@
+ .\"
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH Ì¾Á°
+-man.conf \- man ¥³¥Ş¥ó¥É¤Î¤¿¤á¤ÎÀßÄê¥Õ¥¡¥¤¥ë
++man.config \- man ¥³¥Ş¥ó¥É¤Î¤¿¤á¤ÎÀßÄê¥Õ¥¡¥¤¥ë
+ .SH ÀâÌÀ
+ .LP
+ ¤³¤Î¥Õ¥¡¥¤¥ë¤Ï
+@@ -19,7 +19,7 @@
+ »ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ ¥³¥Ş¥ó¥ÉÌ¾¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÉÕ¤±¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
+diff -urN man-1.6d/man/ja/man.man man-1.6d-man/man/ja/man.man
+--- man-1.6d/man/ja/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/ja/man.man	2006-11-06 16:49:17.000000000 +0100
+@@ -52,9 +52,9 @@
+ .SH ¥ª¥×¥·¥ç¥ó
+ .TP
+ .B \-\^C " config_file"
+-»ÈÍÑ¤¹¤ë man.conf ¥Õ¥¡¥¤¥ë¤ò»ØÄê¤¹¤ë¡£¥Ç¥Õ¥©¥ë¥È¤Ï
++»ÈÍÑ¤¹¤ë man.config ¥Õ¥¡¥¤¥ë¤ò»ØÄê¤¹¤ë¡£¥Ç¥Õ¥©¥ë¥È¤Ï
+ .BR @man_config_file@
+-(»²¾È¡§ man.conf(5))
++(»²¾È¡§ man.config(5))
+ .TP
+ .B \-\^M " path"
+ ¥Ş¥Ë¥å¥¢¥ë¡¦¥Ú¡¼¥¸¤òÃµ¤¹¥Ç¥£¥ì¥¯¥È¥ê¤Î¥ê¥¹¥È¤ò»ØÄê¤¹¤ë¡£
+diff -urN man-1.6d/man/ja/man1/man.1 man-1.6d-man/man/ja/man1/man.1
+--- man-1.6d/man/ja/man1/man.1	2001-09-14 17:10:28.000000000 +0200
++++ man-1.6d-man/man/ja/man1/man.1	2006-11-06 16:49:50.000000000 +0100
+@@ -65,10 +65,10 @@
+ .SH ¥ª¥×¥·¥ç¥ó
+ .TP
+ .B \-\^C " config_file"
+-»ÈÍÑ¤¹¤ë man.conf ¥Õ¥¡¥¤¥ë¤ò»ØÄê¤¹¤ë¡£¥Ç¥Õ¥©¥ë¥È¤Ï
+-.B /usr/lib/man.conf
++»ÈÍÑ¤¹¤ë man.config ¥Õ¥¡¥¤¥ë¤ò»ØÄê¤¹¤ë¡£¥Ç¥Õ¥©¥ë¥È¤Ï
++.B /etc/man.config
+ ¤Ç¤¢¤ë
+-.RB ( man.conf (5)
++.RB ( man.config (5)
+ ¤ò¸«¤è)¡£
+ .TP
+ .B \-\^M " path"
+@@ -76,7 +76,7 @@
+ ¤³¤Î¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Ê¤¤¾ì¹ç¡¢´Ä¶­ÊÑ¿ô
+ .B MANPATH
+ ¤ò»È¤¦¡£¤³¤Î´Ä¶­ÊÑ¿ô¤â»ØÄê¤·¤Ê¤¤¤È¡¢
+-.BR /usr/lib/man.conf
++.BR /etc/man.config
+ ¤Ë»ØÄê¤µ¤ì¤¿¥Ç¥Õ¥©¥ë¥È¤Î¥ê¥¹¥È¤ò»È¤¦¡£
+ .B MANPATH
+ Ãæ¤Ë¶õÊ¸»úÎó¤¬¤¢¤ë¤È¡¢¤½¤ì¤Ï¥Ç¥Õ¥©¥ë¥È¤Î¥ê¥¹¥È¤Î°ÕÌ£¤Ë¤Ê¤ë¡£
+@@ -189,7 +189,7 @@
+ ÅÁÅıÅª¤Ë¡¢DIR/manX ¤ÎÀ°·ÁºÑ¤ß¥Ş¥Ë¥å¥¢¥ë¤Ï DIR/catX ¤Ë
+ ¥»¡¼¥Ö¤µ¤ì¤ë¤¬¡¢
+ man ¥Ç¥£¥ì¥¯¥È¥ê¤«¤é cat ¥Ç¥£¥ì¥¯¥È¥ê¤Ø¤Î¥Ş¥Ã¥Ô¥ó¥°ÊıË¡¤È¤·¤Æ¡¢°Û¤Ê¤ëÃÍ¤ò
+-.B /usr/lib/man.conf
++.B /etc/man.config
+ ¤Ë»ØÄê¤¹¤ë¤³¤È¤â¤Ç¤­¤ë¡£
+ cat ¥Ç¥£¥ì¥¯¥È¥ê¤¬ÍÑ°Õ¤µ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¾ì¹ç¡¢
+ cat ¥Ú¡¼¥¸¤Ï¥»¡¼¥Ö¤µ¤ì¤Ê¤¤¡£
+diff -urN man-1.6d/man/ja/man5/man.conf.5 man-1.6d-man/man/ja/man5/man.conf.5
+--- man-1.6d/man/ja/man5/man.conf.5	2001-09-14 17:10:28.000000000 +0200
++++ man-1.6d-man/man/ja/man5/man.conf.5	2006-11-06 16:50:01.000000000 +0100
+@@ -1,4 +1,4 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\"
+ .\" Japanese Version Copyright (c) 1997 HANATAKA Shinya
+ .\"         all rights reserved.
+@@ -7,7 +7,7 @@
+ .\"
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH Ì¾Á°
+-man.conf \- man ¥³¥Ş¥ó¥É¤Î¤¿¤á¤ÎÀßÄê¥Õ¥¡¥¤¥ë
++man.config \- man ¥³¥Ş¥ó¥É¤Î¤¿¤á¤ÎÀßÄê¥Õ¥¡¥¤¥ë
+ .SH ÀâÌÀ
+ .LP
+ ¤³¤Î¥Õ¥¡¥¤¥ë¤Ï
+@@ -19,7 +19,7 @@
+ »ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
+ .LP
+ .RS
+-man -C private_man.conf ...
++man -C private_man.config ...
+ .RE
+ .LP
+ ¥³¥Ş¥ó¥ÉÌ¾¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÉÕ¤±¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
+diff -urN man-1.6d/man/ko/man.conf.man man-1.6d-man/man/ko/man.conf.man
+--- man-1.6d/man/ko/man.conf.man	2006-04-29 07:16:40.000000000 +0200
++++ man-1.6d-man/man/ko/man.conf.man	2006-11-06 16:50:17.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH ÀÌ¸§
+-man.conf \- manÀ» À§ÇÑ ±¸¼º ÀÚ·á 
++man.config \- manÀ» À§ÇÑ ±¸¼º ÀÚ·á 
+ .SH ¼³¸í
+ .LP
+ ÀÌ ÆÄÀÏÀº 
+diff -urN man-1.6d/man/ko/man.man man-1.6d-man/man/ko/man.man
+--- man-1.6d/man/ko/man.man	2006-04-29 07:17:58.000000000 +0200
++++ man-1.6d-man/man/ko/man.man	2006-11-06 16:50:27.000000000 +0100
+@@ -46,11 +46,11 @@
+ .SH ¿É¼Ç
+ .TP
+ .B \-\^C " config_file"
+-»ç¿ë ÇÒ man.conf ÆÄÀÏÀ» ÁöÁ¤; ±âº» °ªÀº
++»ç¿ë ÇÒ man.config ÆÄÀÏÀ» ÁöÁ¤; ±âº» °ªÀº
+ .B @man_config_file@
+ ÀÌ´Ù.
+ (
+-.BR man.conf (5) º¸¶ó.)
++.BR man.config (5) º¸¶ó.)
+ .TP
+ .B \-\^M " path"
+ ¸Ç ÆäÀÌÁö °Ë»öÀ» À§ÇÑ µğ·ºÅä¸® ¸®½ºÆ®¸¦ ÁöÁ¤ÇÑ´Ù.
+diff -urN man-1.6d/man/ko/man1/man.1 man-1.6d-man/man/ko/man1/man.1
+--- man-1.6d/man/ko/man1/man.1	2000-05-20 14:10:12.000000000 +0200
++++ man-1.6d-man/man/ko/man1/man.1	2006-11-06 16:50:43.000000000 +0100
+@@ -50,7 +50,7 @@
+ .SH ¿É¼Ç
+ .TP
+ .B \-\^C " config_file"
+-»ç¿ë ÇÒ man.conf ÆÄÀÏÀ» ÁöÁ¤; ±âº» °ªÀº
++»ç¿ë ÇÒ man.config ÆÄÀÏÀ» ÁöÁ¤; ±âº» °ªÀº
+ .BR /etc/man.config 
+ ÀÌ´Ù.
+ (
+diff -urN man-1.6d/man/ko/man5/man.conf.5 man-1.6d-man/man/ko/man5/man.conf.5
+--- man-1.6d/man/ko/man5/man.conf.5	2000-06-02 17:43:01.000000000 +0200
++++ man-1.6d-man/man/ko/man5/man.conf.5	2006-11-06 16:50:51.000000000 +0100
+@@ -2,7 +2,7 @@
+ .\" Generated automatically from man.config.5.in by the
+ .\" configure script.
+ .\"
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONFIG 5 "30 Mar 1994"
+ .SH ÀÌ¸§
+ man.config \- manÀ» À§ÇÑ ±¸¼º ÀÚ·á 
+diff -urN man-1.6d/man/nl/man.conf.man man-1.6d-man/man/nl/man.conf.man
+--- man-1.6d/man/nl/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/nl/man.conf.man	2006-11-06 16:40:18.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH NAAM
+-man.conf \- configuratie bestand voor man
++man.config \- configuratie bestand voor man
+ .SH BESCHRIJVING
+ .LP
+ Dit bestand wordt door
+@@ -14,7 +14,7 @@
+ man de -C optie mee te geven:
+ .LP
+ .RS
+-man -C prive_man.conf ...
++man -C prive_man.config ...
+ .RE
+ .LP
+ Aan de programmanamen kunnen opties worden meegegeven.
+diff -urN man-1.6d/man/nl/man.man man-1.6d-man/man/nl/man.man
+--- man-1.6d/man/nl/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/nl/man.man	2006-11-06 16:39:56.000000000 +0100
+@@ -55,7 +55,7 @@
+ Geef aan welk configuratiebestand gebruikt moet worden.
+ Als deze optie niet is opgegeven, dan wordt
+ @man_config_file@ gebruikt. (Voor een beschrijving van dit
+-bestand, zie man.conf(5).)
++bestand, zie man.config(5).)
+ .TP
+ .B \-\^M " pad"
+ Geef de lijst van directories waarin gezocht moet worden.
+diff -urN man-1.6d/man/pl/man.conf.man man-1.6d-man/man/pl/man.conf.man
+--- man-1.6d/man/pl/man.conf.man	2006-06-09 21:47:45.000000000 +0200
++++ man-1.6d-man/man/pl/man.conf.man	2006-11-06 16:42:23.000000000 +0100
+@@ -1,8 +1,8 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" T³umaczenie: 950322 Rafa³ Maszkowski <rzm@pdi.net>
+ .TH MAN.CONF 5 "19 wrze¶nia 2005"
+ .SH NAZWA
+-man.conf \- dane konfiguracyjne dla programu man
++man.config \- dane konfiguracyjne dla programu man
+ .SH OPIS
+ .LP
+ Ten plik jest czytany przez
+@@ -11,10 +11,10 @@
+ (b) pe³ne ¶cie¿ki do ró¿nych programów jak nroff, eqn, tbl itd., które
+ s± u¿ywane przez man oraz (c) listê programów rozpakowuj±cych pliki z
+ podanymi rozszerzeniami.
+-Alternatywna wersja pliku man.conf mo¿e byæ podana przez
++Alternatywna wersja pliku man.config mo¿e byæ podana przez
+ .LP
+ .RS
+-man -C prywatny_man.conf ...
++man -C prywatny_man.config ...
+ .RE
+ .LP
+ Nazwy poleceñ mog± byæ podane z opcjami.
+diff -urN man-1.6d/man/pl/man.man man-1.6d-man/man/pl/man.man
+--- man-1.6d/man/pl/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/pl/man.man	2006-11-06 16:42:35.000000000 +0100
+@@ -78,7 +78,7 @@
+ Okre¶la plik konfiguracyjny, którego nale¿y u¿yæ. Domy¶lnym jest
+ .BR @man_config_file@ .
+ (Zobacz
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " ¶cie¿ka"
+ Okre¶la listê katalogów, w których bêd± szukane strony podrêcznika man.
+@@ -402,7 +402,7 @@
+ razem z opcj±
+ .BR \-m ). 
+ .SH "ZOBACZ TAK¯E"
+-apropos(1), whatis(1), less(1), groff(1), man.conf(5).
++apropos(1), whatis(1), less(1), groff(1), man.config(5).
+ .SH B£ÊDY
+ Opcja
+ .B \-t
+diff -urN man-1.6d/man/pt/man.conf.man man-1.6d-man/man/pt/man.conf.man
+--- man-1.6d/man/pt/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/pt/man.conf.man	2006-11-06 16:41:59.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "30/3/1994"
+ .SH NOME
+-man.conf \- dicheiro de configuração para man
++man.config \- dicheiro de configuração para man
+ .SH DESCRIÇÃO
+ .LP
+ Este ficheiro é lido por
+diff -urN man-1.6d/man/ro/man.conf.man man-1.6d-man/man/ro/man.conf.man
+--- man-1.6d/man/ro/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/ro/man.conf.man	2006-11-06 16:51:04.000000000 +0100
+@@ -1,8 +1,8 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .\" Traducere de Ovidiu Constantin <ovidiu.soft@xnet.ro>
+ .TH MAN.CONF 5 "30 Mar 1994"
+ .SH NUME
+-man.conf \- date de configurare pentru man
++man.config \- date de configurare pentru man
+ .SH DESCRIERE
+ .LP
+ Acest fiºier este citit de
+diff -urN man-1.6d/man/ro/man.man man-1.6d-man/man/ro/man.man
+--- man-1.6d/man/ro/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/ro/man.man	2006-11-06 16:51:10.000000000 +0100
+@@ -70,7 +70,7 @@
+ Specificã fiºierul de configurare care se va folosi; inplicit este
+ .BR @man_config_file@ .
+ (Vezi 
+-.BR man.conf (5).)
++.BR man.config (5).)
+ .TP
+ .B \-\^M " cale"
+ Specificã lista de directoare unde se cautã paginile man. Separaşi
+@@ -409,7 +409,7 @@
+ (pentru a fi utilizat cu opşiunea
+ .BR \-m ). 
+ .SH "VEZI ªI"
+-apropos(1), whatis(1), less(1), groff(1), man.conf(5).
++apropos(1), whatis(1), less(1), groff(1), man.config(5).
+ .SH ERORI
+ Opşiunea
+ .B \-t
+diff -urN man-1.6d/man/sl/man.conf.man man-1.6d-man/man/sl/man.conf.man
+--- man-1.6d/man/sl/man.conf.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/sl/man.conf.man	2006-11-06 16:51:24.000000000 +0100
+@@ -1,7 +1,7 @@
+-.\" @(#)man.conf
++.\" @(#)man.config
+ .TH MAN.CONF 5 "30. marec 1994"
+ .SH IME
+-man.conf \- nastavitvena datoteka za program man
++man.config \- nastavitvena datoteka za program man
+ .SH OPIS
+ .LP
+ To datoteko prebere program
+@@ -13,7 +13,7 @@
+ Alternativo privzeti verziji te datoteke lahko doloèimo z izbiro
+ .LP
+ .RS
+-man -C privatni_man.conf ...
++man -C privatni_man.config ...
+ .RE
+ .LP
+ Ukazi so lahko navedeni skupaj z izbirami.  Nekaj uporabnih izbir
+diff -urN man-1.6d/man/sl/man.man man-1.6d-man/man/sl/man.man
+--- man-1.6d/man/sl/man.man	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/man/sl/man.man	2006-11-06 16:51:30.000000000 +0100
+@@ -57,9 +57,9 @@
+ .SH IZBIRE
+ .TP
+ .B \-\^C " nastavitvena_datoteka"
+-Doloèimo nastavitveno datoteko man.conf, ki jo ¾elimo
++Doloèimo nastavitveno datoteko man.config, ki jo ¾elimo
+ uporabljati; privzeta izbira je
+-@man_config_file@. (glejte man.conf(5).)
++@man_config_file@. (glejte man.config(5).)
+ .TP
+ .B \-\^M " pot"
+ Doloèimo seznam imenikov, v katerih se i¹èe za stranmi
+diff -urN man-1.6d/src/man.conf.in man-1.6d-man/src/man.conf.in
+--- man-1.6d/src/man.conf.in	2005-08-21 01:26:06.000000000 +0200
++++ man-1.6d-man/src/man.conf.in	2006-11-06 16:43:50.000000000 +0100
+@@ -1,7 +1,7 @@
+-# man.conf from @version@
++# man.config from @version@
+ #
+ # For more information about this file, see the man pages man(1)
+-# and man.conf(5).
++# and man.config(5).
+ #
+ # This file is read by man to configure the default manpath (also used
+ # when MANPATH contains an empty substring), to find out where the cat
