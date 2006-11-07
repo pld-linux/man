@@ -42,8 +42,7 @@ Patch16:	%{name}-man-pages.patch
 Patch17:	%{name}-i18n_nroff.patch
 Patch18:	%{name}-i18n_makewhatis.patch
 Patch19:	%{name}-apropos.patch
-Patch20:	%{name}-sec.patch
-Patch21:	%{name}-rpm.patch
+Patch20:	%{name}-rpm.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	iconv
 BuildRequires:	less
@@ -227,7 +226,6 @@ nie byæ bezpieczne.
 %patch18 -p1
 %patch19 -p1
 %patch20 -p1
-%patch21 -p1
 
 cp -f %{SOURCE4} msgs/mess.ru   # replace bad ru trans
 
