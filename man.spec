@@ -234,30 +234,33 @@ for i in $(find man -name man.conf.man); do
 done
 
 for src in $(find msgs -type f -name 'mess.[a-z][a-z]'); do
-	lang=$(echo ${src} | sed -r 's;.*([a-z]{2})$;\1;')
-	if   [ ${lang} = ja ]; then charset=euc-jp
-	elif [ ${lang} = ko ]; then charset=euc-kr
-	elif [ ${lang} = ru ]; then charset=koi8-r
-	elif [ ${lang} = da ]; then charset=iso-8859-1
-	elif [ ${lang} = de ]; then charset=iso-8859-1
-	elif [ ${lang} = en ]; then charset=iso-8859-1
-	elif [ ${lang} = es ]; then charset=iso-8859-1
-	elif [ ${lang} = fi ]; then charset=iso-8859-1
-	elif [ ${lang} = fr ]; then charset=iso-8859-1
-	elif [ ${lang} = it ]; then charset=iso-8859-1
-	elif [ ${lang} = pt ]; then charset=iso-8859-1
-	elif [ ${lang} = nl ]; then charset=iso-8859-1
-	elif [ ${lang} = cs ]; then charset=iso-8859-2
-	elif [ ${lang} = hr ]; then charset=iso-8859-2
-	elif [ ${lang} = pl ]; then charset=iso-8859-2
-	elif [ ${lang} = ro ]; then charset=iso-8859-2
-	elif [ ${lang} = sl ]; then charset=iso-8859-2
-	elif [ ${lang} = bg ]; then charset=cp1251
-	elif [ ${lang} = el ]; then charset=iso-8859-7
-	else
-		echo === LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING
-		exit 1
-	fi
+	lang=${src##*.}
+	case ${lang} in
+		ja) charset=euc-jp ;;
+		ko) charset=euc-kr ;;
+		ru) charset=koi8-r ;;
+		da) charset=iso-8859-1 ;;
+		de) charset=iso-8859-1 ;;
+		en) charset=iso-8859-1 ;;
+		es) charset=iso-8859-1 ;;
+		fi) charset=iso-8859-1 ;;
+		fr) charset=iso-8859-1 ;;
+		it) charset=iso-8859-1 ;;
+		pt) charset=iso-8859-1 ;;
+		nl) charset=iso-8859-1 ;;
+		cs) charset=iso-8859-2 ;;
+		hr) charset=iso-8859-2 ;;
+		pl) charset=iso-8859-2 ;;
+		ro) charset=iso-8859-2 ;;
+		sl) charset=iso-8859-2 ;;
+		hu) charset=iso-8859-2 ;;
+		bg) charset=cp1251 ;;
+		el) charset=iso-8859-7 ;;
+		*)
+			echo "=== LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING"
+			exit 1
+		;;
+	esac
 	iconv -t utf-8 -f ${charset} -o ${src}.utf ${src} && mv ${src}.utf ${src}
 done
 
@@ -315,42 +318,48 @@ done
 %{__make} -C man2html install-scripts \
 	PREFIX="$RPM_BUILD_ROOT"
 
+dir=$RPM_BUILD_ROOT%{_mandir}
 for src in $(find man -type f -name '*.[1-9n]'); do
-   lang=$(echo ${src} | sed -r 's;.*/([a-z]{2})/.*;\1;')
-   page=$(basename ${src})
-   sect=$(echo ${page} | sed -r 's;.*([1-9n])$;man\1;')
-   dir=${RPM_BUILD_ROOT}%{_mandir}
-   if   [ ${lang} = ja ]; then charset=euc-jp
-   elif [ ${lang} = ko ]; then charset=euc-kr
-   elif [ ${lang} = da ]; then charset=iso-8859-1
-   elif [ ${lang} = de ]; then charset=iso-8859-1
-   elif [ ${lang} = en ]; then charset=iso-8859-1
-   elif [ ${lang} = es ]; then charset=iso-8859-1
-   elif [ ${lang} = fi ]; then charset=iso-8859-1
-   elif [ ${lang} = fr ]; then charset=iso-8859-1
-   elif [ ${lang} = it ]; then charset=iso-8859-1
-   elif [ ${lang} = pt ]; then charset=iso-8859-1
-   elif [ ${lang} = nl ]; then charset=iso-8859-1
-   elif [ ${lang} = cs ]; then charset=iso-8859-2
-   elif [ ${lang} = hr ]; then charset=iso-8859-2
-   elif [ ${lang} = pl ]; then charset=iso-8859-2
-   elif [ ${lang} = ro ]; then charset=iso-8859-2
-   elif [ ${lang} = sl ]; then charset=iso-8859-2
-   elif [ ${lang} = hu ]; then charset=iso-8859-2
-   elif [ ${lang} = bg ]; then charset=cp1251
-   elif [ ${lang} = el ]; then charset=iso-8859-7
-   else
-      echo === LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING
-      exit 1
-   fi
-   mkdir -p ${dir}/${lang}/${sect}
-   iconv -t utf-8 -f ${charset} -o ${dir}/${lang}/${sect}/${page} ${src}
+	# src is like: man/nl/man.config.5 or man/pl/man1/man2html.1
+	noman=${src#*/}
+	lang=${noman%%%%/*}
+	page=${src##*/}
+	sect=man${src##*.}
 
-   # ensure POSIX/C locale only has ASCII subset and no latin-1
-   if [ ${lang} = en ]; then
-      mkdir -p ${dir}/${sect}
-      iconv -t ascii//translit -f ${charset} -o ${dir}/${sect}/${page} ${src}
-   fi
+	case ${lang} in
+		ja) charset=euc-jp ;;
+		ko) charset=euc-kr ;;
+		ru) charset=koi8-r ;;
+		da) charset=iso-8859-1 ;;
+		de) charset=iso-8859-1 ;;
+		en) charset=iso-8859-1 ;;
+		es) charset=iso-8859-1 ;;
+		fi) charset=iso-8859-1 ;;
+		fr) charset=iso-8859-1 ;;
+		it) charset=iso-8859-1 ;;
+		pt) charset=iso-8859-1 ;;
+		nl) charset=iso-8859-1 ;;
+		cs) charset=iso-8859-2 ;;
+		hr) charset=iso-8859-2 ;;
+		pl) charset=iso-8859-2 ;;
+		ro) charset=iso-8859-2 ;;
+		sl) charset=iso-8859-2 ;;
+		hu) charset=iso-8859-2 ;;
+		bg) charset=cp1251 ;;
+		el) charset=iso-8859-7 ;;
+		*)
+			echo "=== LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING"
+			exit 1
+		;;
+	esac
+	mkdir -p ${dir}/${lang}/${sect}
+	iconv -t utf-8 -f ${charset} -o ${dir}/${lang}/${sect}/${page} ${src}
+
+	# ensure POSIX/C locale only has ASCII subset and no latin-1
+	if [ ${lang} = en ]; then
+		mkdir -p ${dir}/${sect}
+		iconv -t ascii//translit -f ${charset} -o ${dir}/${sect}/${page} ${src}
+	fi
 done
 
 rm -rf $RPM_BUILD_ROOT%{_mandir}/en
