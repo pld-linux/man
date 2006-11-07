@@ -12,7 +12,7 @@ Summary(tr):	KЩlavuz sayfasЩ okuyucusu
 Summary(uk):	Наб╕р утил╕т для документац╕╖: man, apropos та whatis
 Name:		man
 Version:	1.6d
-Release:	3.1
+Release:	3.3
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -233,7 +233,7 @@ for i in $(find man -name man.conf.man); do
 	mv $i ${i%man.conf.man}man.config.man
 done
 
-for src in $(find msgs -type f -name 'mess.[a-z][a-z]'); do
+for src in msgs/mess.[a-z][a-z]; do
 	lang=${src##*.}
 	case ${lang} in
 		ja) charset=euc-jp ;;
@@ -265,7 +265,7 @@ for src in $(find msgs -type f -name 'mess.[a-z][a-z]'); do
 done
 
 # use gzip (not bzip2) to compress formatted man pages
-sed -i -e 's/compress=$/compress=gzip/' configure
+%{__sed} -i -e 's/compress=$/compress=gzip/' configure
 
 cat << 'EOF' > apache.conf
 ScriptAlias /cgi-bin/man %{_cgibinmandir}
@@ -282,7 +282,7 @@ EOF
 	-confdir %{_sysconfdir}
 
 # HACK: Make output default to using -c; otherwise it appears broken.
-perl -pi -e "s/nroff /nroff -c /" conf_script
+%{__sed} -i -e 's/nroff /nroff -c /' conf_script
 
 %{__make} \
 	BUILD_CC="%{__cc} %{rpmcflags} %{rpmldflags}" \
@@ -294,9 +294,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_cgibinmandir},%{_cgiauxmandir}} \
 	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_webappdir},/etc/tmpwatch}
 
-echo "# Cleanup man temporary files:" > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
-echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
+echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
+> man.lang
+for i in '' bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
@@ -304,11 +304,11 @@ for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	else
 		lng=""
 	fi
-	for cdir in "" /local /X11R6 ; do
+	for cdir in '' /local /X11R6 ; do
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
 		echo "/var/cache/man${cdir}$i 240" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
-		echo "${lng}%attr(775,root, man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
+		echo "${lng}%attr(775,root,man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
 	done
 done
 
@@ -319,7 +319,7 @@ done
 	PREFIX="$RPM_BUILD_ROOT"
 
 dir=$RPM_BUILD_ROOT%{_mandir}
-for src in $(find man -type f -name '*.[1-9n]'); do
+for src in man/{*/,}*/*.[1-9n]; do
 	# src is like: man/nl/man.config.5 or man/pl/man1/man2html.1
 	noman=${src#*/}
 	lang=${noman%%%%/*}
