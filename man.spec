@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	3.3
+Release:	4
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -51,7 +51,7 @@ BuildRequires:	sed >= 4.0
 Requires(post,preun):	fileutils
 Requires:	%{name}-config = %{version}-%{release}
 Requires:	/bin/awk
-Requires:	groff >= 1.19.1-4
+Requires:	groff >= 1:1.18.1.4
 Requires:	gzip
 Requires:	iconv
 Requires:	less
