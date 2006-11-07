@@ -41,7 +41,7 @@ Patch15:	%{name}-encoding.patch
 Patch16:	%{name}-man-pages.patch
 Patch17:	%{name}-i18n_nroff.patch
 Patch18:	%{name}-i18n_makewhatis.patch
-Patch29:	%{name}-apropos.patch
+Patch19:	%{name}-apropos.patch
 Patch20:	%{name}-sec.patch
 Patch21:	%{name}-rpm.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
