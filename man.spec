@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -296,7 +296,7 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 
 echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 > man.lang
-for i in '' bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
+for i in '' bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
