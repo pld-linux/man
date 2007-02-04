@@ -60,6 +60,7 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
+Conflicts:	tmpwatch < 2.9.6-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_cgibinmandir		/usr/lib/cgi-bin/man
@@ -257,7 +258,7 @@ for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	fi
 	for cdir in "" /local /X11R6 ; do
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
-		echo "/var/cache/man${cdir}$i 240" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
+		echo "/var/cache/man${cdir}$i 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
 		echo "${lng}%attr(775,root, man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
 	done
