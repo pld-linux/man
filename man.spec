@@ -66,6 +66,7 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
+Conflicts:	tmpwatch < 2.9.6-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_cgibinmandir		/usr/lib/cgi-bin/man
