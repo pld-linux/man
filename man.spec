@@ -1,15 +1,15 @@
 # TODO:
 # - PLD patch renames man.conf to man.config, but all manuals are named man.conf(5)
 Summary:	Manual page reader
-Summary(de):	Manual-Page-Reader
-Summary(es):	Lector de páginas de manual (man)
-Summary(fr):	Lecteur de pages de man
-Summary(ko):	¹®¼­ °ü·Ã µµ±¸ ¸ðÀ½ : ¸Ç, apropos ±×¸®°í whatis
-Summary(pl):	Czytnik stron man
-Summary(pt_BR):	Leitor de páginas de manuais (man)
-Summary(ru):	îÁÂÏÒ ÕÔÉÌÉÔ ÄÌÑ ÄÏËÕÍÅÎÔÁÃÉÉ: man, apropos É whatis
-Summary(tr):	Kýlavuz sayfasý okuyucusu
-Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
+Summary(de.UTF-8):   Manual-Page-Reader
+Summary(es.UTF-8):   Lector de pÃ¡ginas de manual (man)
+Summary(fr.UTF-8):   Lecteur de pages de man
+Summary(ko.UTF-8):   ë¬¸ì„œ ê´€ë ¨ ë„êµ¬ ëª¨ìŒ : ë§¨, apropos ê·¸ë¦¬ê³  whatis
+Summary(pl.UTF-8):   Czytnik stron man
+Summary(pt_BR.UTF-8):   Leitor de pÃ¡ginas de manuais (man)
+Summary(ru.UTF-8):   ÐÐ°Ð±Ð¾Ñ€ ÑƒÑ‚Ð¸Ð»Ð¸Ñ‚ Ð´Ð»Ñ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸Ð¸: man, apropos Ð¸ whatis
+Summary(tr.UTF-8):   KÄ±lavuz sayfasÄ± okuyucusu
+Summary(uk.UTF-8):   ÐÐ°Ð±Ñ–Ñ€ ÑƒÑ‚Ð¸Ð»Ñ–Ñ‚ Ð´Ð»Ñ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–Ñ—: man, apropos Ñ‚Ð° whatis
 Name:		man
 Version:	1.6d
 Release:	5
@@ -85,78 +85,78 @@ Whatis searches its own database for a complete word.
 
 Whatis and apropos are in a separate package, man-whatis.
 
-%description -l de
-Die man-Seiten-Suite, einschließlich Handbuch, Apropos und Whatis.
-Diese Programme dienen zum Einsehen des Großteils der Dokumentation,
-die auf einem Linux-System verfügbar ist. Die Whatis- und
+%description -l de.UTF-8
+Die man-Seiten-Suite, einschlieÃŸlich Handbuch, Apropos und Whatis.
+Diese Programme dienen zum Einsehen des GroÃŸteils der Dokumentation,
+die auf einem Linux-System verfÃ¼gbar ist. Die Whatis- und
 Apropos-Programme dienen dazu, Beschreibungen zu bestimmten Themen zu
 finden.
 
 whatis und apropos sind im Paket man-whatis.
 
-%description -l es
-Es un conjunto de páginas de manual, incluyendo man, apropos y whatis.
-Estos programas se usan para leer la mayoría de la documentación
+%description -l es.UTF-8
+Es un conjunto de pÃ¡ginas de manual, incluyendo man, apropos y whatis.
+Estos programas se usan para leer la mayorÃ­a de la documentaciÃ³n
 disponible en el sistema Linux. Los programas whatis y apropos pueden
-ser usados para encontrar documentación relacionada con un asunto
+ser usados para encontrar documentaciÃ³n relacionada con un asunto
 particular.
 
-%description -l fr
+%description -l fr.UTF-8
 Ensemble des pages man. Contient man, apropos et whatis. Ces
-programmes servent à lire la plupart de la documentation disponible
-sur un système Linux. Les programmes whatis et apropos servent à
-trouver la documentation relative à un sujet précis.
+programmes servent Ã  lire la plupart de la documentation disponible
+sur un systÃ¨me Linux. Les programmes whatis et apropos servent Ã 
+trouver la documentation relative Ã  un sujet prÃ©cis.
 
-%description -l pl
-Pakiet man zawiera man, apropos i whatis. Te programy s± u¿ywane do
-czytania wiêkszo¶ci dokumentacji dostêpnej w systemie Linux. Programy
-whatis i apropos mog± byæ u¿yte do znalezienia dokumentacji na tematy
-powi±zane z poszukiwanym.
+%description -l pl.UTF-8
+Pakiet man zawiera man, apropos i whatis. Te programy sÄ… uÅ¼ywane do
+czytania wiÄ™kszoÅ›ci dokumentacji dostÄ™pnej w systemie Linux. Programy
+whatis i apropos mogÄ… byÄ‡ uÅ¼yte do znalezienia dokumentacji na tematy
+powiÄ…zane z poszukiwanym.
 
-Narzêdzia whatis i apropos s± w oddzielnym pakiecie - man-whatis.
+NarzÄ™dzia whatis i apropos sÄ… w oddzielnym pakiecie - man-whatis.
 
-%description -l pt_BR
-É um conjunto de páginas de manual, incluindo man, apropos e whatis.
-Estes programas são usados para ler a maioria da documentação
-disponível no sistema Linux. Os programas whatis e apropos podem ser
-usados para achar documentação relacionada com um assunto particular.
+%description -l pt_BR.UTF-8
+Ã‰ um conjunto de pÃ¡ginas de manual, incluindo man, apropos e whatis.
+Estes programas sÃ£o usados para ler a maioria da documentaÃ§Ã£o
+disponÃ­vel no sistema Linux. Os programas whatis e apropos podem ser
+usados para achar documentaÃ§Ã£o relacionada com um assunto particular.
 
-%description -l tr
-Kýlavuz sayfa takýmý: man, apropos, whatis. Bu programlar Linux
-sisteminde bulunan birçok belgenin okunmasýnda kullanylyr. whatis ve
-apropos programlarý özel bir konu ile alakalý belgeleri bulmak için
-kullanýlabilir.
+%description -l tr.UTF-8
+KÄ±lavuz sayfa takÄ±mÄ±: man, apropos, whatis. Bu programlar Linux
+sisteminde bulunan birÃ§ok belgenin okunmasÄ±nda kullanylyr. whatis ve
+apropos programlarÄ± Ã¶zel bir konu ile alakalÄ± belgeleri bulmak iÃ§in
+kullanÄ±labilir.
 
-%description -l ru
-ðÁËÅÔ man ÓÏÄÅÒÖÉÔ ÔÒÉ ÕÔÉÌÉÔÙ ÄÌÑ ÐÏÉÓËÁ ÉÎÆÏÒÍÁÃÉÉ É/ÉÌÉ
-ÄÏËÕÍÅÎÔÁÃÉÉ Ï ×ÁÛÅÊ ÓÉÓÔÅÍÅ: man, apropos É whatis. óÉÓÔÅÍÁ man
-ÆÏÒÍÁÔÉÒÕÅÔ É ÐÏËÁÚÙ×ÁÅÔ ÏÎÌÁÊÎÏ×ÙÅ ÓÔÒÁÎÉÃÙ ÍÁÎÕÁÌÁ Ï ËÏÍÁÎÄÁÈ É
-ÆÕÎËÃÉÑÈ ×ÁÛÅÊ ÓÉÓÔÅÍÙ. Apropos ÉÝÅÔ ÚÁÄÁÎÎÕÀ ÓÔÒÏËÕ × ÂÁÚÅ ÄÁÎÎÙÈ
-whatis (ÓÏÄÅÒÖÁÝÅÊ ËÏÒÏÔËÉÅ ÏÐÉÓÁÎÉÑ ÓÉÓÔÅÍÎÙÈ ËÏÍÁÎÄ). Whatis ÉÝÅÔ ×
-Ó×ÏÅÊ ÂÁÚÅ ÄÁÎÎÙÈ ÚÁ×ÅÒÛÅÎÎÙÅ ÓÌÏ×Á.
+%description -l ru.UTF-8
+ÐŸÐ°ÐºÐµÑ‚ man ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ñ‚Ñ€Ð¸ ÑƒÑ‚Ð¸Ð»Ð¸Ñ‚Ñ‹ Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¸/Ð¸Ð»Ð¸
+Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸Ð¸ Ð¾ Ð²Ð°ÑˆÐµÐ¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ: man, apropos Ð¸ whatis. Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð° man
+Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð¸Ñ€ÑƒÐµÑ‚ Ð¸ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ð¾Ð½Ð»Ð°Ð¹Ð½Ð¾Ð²Ñ‹Ðµ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¼Ð°Ð½ÑƒÐ°Ð»Ð° Ð¾ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°Ñ… Ð¸
+Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑÑ… Ð²Ð°ÑˆÐµÐ¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹. Apropos Ð¸Ñ‰ÐµÑ‚ Ð·Ð°Ð´Ð°Ð½Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð±Ð°Ð·Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ…
+whatis (ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰ÐµÐ¹ ÐºÐ¾Ñ€Ð¾Ñ‚ÐºÐ¸Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ñ… ÐºÐ¾Ð¼Ð°Ð½Ð´). Whatis Ð¸Ñ‰ÐµÑ‚ Ð²
+ÑÐ²Ð¾ÐµÐ¹ Ð±Ð°Ð·Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð½Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð°.
 
-%description -l uk
-ðÁËÅÔ man Í¦ÓÔÉÔØ ÔÒÉ ÕÔÉÌ¦ÔÉ ÄÌÑ ÐÏÛÕËÕ ¦ÎÆÏÒÍÁÃ¦§ ÔÁ/ÁÂÏ
-ÄÏËÕÍÅÎÔÁÃ¦§ ÐÒÏ ×ÁÛÕ ÓÉÓÔÅÍÕ: man, apropos ÔÁ whatis. óÉÓÔÅÍÁ man
-ÆÏÒÍÁÔÕ¤ ÔÁ ÐÏËÁÚÕ¤ ÏÎÌÁÊÎÏ×¦ ÓÔÏÒ¦ÎËÉ ÍÁÎÕÁÌÕ ÐÒÏ ËÏÍÁÎÄÉ ÔÁ ÆÕÎËÃ¦§
-×ÁÛÏ§ ÓÉÓÔÅÍÉ. Apropos ÛÕËÁ¤ ÚÁÄÁÎÉÊ ÒÑÄÏË Õ ÂÁÚ¦ ÄÁÎÉÈ whatis (ÑËÁ
-Í¦ÓÔÉÔØ ËÏÒÏÔË¦ ÏÐÉÓÉ ÓÉÓÔÅÍÎÉÈ ËÏÍÁÎÄ). Whatis ÛÕËÁ¤ Õ Ó×Ï§Ê ÂÁÚ¦
-ÚÁË¦ÎÞÅÎ¦ ÓÌÏ×Á.
+%description -l uk.UTF-8
+ÐŸÐ°ÐºÐµÑ‚ man Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ Ñ‚Ñ€Ð¸ ÑƒÑ‚Ð¸Ð»Ñ–Ñ‚Ð¸ Ð´Ð»Ñ Ð¿Ð¾ÑˆÑƒÐºÑƒ Ñ–Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ñ–Ñ— Ñ‚Ð°/Ð°Ð±Ð¾
+Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–Ñ— Ð¿Ñ€Ð¾ Ð²Ð°ÑˆÑƒ ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ: man, apropos Ñ‚Ð° whatis. Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð° man
+Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ÑƒÑ” Ñ‚Ð° Ð¿Ð¾ÐºÐ°Ð·ÑƒÑ” Ð¾Ð½Ð»Ð°Ð¹Ð½Ð¾Ð²Ñ– ÑÑ‚Ð¾Ñ€Ñ–Ð½ÐºÐ¸ Ð¼Ð°Ð½ÑƒÐ°Ð»Ñƒ Ð¿Ñ€Ð¾ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¸ Ñ‚Ð° Ñ„ÑƒÐ½ÐºÑ†Ñ–Ñ—
+Ð²Ð°ÑˆÐ¾Ñ— ÑÐ¸ÑÑ‚ÐµÐ¼Ð¸. Apropos ÑˆÑƒÐºÐ°Ñ” Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹ Ñ€ÑÐ´Ð¾Ðº Ñƒ Ð±Ð°Ð·Ñ– Ð´Ð°Ð½Ð¸Ñ… whatis (ÑÐºÐ°
+Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ ÐºÐ¾Ñ€Ð¾Ñ‚ÐºÑ– Ð¾Ð¿Ð¸ÑÐ¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ð¸Ñ… ÐºÐ¾Ð¼Ð°Ð½Ð´). Whatis ÑˆÑƒÐºÐ°Ñ” Ñƒ ÑÐ²Ð¾Ñ—Ð¹ Ð±Ð°Ð·Ñ–
+Ð·Ð°ÐºÑ–Ð½Ñ‡ÐµÐ½Ñ– ÑÐ»Ð¾Ð²Ð°.
 
 %package config
 Summary:	Manual page reader configuration
-Summary(pl):	Konfiguracja czytników podrêczników
+Summary(pl.UTF-8):   Konfiguracja czytnikÃ³w podrÄ™cznikÃ³w
 Group:		Applications/System
 
 %description config
 Configuration file for different manual page browsers.
 
-%description config -l pl
-Plik konfiguracyjny dla ró¿nych czytników podrêczników.
+%description config -l pl.UTF-8
+Plik konfiguracyjny dla rÃ³Å¼nych czytnikÃ³w podrÄ™cznikÃ³w.
 
 %package whatis
 Summary:	whatis utilities
-Summary(pl):	Narzêdzia whatis
+Summary(pl.UTF-8):   NarzÄ™dzia whatis
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Requires:	crondaemon
@@ -165,26 +165,26 @@ Requires:	crondaemon
 This package provides the following utilities: apropos, whatis and
 makewhatis.
 
-%description whatis -l pl
-Ten pakiet dostracza nastêpuj±ce narzêdzia: apropos, whatis i
+%description whatis -l pl.UTF-8
+Ten pakiet dostracza nastÄ™pujÄ…ce narzÄ™dzia: apropos, whatis i
 makewhatis.
 
 %package -n man2html
 Summary:	manroff to html converter
-Summary(pl):	Konwerter formatu manroff na html
+Summary(pl.UTF-8):   Konwerter formatu manroff na html
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 
 %description -n man2html
 This program can convert man pages stored in manroff format to html.
 
-%description -n man2html -l pl
-Program man2html s³u¿y do konwersji plików manuala zapisanych w
+%description -n man2html -l pl.UTF-8
+Program man2html sÅ‚uÅ¼y do konwersji plikÃ³w manuala zapisanych w
 formacie manroff na format html.
 
 %package -n man2html-cgi
 Summary:	CGI interface to man2html
-Summary(pl):	Interfejs CGI dla man2html
+Summary(pl.UTF-8):   Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
 Requires:	filesystem >= 3.0-11
@@ -198,11 +198,11 @@ These scripts allows read man pages throught WWW browser. It uses
 man2htlm program to convert man pages to html format. Scripts are
 still in alpha stage, could be not secure.
 
-%description -n man2html-cgi -l pl
-Skrypty znajduj±ce siê w pakiecie pozwalaj± czytaæ strony man przy
-pomocy przegl±darki WWW. Skrtpty wykorzystuj± program man2html do
-konwersji stron man na html. Programy s± ci±gle w stadium alfa i mog±
-nie byæ bezpieczne.
+%description -n man2html-cgi -l pl.UTF-8
+Skrypty znajdujÄ…ce siÄ™ w pakiecie pozwalajÄ… czytaÄ‡ strony man przy
+pomocy przeglÄ…darki WWW. Skrtpty wykorzystujÄ… program man2html do
+konwersji stron man na html. Programy sÄ… ciÄ…gle w stadium alfa i mogÄ…
+nie byÄ‡ bezpieczne.
 
 %prep
 %setup -q -a3
