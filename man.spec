@@ -1,15 +1,15 @@
 # TODO:
 # - PLD patch renames man.conf to man.config, but all manuals are named man.conf(5)
 Summary:	Manual page reader
-Summary(de.UTF-8):   Manual-Page-Reader
-Summary(es.UTF-8):   Lector de páginas de manual (man)
-Summary(fr.UTF-8):   Lecteur de pages de man
-Summary(ko.UTF-8):   문서 관련 도구 모음 : 맨, apropos 그리고 whatis
-Summary(pl.UTF-8):   Czytnik stron man
-Summary(pt_BR.UTF-8):   Leitor de páginas de manuais (man)
-Summary(ru.UTF-8):   Набор утилит для документации: man, apropos и whatis
-Summary(tr.UTF-8):   Kılavuz sayfası okuyucusu
-Summary(uk.UTF-8):   Набір утиліт для документації: man, apropos та whatis
+Summary(de.UTF-8):	Manual-Page-Reader
+Summary(es.UTF-8):	Lector de páginas de manual (man)
+Summary(fr.UTF-8):	Lecteur de pages de man
+Summary(ko.UTF-8):	문서 관련 도구 모음 : 맨, apropos 그리고 whatis
+Summary(pl.UTF-8):	Czytnik stron man
+Summary(pt_BR.UTF-8):	Leitor de páginas de manuais (man)
+Summary(ru.UTF-8):	Набор утилит для документации: man, apropos и whatis
+Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
+Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6d
 Release:	5
@@ -145,7 +145,7 @@ whatis (содержащей короткие описания системны�
 
 %package config
 Summary:	Manual page reader configuration
-Summary(pl.UTF-8):   Konfiguracja czytników podręczników
+Summary(pl.UTF-8):	Konfiguracja czytników podręczników
 Group:		Applications/System
 
 %description config
@@ -156,7 +156,7 @@ Plik konfiguracyjny dla różnych czytników podręczników.
 
 %package whatis
 Summary:	whatis utilities
-Summary(pl.UTF-8):   Narzędzia whatis
+Summary(pl.UTF-8):	Narzędzia whatis
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Requires:	crondaemon
@@ -171,7 +171,7 @@ makewhatis.
 
 %package -n man2html
 Summary:	manroff to html converter
-Summary(pl.UTF-8):   Konwerter formatu manroff na html
+Summary(pl.UTF-8):	Konwerter formatu manroff na html
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 
@@ -184,7 +184,7 @@ formacie manroff na format html.
 
 %package -n man2html-cgi
 Summary:	CGI interface to man2html
-Summary(pl.UTF-8):   Interfejs CGI dla man2html
+Summary(pl.UTF-8):	Interfejs CGI dla man2html
 Group:		Applications/System
 Requires:	%{name}-whatis = %{version}-%{release}
 Requires:	filesystem >= 3.0-11
