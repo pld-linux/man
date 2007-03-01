@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -246,7 +246,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbindir},%{_cgibinmandir},%{_cgiauxmandir}} \
 	$RPM_BUILD_ROOT{%{_mandir}/{hu,ja,ko}/man{1,5,8},%{_webappdir},/etc/tmpwatch}
 
-echo "# Cleanup man temporary files:" > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
+echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
+echo "/var/cache/man 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo '%defattr(644,root,root,755)' > man.lang
 for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
@@ -260,7 +261,7 @@ for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
 		echo "/var/cache/man${cdir}$i 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
-		echo "${lng}%attr(775,root, man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
+		echo "${lng}%attr(775,root,man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
 	done
 done
 
