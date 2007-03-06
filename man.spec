@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -259,7 +259,6 @@ for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	fi
 	for cdir in "" /local /X11R6 ; do
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
-		echo "/var/cache/man${cdir}$i 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
 		echo "${lng}%attr(775,root,man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
 	done
