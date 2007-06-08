@@ -12,7 +12,7 @@ Summary(tr):	Kýlavuz sayfasý okuyucusu
 Summary(uk):	îÁÂ¦Ò ÕÔÉÌ¦Ô ÄÌÑ ÄÏËÕÍÅÎÔÁÃ¦§: man, apropos ÔÁ whatis
 Name:		man
 Version:	1.6d
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -249,8 +249,8 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo "/var/cache/man 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo '%defattr(644,root,root,755)' > man.lang
-for i in "" bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
-	 sk sl sr sv tr uk zh_CN zh_TW; do
+for i in "" bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR \
+	 ro ru sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
@@ -362,7 +362,7 @@ fi
 %attr(755,root,root) %{_bindir}/zsoelim
 %{_mandir}/man1/man.1*
 
-# Supported languages bg cs da de en es fi fr hr it ja nl pl pt ro sl  + hu
+# Supported languages bg cs da de en es fi fr hr hu it ja nl pl pt ro sl
 %lang(bg) %{_mandir}/bg/man1/man.1*
 %lang(cs) %{_mandir}/cs/man1/man.1*
 %lang(da) %{_mandir}/da/man1/man.1*
