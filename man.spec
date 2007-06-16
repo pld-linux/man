@@ -298,7 +298,7 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo "/var/cache/man 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 > man.lang
-for i in '' bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
+for i in '' bg ca cs da de el eo es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
 	 sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
@@ -306,7 +306,7 @@ for i in '' bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru
 	else
 		lng=""
 	fi
-	for cdir in '' /local /X11R6 ; do
+	for cdir in '' /local ; do
 		install -d $RPM_BUILD_ROOT/var/cache/man${cdir}$i/cat{1,2,3,4,5,6,7,8,9,n}
 		echo "${lng}%dir /var/cache/man${cdir}$i" >> man.lang
 		echo "${lng}%attr(775,root,man) /var/cache/man${cdir}$i/cat[1-9n]" >> man.lang
@@ -387,27 +387,27 @@ install apache.conf $RPM_BUILD_ROOT%{_webappdir}/httpd.conf
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%pre
+rm -f /var/cache/man/X11/cat[123456789n]/*
+rm -f /var/cache/man/X11R6/cat[123456789n]/*
+rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
+rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
+
 %preun
 rm -f /var/cache/man/cat[123456789n]/*
 rm -f /var/cache/man/local/cat[123456789n]/*
-rm -f /var/cache/man/X11R6/cat[123456789n]/*
 rm -f /var/cache/man/??/cat[123456789n]/*
 rm -f /var/cache/man/??_??/cat[123456789n]/*
 rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??_??/cat[123456789n]/*
-rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
-rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %post
 rm -f /var/cache/man/cat[123456789n]/*
 rm -f /var/cache/man/local/cat[123456789n]/*
-rm -f /var/cache/man/X11/cat[123456789n]/*
 rm -f /var/cache/man/??/cat[123456789n]/*
 rm -f /var/cache/man/??_??/cat[123456789n]/*
 rm -f /var/cache/man/local/??/cat[123456789n]/*
 rm -f /var/cache/man/local/??_??/cat[123456789n]/*
-rm -f /var/cache/man/X11R6/??/cat[123456789n]/*
-rm -f /var/cache/man/X11R6/??_??/cat[123456789n]/*
 
 %triggerin -n man2html-cgi -- apache1 < 1.3.37-3, apache1-base
 %webapp_register apache %{_webapp}
