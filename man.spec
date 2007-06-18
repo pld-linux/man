@@ -537,6 +537,7 @@ fi
 %lang(el) %{_mandir}/el/man1/[aw]*
 %lang(el) %{_mandir}/el/man8/*
 %lang(es) %{_mandir}/es/man1/[aw]*
+%lang(es) %{_mandir}/es/man8/*
 %lang(fi) %{_mandir}/fi/man1/[aw]*
 %lang(fr) %{_mandir}/fr/man1/[aw]*
 %lang(fr) %{_mandir}/fr/man8/*
