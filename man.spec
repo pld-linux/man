@@ -346,6 +346,7 @@ for src in man/{*/,}*/*.[1-9n]; do
 		ro) charset=iso-8859-2 ;;
 		sl) charset=iso-8859-2 ;;
 		hu) charset=iso-8859-2 ;;
+		eo) charset=iso-8859-3 ;;
 		bg) charset=cp1251 ;;
 		el) charset=iso-8859-7 ;;
 		*)
