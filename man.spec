@@ -285,7 +285,7 @@ EOF
 # HACK: Make output default to using -c; otherwise it appears broken.
 %{__sed} -i -e 's/nroff /nroff -c /' conf_script
 
-%{__make} \
+%{__make} -j1 \
 	BUILD_CC="%{__cc} %{rpmcflags} %{rpmldflags}" \
 	CC="%{__cc} %{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
