@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6f
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -224,11 +224,9 @@ nie być bezpieczne.
 %patch15 -p1
 %patch16 -p1
 %patch17 -p1
-# FIXME
-#%patch18 -p1
+%patch18 -p1
 %patch19 -p1
-# FIXME
-#%patch20 -p1
+%patch20 -p1
 
 cp -f %{SOURCE4} msgs/mess.ru   # replace bad ru trans
 
