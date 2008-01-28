@@ -11,12 +11,12 @@ Summary(ru.UTF-8):	Набор утилит для документации: man,
 Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
-Version:	1.6e
-Release:	1
+Version:	1.6f
+Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
-# Source0-md5:	d8187cd756398baefc48ba7d60ff6a8a
+# Source0-md5:	67aaaa6df35215e812fd7d89472c44b6
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
@@ -224,9 +224,11 @@ nie być bezpieczne.
 %patch15 -p1
 %patch16 -p1
 %patch17 -p1
-%patch18 -p1
+# FIXME
+#%patch18 -p1
 %patch19 -p1
-%patch20 -p1
+# FIXME
+#%patch20 -p1
 
 cp -f %{SOURCE4} msgs/mess.ru   # replace bad ru trans
 
