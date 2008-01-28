@@ -1,17 +1,17 @@
 diff -urN man-1.5h1.org/src/man.c man-1.5h1/src/man.c
 --- man-1.5h1.org/src/man.c	Tue Mar 13 21:03:10 2001
 +++ man-1.5h1/src/man.c	Tue Mar 13 21:04:24 2001
-@@ -307,7 +307,9 @@
+@@ -345,7 +345,9 @@
  	       gripe (EXPANSION_FAILED, command);
  	       return (NULL);
  	  }
 -	  fgr = fgets (buf, sizeof(buf), fp);
 +	  do {
-+	       fgr = fgets (buf, sizeof(buf), fp);
++		  fgr = fgets (buf, sizeof(buf), fp);
 +	  } while (fgr != NULL && (buf[0] == '\n' || !strncmp(buf,".\\\"",3)));
- 	  pclose (fp);
- 	  expfl = 1;
-      } else {
+ 
+           #ifdef __APPLE__
+           /* Man 1.5x randomly freezes under Mac OS X 10.4.7 when the 
 @@ -334,7 +336,9 @@
  	       gripe (OPEN_ERROR, name);
  	       return (NULL);

@@ -19,18 +19,21 @@ diff -ur man-1.5p/src/makewhatis.sh man-1.5p.new/src/makewhatis.sh
  do
      if [ -d $d ]; then
  	if [ x$dc = x ]; then dc=$d; else dc=$dc:$d; fi
-@@ -393,13 +393,7 @@
+
+--- man-1.6f/src/makewhatis.sh~	2008-01-28 10:29:04.000000000 +0100
++++ man-1.6f/src/makewhatis.sh	2008-01-28 10:30:27.277670692 +0100
+@@ -185,13 +185,7 @@
+ 	echo "about to enter $mandir" > /dev/stderr
+      fi
  
-        cd $here
+-     # kludge for Slackware's /usr/man/preformat
+-     if [ $mandir = /usr/man/preformat ]
+-     then
+-	mandir1=/usr/man
+-     else
+-	mandir1=$mandir
+-     fi
++     mandir1=$mandir
  
--       # kludge for Slackware's /usr/man/preformat
--       if [ $mandir = /usr/man/preformat ]
--       then
--	 mandir1=/usr/man
--       else
--	 mandir1=$mandir
--       fi
-+       mandir1=$mandir
- 
-        if [ -f ${mandir1}/whatis ]
-        then
+      # if $mandir is on a readonly partition, and the whatis file
+      # is not a symlink, then let's skip trying to update it
