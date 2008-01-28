@@ -1,6 +1,5 @@
-diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
---- man-1.6e.org/src/makewhatis.sh	2007-06-07 20:53:46.993885000 +0200
-+++ man-1.6e/src/makewhatis.sh	2007-06-07 21:02:26.970703815 +0200
+--- man-1.6e.org/src/makewhatis.sh	2008-01-28 10:50:17.503993664 +0100
++++ man-1.6e/src/makewhatis.sh	2008-01-28 10:50:38.265034266 +0100
 @@ -66,8 +66,9 @@
  # Some distributions make a single big /var/cache/man/whatis file,
  # but that leads to problems and bugs.
@@ -97,10 +96,10 @@ diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
  fi
  
  for pages in man cat
-@@ -184,11 +182,6 @@
-      if [ x$verbose != x ]; then
- 	echo "about to enter $mandir" > /dev/stderr
+@@ -204,11 +204,6 @@
+ 	fi
       fi
+ 
 -     if [ -s ${mandir}/whatis -a $pages = man -a x$update = x ]; then
 -	if [ x$verbose != x ]; then
 -	   echo skipping $mandir - we did it already > /dev/stderr
@@ -109,33 +108,11 @@ diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
         here=`pwd`
         cd $mandir
         for i in $sections
-@@ -199,228 +192,257 @@
+@@ -199,7 +192,23 @@
  	    section=$i
  	    curdir=$mandir/${pages}$i
  	    export section verbose curdir
 -	    find $mandir/${pages}$i/. -name '*' $findarg0 $findarg -print | $AWK '
--
--	    function readline() {
--	      if (use_zcat || use_bzcat) {
--		result = (pipe_cmd | getline);
--		if (result < 0) {
--		  print "Pipe error: " pipe_cmd " " ERRNO > "/dev/stderr";
--		}
--	      } else {
--		result = (getline < filename);
--		if (result < 0) {
--		  print "Read file error: " filename " " ERRNO > "/dev/stderr";
--		}
--	      }
--	      return result;
--	    }
--	    
--	    function closeline() {
--	      if (use_zcat || use_bzcat) {
--		return close(pipe_cmd);
--	      } else {
--		return close(filename);
--	      }
 + 
 + 	    utf8=
 +            for x in $(find $mandir/${pages}$i -name '*' $findarg0 $findarg)
@@ -153,71 +130,21 @@ diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
 +               if ${cat} ${x} | iconv -f utf-8 -t utf-8 -o /dev/null 2>/dev/null
 +               then
 +                  echo ${x} | $AWK '
-+   
-+    function readline() {
-+      if (use_zcat || use_bzcat) {
-+        result = (pipe_cmd | getline);
-+        if (result < 0) {
-+          print "Pipe error: " pipe_cmd " " ERRNO > "/dev/stderr";
-+        }
-+      } else {
-+        result = (getline < filename);
-+        if (result < 0) {
-+          print "Read file error: " filename " " ERRNO > "/dev/stderr";
-+        }
-+      }
-+      return result;
-+    }
-+   
-+    function closeline() {
-+      if (use_zcat || use_bzcat) {
-+        return close(pipe_cmd);
-+      } else {
-+        return close(filename);
-+      }
-+    }
-+   
-+    function do_one() {
-+      insh = 0; thisjoin = 1; done = 0;
-+      entire_line = "";
-+   
-+      if (verbose) {
-+        print "adding " filename > "/dev/stderr"
-+      }
-+
-+      use_zcat = match(filename,"\\.Z$") ||
-+                 match(filename,"\\.z$") || match(filename,"\\.gz$");
-+      if (!use_zcat)
-+        use_bzcat = match(filename,"\\.bz2");
-+      if (use_zcat || use_bzcat) {
-+        filename_no_gz = substr(filename, 0, RSTART - 1);
-+      } else {
-+        filename_no_gz = filename;
-+      }
-+      match(filename_no_gz, "/[^/]+$");
-+      progname = substr(filename, RSTART + 1, RLENGTH - 1);
-+      if (match(progname, "\\." section "[A-Za-z]+")) {
-+        actual_section = substr(progname, RSTART + 1, RLENGTH - 1);
-+      } else {
-+        actual_section = section;
-+      }
-+      sub(/\..*/, "", progname);
-+      if (use_zcat || use_bzcat) {
-+        if (use_zcat) {
-+          pipe_cmd = "zcat \"" filename "\"";
-+        } else {
-+          pipe_cmd = "bzcat \"" filename "\"";
-+        }
-+        # try to avoid suspicious stuff
-+        if (filename ~ /[;&|`$(]/) {
-+          print "ignored strange file name " filename " in " curdir > "/dev/stderr";
-+          return;
-+        }
-+      }
-+
-+      while (!done && readline() > 0) {
-+        gsub(/.\b/, "");
-+        if (($1 ~ /^\.[Ss][Hh]/ &&
+ 
+ 	    function readline() {
+ 	      if (use_zcat || use_bzcat) {
+@@ -265,14 +274,25 @@
+ 	      while (!done && readline() > 0) {
+ 		gsub(/.\b/, "");
+ 		if (($1 ~ /^\.[Ss][Hh]/ &&
+-		  ($2 ~ /[Nn][Aa][Mm][Ee]/ ||
+-		   $2 ~ /^JMÉNO/ || $2 ~ /^NAVN/ || $2 ~ /^NUME/ ||
+-		   $2 ~ /^BEZEICHNUNG/ || $2 ~ /^NOMBRE/ ||
+-		   $2 ~ /^NIMI/ || $2 ~ /^NOM/ || $2 ~ /^IME/ ||
+-		   $2 ~ /^N[ÉE]V/ || $2 ~ /^NAMA/ || $2 ~ /^Ì¾Á°/ ||
+-		   $2 ~ /^Ì¾¾Î/ || $2 ~ /^ÀÌ¸§/ || $2 ~ /^NAZWA/ ||
+-		   $2 ~ /^îáú÷áîéå/ || $2 ~ /^Ãû³Æ/ || $2 ~ /^¦WºÙ/ ||
+-		   $2 ~ /^NOME/ || $2 ~ /^NAAM/ || $2 ~ /^ÈÌÅ/)) ||
 +           ($2 ~ /[Nn][Aa][Mm][Ee]/ ||   # en/de
 +            $2 ~ /^JMÃ‰NO/ ||            # cs
 +            $2 ~ /^NAVN/ ||             # da
@@ -237,331 +164,34 @@ diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
 +            $2 ~ /^åç¨±/ ||             # zh_TW
 +            $2 ~ /^NOME/ ||             # it/pt
 +            $2 ~ /^NAAM/)) ||           # nl
-+          (pages == "cat" && $1 ~ /^NAME/)) {
-+            if (!insh) {
-+              insh = 1;
-+            } else {
-+              done = 1;
+ 		  (pages == "cat" && $1 ~ /^NAME/)) {
+ 		    if (!insh) {
+ 		      insh = 1;
+@@ -447,24 +447,28 @@
+ 	      do_one();
  	    }
--	    
--	    function do_one() {
--	      insh = 0; thisjoin = 1; done = 0;
--	      entire_line = "";
--
--	      if (verbose) {
--		print "adding " filename > "/dev/stderr"
--	      }
--	      
--	      use_zcat = match(filename,"\\.Z$") ||
--			 match(filename,"\\.z$") || match(filename,"\\.gz$");
--	      if (!use_zcat)
--		use_bzcat = match(filename,"\\.bz2");
--	      if (use_zcat || use_bzcat) {
--		filename_no_gz = substr(filename, 0, RSTART - 1);
--	      } else {
--		filename_no_gz = filename;
--	      }
--	      match(filename_no_gz, "/[^/]+$");
--	      progname = substr(filename, RSTART + 1, RLENGTH - 1);
--	      if (match(progname, "\\." section "[A-Za-z]+")) {
--		actual_section = substr(progname, RSTART + 1, RLENGTH - 1);
-+        } else if (insh) {
-+          if ($1 ~ /^\.[Ss][HhYS]/ ||
-+            (pages == "cat" &&
-+            ($1 ~ /^S[yYeE]/ || $1 ~ /^DESCRIPTION/ ||
-+             $1 ~ /^COMMAND/ || $1 ~ /^OVERVIEW/ ||
-+             $1 ~ /^STRUCTURES/ || $1 ~ /^INTRODUCTION/ ||
-+             $0 ~ /^[^ ]/))) {
-+              # end insh for Synopsis, Syntax, but also for
-+              # DESCRIPTION (e.g., XFree86.1x),
-+              # COMMAND (e.g., xspread.1)
-+              # OVERVIEW (e.g., TclCommandWriting.3)
-+              # STRUCTURES (e.g., XEvent.3x)
-+              # INTRODUCTION (e.g., TclX.n)
-+              # and anything at all that begins in Column 1, so
-+              # is probably a section header.
-+            done = 1;
-+          } else {
-+            if ($0 ~ progname"-") {  # Fix old cat pages
-+                sub(progname"-", progname" - ");
-+   	    }	    
-+            if ($0 ~ /[^ \\]-$/) {
-+              sub(/-$/, "");      # Handle Hyphenations
-+              nextjoin = 1;
-+            } else if ($0 ~ /\\c$/) {
-+              sub(/\\c$/, "");    # Handle Continuations
-+              nextjoin = 1;
-+            } else
-+              nextjoin = 0;
-+ 
-+            sub(/^.[IB] /, "");       # Kill bold and italics
-+            sub(/^.BI /, "");         #
-+            sub(/^.SM /, "");         # Kill small
-+            sub(/^.Nm /, "");         # Kill bold
-+            sub(/^.Tn /, "");         # Kill normal
-+            sub(/^.Li /, "");         # Kill .Li
-+            sub(/^.Dq /, "");         # Kill .Dq
-+            sub(/^.Nd */, "- ");      # Convert .Nd to dash
-+            sub(/\\\".*/, "");        # Trim pending comments
-+            sub(/  *$/, "");          # Trim pending spaces
-+            sub(/^\.$/, "");          # Kill blank comments
-+            sub(/^'"'"'.*/, "");      # Kill comment/troff lines
-+            sub(/^.in .*/, "");       # Kill various macros
-+            sub(/^.ti .*/, "");
-+            sub(/^.ta .*/, "");
-+            sub(/^.Vb .*/, "");
-+            sub(/^.[PLTH]P$/, "");    # .PP/.LP/.TP/.HP
-+            sub(/^.Pp$/, "");
-+            sub(/^.[iI]X .*$/, "");
-+            sub(/^.nolinks$/, "");
-+            sub(/^.B$/, "");
-+            sub(/^.nf$/, "");
-+
-+            if (($1 ~ /^\.../ || $1 == "") &&
-+                (entire_line ~ / - / || entire_line ~ / \\- /)) {
-+              # Assume that this ends the description of one line
-+              # Sometimes there are several descriptions in one page,
-+              # as in outb(2).
-+              handle_entire_line();
-+ 	      entire_line = "";
-+              thisjoin = 1;
-+            } else {
-+              if (thisjoin) {
-+                entire_line = entire_line $0;
- 	      } else {
--		actual_section = section;
--	      }
--	      sub(/\..*/, "", progname);
--	      if (use_zcat || use_bzcat) {
--		if (use_zcat) {
--		  pipe_cmd = "zcat \"" filename "\"";
--		} else {
--		  pipe_cmd = "bzcat \"" filename "\"";
--		}
--		# try to avoid suspicious stuff
--		if (filename ~ /[;&|`$(]/) {
--		  print "ignored strange file name " filename " in " curdir > "/dev/stderr";
--		  return;
--		}
-+                entire_line = entire_line " " $0;
- 	      }
--	    
--	      while (!done && readline() > 0) {
--		gsub(/.\b/, "");
--		if (($1 ~ /^\.[Ss][Hh]/ &&
--		  ($2 ~ /[Nn][Aa][Mm][Ee]/ ||
--		   $2 ~ /^JMÉNO/ || $2 ~ /^NAVN/ || $2 ~ /^NUME/ ||
--		   $2 ~ /^BEZEICHNUNG/ || $2 ~ /^NOMBRE/ ||
--		   $2 ~ /^NIMI/ || $2 ~ /^NOM/ || $2 ~ /^IME/ ||
--		   $2 ~ /^N[ÉE]V/ || $2 ~ /^NAMA/ || $2 ~ /^Ì¾Á°/ ||
--		   $2 ~ /^Ì¾¾Î/ || $2 ~ /^ÀÌ¸§/ || $2 ~ /^NAZWA/ ||
--		   $2 ~ /^îáú÷áîéå/ || $2 ~ /^Ãû³Æ/ || $2 ~ /^¦WºÙ/ ||
--		   $2 ~ /^NOME/ || $2 ~ /^NAAM/ || $2 ~ /^ÈÌÅ/)) ||
--		  (pages == "cat" && $1 ~ /^NAME/)) {
--		    if (!insh) {
--		      insh = 1;
--		    } else {
--		      done = 1;
--		    }
--		} else if (insh) {
--		  if ($1 ~ /^\.[Ss][HhYS]/ ||
--		    (pages == "cat" &&
--		    ($1 ~ /^S[yYeE]/ || $1 ~ /^DESCRIPTION/ ||
--		     $1 ~ /^COMMAND/ || $1 ~ /^OVERVIEW/ ||
--		     $1 ~ /^STRUCTURES/ || $1 ~ /^INTRODUCTION/ ||
--		     $0 ~ /^[^ ]/))) {
--		      # end insh for Synopsis, Syntax, but also for
--		      # DESCRIPTION (e.g., XFree86.1x),
--		      # COMMAND (e.g., xspread.1)
--		      # OVERVIEW (e.g., TclCommandWriting.3)
--		      # STRUCTURES (e.g., XEvent.3x)
--		      # INTRODUCTION (e.g., TclX.n)
--		      # and anything at all that begins in Column 1, so 
--		      # is probably a section header.
--		    done = 1;
--		  } else {
--		    if ($0 ~ progname"-") {  # Fix old cat pages
--			sub(progname"-", progname" - ");
--		    }
--		    if ($0 ~ /[^ \\]-$/) {
--		      sub(/-$/, "");	  # Handle Hyphenations
--		      nextjoin = 1;
--		    } else if ($0 ~ /\\c$/) {
--		      sub(/\\c$/, "");	  # Handle Continuations
--		      nextjoin = 1;
--		    } else
--		      nextjoin = 0;
--
--		    sub(/^.[IB] /, "");       # Kill bold and italics
--		    sub(/^.BI /, "");         #
--		    sub(/^.SM /, "");         # Kill small
--		    sub(/^.Nm /, "");         # Kill bold
--		    sub(/^.Tn /, "");         # Kill normal
--	            sub(/^.Li /, "");         # Kill .Li
--	            sub(/^.Dq /, "");         # Kill .Dq
--	            sub(/^.Nd */, "- ");      # Convert .Nd to dash
--		    sub(/\\\".*/, "");        # Trim pending comments
--		    sub(/  *$/, "");          # Trim pending spaces
--		    sub(/^\.$/, "");          # Kill blank comments
--		    sub(/^'"'"'.*/, "");      # Kill comment/troff lines
--		    sub(/^.in .*/, "");       # Kill various macros
--		    sub(/^.ti .*/, "");
--		    sub(/^.ta .*/, "");
--		    sub(/^.Vb .*/, "");
--		    sub(/^.[PLTH]P$/, "");    # .PP/.LP/.TP/.HP
--		    sub(/^.Pp$/, "");
--		    sub(/^.[iI]X .*$/, "");
--		    sub(/^.nolinks$/, "");
--		    sub(/^.B$/, "");
--		    sub(/^.nf$/, "");
--
--		    if (($1 ~ /^\.../ || $1 == "") &&
--		        (entire_line ~ / - / || entire_line ~ / \\- /)) {
--		      # Assume that this ends the description of one line
--		      # Sometimes there are several descriptions in one page,
--		      # as in outb(2).
--		      handle_entire_line();
--		      entire_line = "";
--		      thisjoin = 1;
--		    } else {
--		      if (thisjoin) {
--			entire_line = entire_line $0;
--		      } else {
--			entire_line = entire_line " " $0;
--		      }
--		      thisjoin = nextjoin;
--		    }
--		  }
--		}
--	      }
--	      handle_entire_line();
--	      closeline();
-+              thisjoin = nextjoin;
- 	    }
-+          }
-+        }
-+      }
-+      handle_entire_line();
-+      closeline();
-+    }
-+
-+    function handle_entire_line() {
-+      x = entire_line;             # Keep it short
-+
-+      gsub(/\015/, "", x);         # Kill DOS remains
-+      gsub(/	/, " ", x);        # Translate tabs to spaces
-+      gsub(/  +/, " ", x);         # Collapse spaces
-+      gsub(/ *, */, ", ", x);      # Fix comma spacings
-+      sub(/^ /, "", x);            # Kill initial spaces
-+      sub(/ $/, "", x);            # Kill trailing spaces
-+      sub(/__+/, "_", x);          # Collapse underscores
-+
-+      gsub(/\\f\(../, "", x);         # Kill font changes
-+      gsub(/\\f[PRIB0123]/, "", x);   # Kill font changes
-+      gsub(/\\s[-+0-9]*/, "", x);     # Kill size changes
-+      gsub(/\\&/, "", x);             # Kill \&
-+      gsub(/\\\|/, "", x);            # Kill \|
-+      gsub(/\\\((ru|ul)/, "_", x);    # Translate
-+      gsub(/\\\((mi|hy|em)/, "-", x); # Translate
-+      gsub(/\\\*\(../, "", x);        # Kill troff strings
-+      gsub(/\\/, "", x);              # Kill all backslashes
-+      gsub(/"/, "", x);               # Kill quotes (from .Nd "foo bar")
-+      sub(/<h1 align=center>/, "", x);# Yuk! HTML cruft
-+      gsub(/\000.*/, "X", x);         # Binary cruft in LAPACK pages
-+      gsub(/  +/, " ", x);            # Collapse spaces (again)
-+      sub(/^ /, "", x);               # Kill initial spaces (again)
-+      sub(/ $/, "", x);               # Kill trailing spaces (again)
-+      sub(/\.$/, "", x);              # Kill trailing period
-+
-+      if (!match(x, / - /))
-+        return;
-+
-+      after_dash = substr(x, RSTART);
-+      head = substr(x, 1, RSTART-1) ", ";
-+      while (match(head, /, /)) {
-+        prog = substr(head, 1, RSTART-1);
-+        head = substr(head, RSTART+2);
-+        if (prog != progname)
-+          prog = prog " [" progname "]";
-+        printf "%-*s (%s) %s\n", 20, prog, actual_section, after_dash;
-+      }
-+    }
-+
-+    {                  # Main action - process each filename read in.
-+      filename = $0;
-+      do_one();
-+    }
- 
--	    function handle_entire_line() {
--	      x = entire_line;             # Keep it short
--
--	      gsub(/\015/, "", x);         # Kill DOS remains
--	      gsub(/	/, " ", x);        # Translate tabs to spaces
--	      gsub(/  +/, " ", x);         # Collapse spaces
--	      gsub(/ *, */, ", ", x);      # Fix comma spacings
--	      sub(/^ /, "", x);            # Kill initial spaces
--	      sub(/ $/, "", x);            # Kill trailing spaces
--	      sub(/__+/, "_", x);          # Collapse underscores
--
--	      gsub(/\\f\(../, "", x);         # Kill font changes
--	      gsub(/\\f[PRIB0123]/, "", x);   # Kill font changes
--	      gsub(/\\s[-+0-9]*/, "", x);     # Kill size changes
--	      gsub(/\\&/, "", x);             # Kill \&
--	      gsub(/\\\|/, "", x);            # Kill \|
--	      gsub(/\\\((ru|ul)/, "_", x);    # Translate
--	      gsub(/\\\((mi|hy|em)/, "-", x); # Translate
--	      gsub(/\\\*\(../, "", x);        # Kill troff strings
--	      gsub(/\\/, "", x);              # Kill all backslashes
--	      gsub(/"/, "", x);               # Kill quotes (from .Nd "foo bar")
--	      sub(/<h1 align=center>/, "", x);# Yuk! HTML cruft
--	      gsub(/\000.*/, "X", x);         # Binary cruft in LAPACK pages
--	      gsub(/  +/, " ", x);            # Collapse spaces (again)
--	      sub(/^ /, "", x);               # Kill initial spaces (again)
--	      sub(/ $/, "", x);               # Kill trailing spaces (again)
--	      sub(/\.$/, "", x);              # Kill trailing period
--
--	      if (!match(x, / - /))
--		return;
--
--	      after_dash = substr(x, RSTART);
--	      head = substr(x, 1, RSTART-1) ", ";
--	      while (match(head, /, /)) {
--		prog = substr(head, 1, RSTART-1);
--		head = substr(head, RSTART+2);
--		if (prog != progname)
--		  prog = prog " [" progname "]";
--		printf "%-*s (%s) %s\n", 20, prog, actual_section, after_dash;
--	      }
--	    }
--
--	    {			# Main action - process each filename read in.
--	      filename = $0;
--	      do_one();
--	    }
  	    ' pages=$pages section=$section verbose=$verbose curdir=$curdir
-+               fi
-+            done
++		    fi
++		    done
  	    cd ..
  	 fi
         done > $TMPFILE
  
-        cd $here
+        cd "$here"
  
--       mandir1=$mandir
--
 -       if [ -f ${mandir1}/whatis ]
 +       if [ -f ${whatisdb} ]
         then
 -	 cat ${mandir1}/whatis >> $TMPFILE
-+         cat ${whatisdb} >> $TMPFILE
++	 cat ${whatisdb} >> $TMPFILE
         fi
 -       tr -s '\n' < $TMPFILE | sort -u > ${mandir1}/whatis
 +       tr -s '\n' < $TMPFILE | sort -u > ${whatisdb}
  
 -       chmod 644 ${mandir1}/whatis
 -       rm $TMPFILE
--     fi
 +       chmod 644 ${whatisdb}
+      fi
     done
  done
  
@@ -570,43 +200,6 @@ diff -ur man-1.6e.org/src/makewhatis.sh man-1.6e/src/makewhatis.sh
 +rm -rf $TMPFILE
  
 +else            # we're here if TMPFILE creation failed
-+    exit 1
++	exit 1
 +fi
-Tylko w man-1.6e/src: makewhatis.sh~
-diff -ur man-1.6e.org/src/makewhatis.sh.orig man-1.6e/src/makewhatis.sh.orig
---- man-1.6e.org/src/makewhatis.sh.orig	2006-07-19 06:58:08.000000000 +0200
-+++ man-1.6e/src/makewhatis.sh.orig	2007-06-07 20:53:46.993885225 +0200
-@@ -45,7 +45,7 @@
- # and should be first.
- # It is a bug to add /var/cache/man to DEFCATPATH.
- dm=
--for d in /usr/man /usr/share/man /usr/X11R6/man /usr/local/man
-+for d in /usr/share/man /usr/X11R6/man /usr/local/man
- do
-     if [ -d $d ]; then
- 	if [ x$dm = x ]; then dm=$d; else dm=$dm:$d; fi
-@@ -53,7 +53,7 @@
- done
- DEFMANPATH=$dm
- dc=
--for d in /usr/man/preformat /usr/man /usr/share/man/preformat /usr/share/man
-+for d in /usr/share/man/preformat /usr/share/man
- do
-     if [ -d $d ]; then
- 	if [ x$dc = x ]; then dc=$d; else dc=$dc:$d; fi
-@@ -407,13 +407,7 @@
- 
-        cd $here
- 
--       # kludge for Slackware's /usr/man/preformat
--       if [ $mandir = /usr/man/preformat ]
--       then
--	 mandir1=/usr/man
--       else
--	 mandir1=$mandir
--       fi
-+       mandir1=$mandir
- 
-        if [ -f ${mandir1}/whatis ]
-        then
-Tylko w man-1.6e/src: makewhatis.sh.rej
+
