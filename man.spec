@@ -68,8 +68,8 @@ Obsoletes:	man-sl
 Conflicts:	tmpwatch < 2.9.6-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_cgibinmandir		/usr/lib/cgi-bin/man
-%define		_cgiauxmandir		/usr/share/man2html-cgi
+%define		_cgibinmandir	/usr/lib/cgi-bin/man
+%define		_cgiauxmandir	/usr/share/man2html-cgi
 %define		_webapps	/etc/webapps
 %define		_webapp		man2html
 %define		_webappdir	%{_webapps}/%{_webapp}
@@ -227,39 +227,28 @@ nie być bezpieczne.
 %patch19 -p1
 %patch20 -p1
 
+# prefer included man pages over old from "additional" tarball
+rm man/ja/man1/{apropos,man,whatis}.1
+rm man/ja/man5/man.conf.5
+rm man/ko/man1/man.1
+rm man/ko/man5/man.conf.5
+
+# unify names
+cp man/el/hman.{man,1}
+cp man/el/man2html.{man,1}
+cp man/ro/man2html.{man,1}
+
 for i in $(find man -name man.conf.man); do
 	mv $i ${i%man.conf.man}man.config.man
 done
+for i in $(find man -name man.conf.5); do
+	mv $i ${i%man.conf.5}man.config.5
+done
 
 for src in msgs/mess.[a-z][a-z]; do
-	lang=${src##*.}
-	case ${lang} in
-		ja) charset=euc-jp ;;
-		ko) charset=euc-kr ;;
-		ru) charset=koi8-r ;;
-		da) charset=iso-8859-1 ;;
-		de) charset=iso-8859-1 ;;
-		en) charset=iso-8859-1 ;;
-		es) charset=iso-8859-1 ;;
-		fi) charset=iso-8859-1 ;;
-		fr) charset=iso-8859-1 ;;
-		it) charset=iso-8859-1 ;;
-		pt) charset=iso-8859-1 ;;
-		nl) charset=iso-8859-1 ;;
-		cs) charset=iso-8859-2 ;;
-		hr) charset=iso-8859-2 ;;
-		pl) charset=iso-8859-2 ;;
-		ro) charset=iso-8859-2 ;;
-		sl) charset=iso-8859-2 ;;
-		hu) charset=iso-8859-2 ;;
-		bg) charset=cp1251 ;;
-		el) charset=iso-8859-7 ;;
-		*)
-			echo "=== LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING"
-			exit 1
-		;;
-	esac
+	charset=$(sed 's/^.*codeset=//' ${src}.codeset)
 	iconv -t utf-8 -f ${charset} -o ${src}.utf ${src} && mv ${src}.utf ${src}
+	echo '$ codeset=utf-8' > ${src}.codeset
 done
 
 # use gzip (not bzip2) to compress formatted man pages
@@ -324,44 +313,34 @@ for src in man/{*/,}*/*.[1-9n]; do
 	page=${src##*/}
 	sect=man${src##*.}
 
+	destpath=${dir}/${lang}/${sect}
+	destcharset=utf-8
 	case ${lang} in
 		ja) charset=euc-jp ;;
 		ko) charset=euc-kr ;;
 		ru) charset=koi8-r ;;
-		da) charset=iso-8859-1 ;;
-		de) charset=iso-8859-1 ;;
-		en) charset=iso-8859-1 ;;
-		es) charset=iso-8859-1 ;;
-		fi) charset=iso-8859-1 ;;
-		fr) charset=iso-8859-1 ;;
-		it) charset=iso-8859-1 ;;
-		pt) charset=iso-8859-1 ;;
-		nl) charset=iso-8859-1 ;;
-		cs) charset=iso-8859-2 ;;
-		hr) charset=iso-8859-2 ;;
-		pl) charset=iso-8859-2 ;;
-		ro) charset=iso-8859-2 ;;
-		sl) charset=iso-8859-2 ;;
-		hu) charset=iso-8859-2 ;;
+		da|de|es|fi|fr|it|pt|nl)
+		    charset=iso-8859-1 ;;
+		cs|hr|pl|ro|sl|hu)
+		    charset=iso-8859-2 ;;
 		eo) charset=iso-8859-3 ;;
 		bg) charset=cp1251 ;;
 		el) charset=iso-8859-7 ;;
+		en)
+		    charset=iso-8859-1
+		    # install en as default man pages
+		    destpath=${dir}/${sect}
+		    # ensure POSIX/C locale only has ASCII subset and no latin-1
+		    destcharset=ascii//translit
+		    ;;
 		*)
 			echo "=== LANGUAGE ${lang}: MUST SPECIFY CHARSET/ENCODING"
 			exit 1
 		;;
 	esac
-	mkdir -p ${dir}/${lang}/${sect}
-	iconv -t utf-8 -f ${charset} -o ${dir}/${lang}/${sect}/${page} ${src}
-
-	# ensure POSIX/C locale only has ASCII subset and no latin-1
-	if [ ${lang} = en ]; then
-		mkdir -p ${dir}/${sect}
-		iconv -t ascii//translit -f ${charset} -o ${dir}/${sect}/${page} ${src}
-	fi
+	mkdir -p ${destpath}
+	iconv -t ${destcharset} -f ${charset} -o ${destpath}/${page} ${src}
 done
-
-rm -rf $RPM_BUILD_ROOT%{_mandir}/en
 
 # for man_db and xman compatibility
 ln -sf soelim $RPM_BUILD_ROOT%{_bindir}/zsoelim
@@ -370,14 +349,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.daily/makewhatis
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.weekly/makewhatis
 
 touch $RPM_BUILD_ROOT/var/cache/man/whatis
-
-install man/el/hman.man $RPM_BUILD_ROOT%{_mandir}/el/man1/hman.1
-install man/el/man2html.man $RPM_BUILD_ROOT%{_mandir}/el/man1/man2html.1
-install man/hu/man1/* $RPM_BUILD_ROOT%{_mandir}/hu/man1
-install man/ja/man1/{hman,man2html}.1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
-install man/ja/man8/makewhatis.8 $RPM_BUILD_ROOT%{_mandir}/ja/man8
-install man/pl/man1/man2html.1 $RPM_BUILD_ROOT%{_mandir}/pl/man1
-install man/ro/man2html.man $RPM_BUILD_ROOT%{_mandir}/ro/man1/man2html.1
 
 install apache.conf $RPM_BUILD_ROOT%{_webappdir}/apache.conf
 install apache.conf $RPM_BUILD_ROOT%{_webappdir}/httpd.conf
