@@ -21,7 +21,6 @@ Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
 # Source3-md5:	16c3fde2243289524cf40c1d2e7150e4
-Source4:	%{name}-mess.ru
 Patch0:		%{name}-manpaths.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-fhs.patch
@@ -227,8 +226,6 @@ nie być bezpieczne.
 %patch18 -p1
 %patch19 -p1
 %patch20 -p1
-
-cp -f %{SOURCE4} msgs/mess.ru   # replace bad ru trans
 
 for i in $(find man -name man.conf.man); do
 	mv $i ${i%man.conf.man}man.config.man
