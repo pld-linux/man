@@ -32,7 +32,7 @@ Patch7:		%{name}-bug11621.patch
 Patch8:		%{name}-gencat.patch
 Patch9:		%{name}-nls-priority.patch
 Patch10:	%{name}-pmake.patch
-Patch11:	%{name}-fmntbug.patch
+
 Patch12:	%{name}-awk_path.patch
 Patch13:	%{name}-cgi_paths.patch
 Patch14:	%{name}-relat.patch
@@ -217,7 +217,6 @@ nie być bezpieczne.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-%patch11 -p1
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
