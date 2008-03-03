@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6f
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -42,6 +42,7 @@ Patch17:	%{name}-i18n_nroff.patch
 Patch18:	%{name}-i18n_makewhatis.patch
 Patch19:	%{name}-apropos.patch
 Patch20:	%{name}-rpm.patch
+Patch21:	%{name}-catgets-iconv.patch
 URL:		http://primates.ximian.com/~flucifredi/man/
 BuildRequires:	iconv
 BuildRequires:	less
@@ -226,6 +227,7 @@ nie być bezpieczne.
 %patch18 -p1
 %patch19 -p1
 %patch20 -p1
+%patch21 -p1
 
 # prefer included man pages over old from "additional" tarball
 rm man/ja/man1/{apropos,man,whatis}.1
