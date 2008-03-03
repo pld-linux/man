@@ -1,0 +1,50 @@
+--- man-1.6f/src/gripes.c.orig	2008-03-03 21:44:48.158090000 +0100
++++ man-1.6f/src/gripes.c	2008-03-03 22:32:42.361882050 +0100
+@@ -41,10 +41,15 @@
+ 
+ #include <string.h>
+ #include <nl_types.h>
++#include <iconv.h>
++#include <langinfo.h>
+ #include "../catopen/catopen.c"
+ 
+ nl_catd catfd = (nl_catd) -1;
+ int cat_is_open = 0;
++iconv_t cat_iconv = (iconv_t) -1;
++char *cat_iconv_buf = NULL;
++size_t cat_iconv_buf_len = 0;
+ 
+ static void
+ catinit (void) {
+@@ -79,6 +84,15 @@
+ 			mantexts);
+             }
+ 	}
++	cat_iconv = iconv_open(nl_langinfo(CODESET), "UTF-8");
++	if(cat_iconv != (iconv_t) -1) {
++	    /* 8k should suffice for all messages, so we don't need to realloc */
++	    cat_iconv_buf = malloc(cat_iconv_buf_len = 8192);
++	    if(cat_iconv_buf == NULL) {
++		iconv_close(cat_iconv);
++		cat_iconv = (iconv_t) -1;
++	    }
++	}
+     }
+     cat_is_open = 1;
+ }
+@@ -128,6 +142,15 @@
+ 			"man: internal error - cannot find message %d\n", n);
+ 		exit (1);
+         }
++	if(cat_iconv != (iconv_t) -1) {
++	    char *src_ptr = s, *dst_ptr = cat_iconv_buf;
++	    size_t inlen = strlen(s), outlen = cat_iconv_buf_len;
++	    iconv(cat_iconv, NULL, NULL, NULL, NULL); /* reset state */
++	    if(iconv(cat_iconv, &src_ptr, &inlen, &dst_ptr, &outlen) == (size_t) -1)
++		return s; /* fallback to original string */
++	    *dst_ptr = 0;
++	    return cat_iconv_buf;
++	}
+ 	return s;
+ }
+ 
