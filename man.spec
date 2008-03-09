@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6f
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -285,8 +285,8 @@ install -d $RPM_BUILD_ROOT{/etc/cron.{daily,weekly},%{_bindir},%{_mandir},%{_sbi
 echo '# Cleanup man temporary files:' > $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 echo "/var/cache/man 240 -d" >> $RPM_BUILD_ROOT/etc/tmpwatch/man.conf
 > man.lang
-for i in '' bg ca cs da de el eo es fi fr gl hr hu id it ja ko nl pl pt pt_BR ro ru \
-	 sk sl sr sv tr uk zh_CN zh_TW; do
+for i in '' bg ca cs da de el eo es fi fr gl hr hu id it ja ko lt nl pl pt pt_BR \
+	 ro ru sk sl sr sv tr uk zh_CN zh_TW; do
 	if [ "$i" ]; then
 		lng="%lang($i) "
 		i="/$i"
