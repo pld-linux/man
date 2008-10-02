@@ -263,6 +263,7 @@ ScriptAlias /cgi-bin/man %{_cgibinmandir}
 EOF
 
 %build
+unset NLSPATH || :
 ./configure \
 	-default \
 	+fhs \
