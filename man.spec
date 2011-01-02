@@ -11,12 +11,12 @@ Summary(ru.UTF-8):	Набор утилит для документации: man,
 Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
-Version:	1.6f
-Release:	3
+Version:	1.6g
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
-# Source0-md5:	67aaaa6df35215e812fd7d89472c44b6
+# Source0-md5:	ba154d5796928b841c9c69f0ae376660
 Source1:	makewhatis.crondaily
 Source2:	makewhatis.cronweekly
 Source3:	%{name}-additional-%{name}-pages.tar.bz2
