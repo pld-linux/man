@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6g
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
@@ -66,6 +66,7 @@ Obsoletes:	man-nl
 Obsoletes:	man-pl
 Obsoletes:	man-pt
 Obsoletes:	man-sl
+Conflicts:	man-db
 Conflicts:	tmpwatch < 2.9.6-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -160,6 +161,7 @@ Summary(pl.UTF-8):	Narzędzia whatis
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Requires:	crondaemon
+Conflicts:	man-db
 
 %description whatis
 This package provides the following utilities: apropos, whatis and
