@@ -1,5 +1,6 @@
-# TODO:
-# - PLD patch renames man.conf to man.config, but all manuals are named man.conf(5)
+#
+# DEAD, use man-db
+#
 Summary:	Manual page reader
 Summary(de.UTF-8):	Manual-Page-Reader
 Summary(es.UTF-8):	Lector de páginas de manual (man)
@@ -12,7 +13,7 @@ Summary(tr.UTF-8):	Kılavuz sayfası okuyucusu
 Summary(uk.UTF-8):	Набір утиліт для документації: man, apropos та whatis
 Name:		man
 Version:	1.6g
-Release:	2
+Release:	2.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://primates.ximian.com/~flucifredi/man/%{name}-%{version}.tar.gz
