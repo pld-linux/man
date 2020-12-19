@@ -42,50 +42,6 @@ diff -urN man-1.6e.org/configure man-1.6e/configure
  # (why?), also man pages and other docs need to be patched.
  if [ -z "${prefix}" ]; then prefix="/usr"; fi
  if [ -z "${confprefix}" ]; then confprefix=""; fi
-diff -urN man-1.6e.org/configure.orig man-1.6e/configure.orig
---- man-1.6e.org/configure.orig	2007-06-07 20:50:03.459345000 +0200
-+++ man-1.6e/configure.orig	2007-06-07 20:52:16.159331735 +0200
-@@ -10,7 +10,7 @@
- # will not ask questions. Other options:
- #
- #   configure -d[efault]	(language=en, +fhs)
--#   configure -confdir DIR	(directory to hold man.conf)
-+#   configure -confdir DIR	(directory to hold man.config)
- #   configure +suid/sgid	(make man suid or sgid)
- #   configure +lang cs,da,de,el,en,es,fi,fr,hr,it,ko,nl,pl,pt,ro,sl
- #                               (language(s) as given)
-@@ -50,7 +50,7 @@
-   echo 'The options +fhs, +fsstnd, +traditional will make man use'
-   echo ' /var/cache/man, /var/catman and /usr/man/cat?, respectively.'
-   echo 'It is recommended not to use suid/sgid and not to keep cat pages.'
--  echo 'The -confdir option specifies where man.conf lives (default /usr/share/misc).'
-+  echo 'The -confdir option specifies where man.config lives (default /usr/share/misc).'
-   echo
-   exit 1
- fi
-@@ -165,7 +165,7 @@
-   echo 'The option +sgid will make man sgid to a group "man". Create this first.'
-   echo 'The options +fhs, +fsstnd, +traditional will make man use'
-   echo ' /var/cache/man, /var/catman and /usr/man/cat?, respectively.'
--  echo 'The -confdir option specifies where man.conf lives (default /usr/share/misc).'
-+  echo 'The -confdir option specifies where man.config lives (default /usr/share/misc).'
-   exit 1
- 	  ;;
-     esac
-@@ -178,10 +178,10 @@
- # confprefix="/usr/local" or "/usr" or "/etc"
- # 
- # The configuration file has various names and pathnames in the
--# various distributions, such as /usr/share/misc/man.conf,
--# /usr/lib/man.conf, /etc/man.config.
-+# various distributions, such as /usr/share/misc/man.config,
-+# /usr/lib/man.config, /etc/man.config.
- # The FHS wants it in /usr/share/misc
--# All documentation assumes "man.conf" - in case you invent some other name
-+# All documentation assumes "man.config" - in case you invent some other name
- # (why?), also man pages and other docs need to be patched.
- if [ -z "${prefix}" ]; then prefix="/usr"; fi
- if [ -z "${confprefix}" ]; then confprefix=""; fi
 diff -urN man-1.6e.org/HISTORY man-1.6e/HISTORY
 --- man-1.6e.org/HISTORY	2006-11-20 22:41:16.000000000 +0100
 +++ man-1.6e/HISTORY	2007-06-07 20:52:16.162665236 +0200
@@ -1028,18 +984,6 @@ diff -urN man-1.6e.org/src/man.conf.in man-1.6e/src/man.conf.in
  #
  # This file is read by man to configure the default manpath (also used
  # when MANPATH contains an empty substring), to find out where the cat
-diff -urN man-1.6e.org/src/man.c.orig man-1.6e/src/man.c.orig
---- man-1.6e.org/src/man.c.orig	2007-06-07 20:50:03.472679000 +0200
-+++ man-1.6e/src/man.c.orig	2007-06-07 20:52:16.289338253 +0200
-@@ -1308,7 +1308,7 @@
-      get_line_length();
- 
-      /*
--      * read command line options and man.conf
-+      * read command line options and man.config
-       */
-      man_getopt (argc, argv);
- 
 diff -urN man-1.6e.org/src/man-iconv.c man-1.6e/src/man-iconv.c
 --- man-1.6e.org/src/man-iconv.c	2005-08-21 01:26:06.000000000 +0200
 +++ man-1.6e/src/man-iconv.c	2007-06-07 20:52:16.289338253 +0200
@@ -1056,21 +1000,6 @@ diff -urN man-1.6e.org/src/manpath.c man-1.6e/src/manpath.c
 --- man-1.6e.org/src/manpath.c	2007-06-07 20:50:03.479346000 +0200
 +++ man-1.6e/src/manpath.c	2007-06-07 20:52:16.292671753 +0200
 @@ -294,9 +294,9 @@
- 
- /*
-  * For each directory in the user's path, see if it is one of the
-- * directories listed in the man.conf file.  If so, and it is
-+ * directories listed in the man.config file.  If so, and it is
-  * not already in the manpath, add it.  If the directory is not listed
-- * in the man.conf file, see if there is a subdirectory `man' or
-+ * in the man.config file, see if there is a subdirectory `man' or
-  * `MAN'.  If so, and it is not already in the manpath, add it.
-  *
-  * Example:  user has <dir>/bin in his path and the directory
-diff -urN man-1.6e.org/src/manpath.c.orig man-1.6e/src/manpath.c.orig
---- man-1.6e.org/src/manpath.c.orig	2006-08-03 23:18:33.000000000 +0200
-+++ man-1.6e/src/manpath.c.orig	2007-06-07 20:52:16.296005254 +0200
-@@ -296,9 +296,9 @@
  
  /*
   * For each directory in the user's path, see if it is one of the
